@@ -270,7 +270,7 @@
     margin-top: auto;
     padding-top: 16px;
   }
-  .terms a { color: var(--green); text-decoration: none; }
+  .terms a { color: var(--green); text-decoration: none; cursor: pointer; }
 
   .toast {
     position: fixed;
@@ -292,6 +292,137 @@
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   .toast.erro { background: var(--error); }
 
+  /* ===================== MODAL TERMOS/PRIVACIDADE ===================== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 900;
+    background: rgba(0,0,0,0.5);
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+
+  .modal-sheet {
+    background: var(--white);
+    border-radius: 24px 24px 0 0;
+    width: 100%;
+    max-width: 430px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s ease;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+
+  .modal-handle {
+    width: 40px; height: 4px;
+    background: var(--border);
+    border-radius: 100px;
+    margin: 12px auto 0;
+    flex-shrink: 0;
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .modal-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+
+  .modal-close {
+    background: var(--surface);
+    border: none;
+    width: 30px; height: 30px;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+  }
+
+  .modal-body {
+    overflow-y: auto;
+    padding: 20px;
+    flex: 1;
+  }
+
+  .modal-meta {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  .modal-body h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 20px 0 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-body h2:first-of-type { margin-top: 0; }
+
+  .modal-body p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 8px;
+    font-weight: 300;
+  }
+  .modal-body p strong { color: var(--text); font-weight: 500; }
+
+  .modal-body ul {
+    padding-left: 1rem;
+    margin-bottom: 8px;
+  }
+  .modal-body ul li {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 3px;
+  }
+
+  .modal-highlight {
+    background: var(--green-light);
+    border-left: 3px solid var(--green-mid);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 12px;
+    margin: 8px 0;
+    font-size: 12px;
+    color: var(--green);
+    line-height: 1.6;
+  }
+
+  .modal-contact {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-top: 16px;
+  }
+  .modal-contact p { margin: 0 0 4px; font-size: 12px; }
+  .modal-contact p:last-child { margin: 0; }
+  .email-text { color: var(--green); font-weight: 500; }
+
   @media (max-width: 430px) {
     body { padding: 0; background: var(--white); }
     .phone-frame { border-radius: 0; box-shadow: none; max-height: none; min-height: 100vh; }
@@ -300,6 +431,121 @@
 </head>
 <body>
 
+<!-- ==================== MODAL TERMOS DE USO ==================== -->
+<div class="modal-overlay" id="modal-termos">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <span class="modal-title">Termos de Uso</span>
+      <button class="modal-close" onclick="fecharModal('modal-termos')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-meta">Última atualização: abril de 2026 · Raj Studios</p>
+
+      <h2>1. Sobre o FlowDay</h2>
+      <p>O FlowDay é um aplicativo de bem-estar desenvolvido e operado pela <strong>Raj Studios</strong>, com o objetivo de ajudar pessoas a criarem hábitos saudáveis. O FlowDay <strong>não é um aplicativo médico</strong> e não substitui orientação profissional de saúde.</p>
+
+      <h2>2. Elegibilidade</h2>
+      <p>Para utilizar o FlowDay você deve ter ao menos <strong>13 anos de idade</strong>. Usuários menores de 18 anos devem ter autorização dos pais ou responsáveis legais.</p>
+
+      <h2>3. Criação de conta</h2>
+      <p>Você é responsável por manter a confidencialidade da sua senha e por todas as atividades realizadas na sua conta. Notifique-nos imediatamente em caso de uso não autorizado.</p>
+
+      <h2>4. Dados de saúde</h2>
+      <div class="modal-highlight">
+        O fornecimento de dados de saúde (sono, alimentação, tempo de tela) é completamente <strong>opcional</strong>. A experiência será mais personalizada quando fornecidos, mas o app funciona sem eles.
+      </div>
+
+      <h2>5. Uso permitido</h2>
+      <p>Ao usar o FlowDay, você concorda em não usar o app para fins ilegais, acessar contas de terceiros, interferir no serviço, redistribuir o conteúdo sem autorização ou usar bots e automações.</p>
+
+      <h2>6. Publicidade</h2>
+      <p>O FlowDay pode exibir anúncios de terceiros no futuro. Seus dados de saúde <strong>nunca serão usados</strong> para fins publicitários. Você será avisado antes de qualquer mudança.</p>
+
+      <h2>7. Propriedade intelectual</h2>
+      <p>Todo o conteúdo do FlowDay — nome, logotipo, design e funcionalidades — é propriedade da <strong>Raj Studios</strong> e está protegido pelas leis de propriedade intelectual.</p>
+
+      <h2>8. Limitação de responsabilidade</h2>
+      <p>O FlowDay é fornecido "como está". A Raj Studios não se responsabiliza por danos decorrentes do uso ou impossibilidade de uso do aplicativo. Sempre consulte um profissional de saúde para decisões relacionadas à sua saúde.</p>
+
+      <h2>9. Alterações nos termos</h2>
+      <p>Podemos atualizar estes termos a qualquer momento. Você será notificado por e-mail ou aviso no app. O uso contínuo implica aceitação dos novos termos.</p>
+
+      <h2>10. Lei aplicável</h2>
+      <p>Estes termos são regidos pelas leis do Brasil, em especial pela LGPD (Lei nº 13.709/2018) e pelo Código de Defesa do Consumidor. Para usuários europeus, aplica-se também o GDPR.</p>
+
+      <h2>11. Contato</h2>
+      <div class="modal-contact">
+        <p>📧 Suporte: <span class="email-text">flowday.support&#64;gmail.com</span></p>
+        <p>📧 Raj Studios: <span class="email-text">rajstudioscontact&#64;gmail.com</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MODAL POLÍTICA DE PRIVACIDADE ==================== -->
+<div class="modal-overlay" id="modal-privacidade">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <span class="modal-title">Política de Privacidade</span>
+      <button class="modal-close" onclick="fecharModal('modal-privacidade')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-meta">Última atualização: abril de 2026 · Raj Studios</p>
+
+      <h2>1. Quais dados coletamos</h2>
+      <p><strong>Cadastro:</strong> nome, e-mail e senha (criptografada).</p>
+      <p><strong>Uso:</strong> hábitos concluídos, streaks, pontuações e progresso diário.</p>
+      <p><strong>Saúde (opcionais):</strong> sono, alimentação e tempo de tela — fornecidos voluntariamente.</p>
+      <p><strong>Técnicos:</strong> tipo de dispositivo e sistema operacional, coletados automaticamente.</p>
+
+      <h2>2. Como usamos seus dados</h2>
+      <ul>
+        <li>Criar e manter sua conta</li>
+        <li>Personalizar sua experiência e hábitos</li>
+        <li>Calcular progresso, streak e pontuações</li>
+        <li>Enviar notificações e lembretes (com sua autorização)</li>
+        <li>Melhorar o funcionamento do app</li>
+        <li>Cumprir obrigações legais</li>
+      </ul>
+
+      <h2>3. Dados de saúde</h2>
+      <div class="modal-highlight">
+        Dados de saúde são <strong>100% opcionais</strong> e usados apenas para personalizar sua experiência. <strong>Nunca são compartilhados com terceiros nem usados para publicidade.</strong>
+      </div>
+
+      <h2>4. Compartilhamento de dados</h2>
+      <p>A Raj Studios <strong>não vende seus dados</strong>. Compartilhamos apenas com o Firebase (Google) para autenticação e banco de dados, ou quando exigido por lei.</p>
+
+      <h2>5. Seus direitos (LGPD e GDPR)</h2>
+      <ul>
+        <li>Acessar os dados que temos sobre você</li>
+        <li>Corrigir dados incorretos</li>
+        <li>Solicitar a exclusão dos seus dados</li>
+        <li>Revogar o consentimento a qualquer momento</li>
+        <li>Portabilidade dos seus dados</li>
+      </ul>
+
+      <h2>6. Segurança</h2>
+      <p>Usamos o Firebase com criptografia em trânsito (TLS) e em repouso. Senhas são armazenadas de forma criptografada e nunca visíveis para nossa equipe.</p>
+
+      <h2>7. Exclusão de dados</h2>
+      <p>Ao solicitar exclusão da conta, seus dados serão removidos em até <strong>30 dias</strong>, salvo obrigação legal de retenção.</p>
+
+      <h2>8. Menores de idade</h2>
+      <p>Não coletamos dados de crianças menores de 13 anos intencionalmente. Contas identificadas serão encerradas e os dados removidos.</p>
+
+      <h2>9. Contato</h2>
+      <div class="modal-contact">
+        <p>📧 Suporte: <span class="email-text">flowday.support&#64;gmail.com</span></p>
+        <p>📧 Raj Studios: <span class="email-text">rajstudioscontact&#64;gmail.com</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== APP ==================== -->
 <div class="phone-frame">
   <div class="top-blob">
     <div class="logo">FlowDay<span class="logo-dot"></span></div>
@@ -344,7 +590,7 @@
       </button>
       <p class="terms">
         Ao entrar, você concorda com nossos<br>
-        <a href="termos.html">Termos de Uso</a> e <a href="privacidade.html">Política de Privacidade</a>
+        <a onclick="abrirModal('modal-termos')">Termos de Uso</a> e <a onclick="abrirModal('modal-privacidade')">Política de Privacidade</a>
       </p>
     </div>
 
@@ -392,7 +638,7 @@
       </button>
       <p class="terms">
         Ao criar uma conta, você concorda com nossos<br>
-        <a href="termos.html">Termos de Uso</a> e <a href="privacidade.html">Política de Privacidade</a>
+        <a onclick="abrirModal('modal-termos')">Termos de Uso</a> e <a onclick="abrirModal('modal-privacidade')">Política de Privacidade</a>
       </p>
     </div>
   </div>
@@ -572,6 +818,21 @@
       document.getElementById('err-' + id)?.classList.remove('show');
     });
   }
+
+  function abrirModal(id) {
+    document.getElementById(id).classList.add('active');
+  }
+
+  function fecharModal(id) {
+    document.getElementById(id).classList.remove('active');
+  }
+
+  // Fechar modal clicando fora
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === this) fecharModal(this.id);
+    });
+  });
 </script>
 
 </body>
