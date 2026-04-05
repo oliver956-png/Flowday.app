@@ -45,6 +45,10 @@
     flex-direction: column;
   }
 
+  /* ==================== TELA LOGIN ==================== */
+  .screen { display: none; flex-direction: column; flex: 1; min-height: 0; }
+  .screen.active { display: flex; }
+
   .top-blob {
     width: 100%;
     height: 220px;
@@ -272,48 +276,218 @@
   }
   .terms a { color: var(--green); text-decoration: none; cursor: pointer; }
 
-  .toast {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: var(--text);
-    color: white;
-    padding: 12px 20px;
-    border-radius: 100px;
-    font-size: 13px;
-    font-weight: 500;
-    opacity: 0;
-    transition: all 0.3s;
-    white-space: nowrap;
-    pointer-events: none;
-    z-index: 999;
+  /* ==================== TELA ONBOARDING ==================== */
+  .ob-header {
+    padding: 48px 24px 20px;
+    background: var(--white);
+    flex-shrink: 0;
   }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .toast.erro { background: var(--error); }
 
-  /* ===================== MODAL TERMOS/PRIVACIDADE ===================== */
+  .progress-steps {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+
+  .step-bar {
+    flex: 1; height: 4px;
+    border-radius: 100px;
+    background: var(--border);
+    transition: background 0.3s;
+  }
+  .step-bar.done { background: var(--green-mid); }
+  .step-bar.active { background: var(--green); }
+
+  .ob-label {
+    font-size: 11px; font-weight: 500;
+    color: var(--green); letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+
+  .ob-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 800;
+    color: var(--text); letter-spacing: -0.8px;
+    line-height: 1.2; margin-bottom: 6px;
+  }
+
+  .ob-sub {
+    font-size: 13px; color: var(--muted);
+    font-weight: 300; line-height: 1.5;
+  }
+
+  .ob-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 24px 24px;
+  }
+
+  .ob-step { display: none; }
+  .ob-step.active { display: block; }
+
+  .habits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .habit-option {
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 14px 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--white);
+    text-align: left;
+    width: 100%;
+  }
+
+  .habit-option.selected {
+    border-color: var(--green-mid);
+    background: var(--green-light);
+  }
+
+  .habit-option-emoji { font-size: 24px; display: block; margin-bottom: 8px; }
+  .habit-option-name { font-size: 13px; font-weight: 500; color: var(--text); display: block; margin-bottom: 2px; }
+  .habit-option-desc { font-size: 11px; color: var(--muted); font-weight: 300; display: block; }
+  .habit-option.selected .habit-option-name { color: var(--green); }
+
+  .select-hint { font-size: 11px; color: var(--muted); text-align: center; margin-top: 12px; font-weight: 300; }
+
+  .metas-list { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+
+  .meta-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 14px 16px;
+  }
+
+  .meta-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .meta-emoji { font-size: 20px; }
+  .meta-card-title { font-size: 14px; font-weight: 500; color: var(--text); }
+
+  .meta-field-label {
+    font-size: 11px; color: var(--muted);
+    font-weight: 400; margin-bottom: 6px; display: block;
+  }
+
+  .meta-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    margin-bottom: 8px;
+  }
+  .meta-input:last-child { margin-bottom: 0; }
+  .meta-input:focus { border-color: var(--green); }
+
+  select.meta-input {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 7L11 1' stroke='%235F5E5A' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    appearance: none;
+  }
+
+  .confirm-wrap {
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center;
+    padding-top: 20px;
+  }
+
+  .confirm-icon {
+    width: 80px; height: 80px;
+    background: var(--green-light);
+    border-radius: 100px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px; margin-bottom: 20px;
+  }
+
+  .confirm-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 800;
+    color: var(--text); letter-spacing: -0.8px; margin-bottom: 8px;
+  }
+
+  .confirm-sub {
+    font-size: 14px; color: var(--muted);
+    font-weight: 300; line-height: 1.6;
+    margin-bottom: 24px; max-width: 280px;
+  }
+
+  .confirm-habits { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+  .confirm-badge {
+    background: var(--green-light);
+    border: 1px solid #C0DD97;
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-size: 12px; font-weight: 500; color: var(--green);
+  }
+
+  .ob-footer {
+    padding: 16px 24px 32px;
+    flex-shrink: 0;
+    background: var(--white);
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-row { display: flex; align-items: center; gap: 12px; }
+
+  .btn-back {
+    width: 46px; height: 46px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    cursor: pointer;
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: background 0.2s;
+  }
+  .btn-back:hover { background: var(--surface); }
+
+  .btn-next {
+    flex: 1; padding: 14px;
+    background: var(--green); color: white;
+    border: none; border-radius: 100px;
+    font-size: 15px; font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-next:hover { background: #2d5509; }
+  .btn-next:active { transform: scale(0.98); }
+  .btn-next:disabled { background: var(--green-mid); opacity: 0.6; cursor: not-allowed; }
+  .btn-next.loading .spinner { display: block; }
+
+  /* ==================== MODAIS ==================== */
   .modal-overlay {
     display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 900;
+    position: fixed; inset: 0; z-index: 900;
     background: rgba(0,0,0,0.5);
-    align-items: flex-end;
-    justify-content: center;
+    align-items: flex-end; justify-content: center;
   }
   .modal-overlay.active { display: flex; }
 
   .modal-sheet {
     background: var(--white);
     border-radius: 24px 24px 0 0;
-    width: 100%;
-    max-width: 430px;
-    max-height: 85vh;
-    display: flex;
-    flex-direction: column;
+    width: 100%; max-width: 430px; max-height: 85vh;
+    display: flex; flex-direction: column;
     animation: slideUp 0.3s ease;
   }
+
   @keyframes slideUp {
     from { transform: translateY(100%); }
     to   { transform: translateY(0); }
@@ -321,107 +495,71 @@
 
   .modal-handle {
     width: 40px; height: 4px;
-    background: var(--border);
-    border-radius: 100px;
-    margin: 12px auto 0;
-    flex-shrink: 0;
+    background: var(--border); border-radius: 100px;
+    margin: 12px auto 0; flex-shrink: 0;
   }
 
   .modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between;
     padding: 16px 20px 12px;
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
+    border-bottom: 1px solid var(--border); flex-shrink: 0;
   }
 
   .modal-title {
     font-family: 'Syne', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.3px;
+    font-size: 17px; font-weight: 700;
+    color: var(--text); letter-spacing: -0.3px;
   }
 
   .modal-close {
-    background: var(--surface);
-    border: none;
-    width: 30px; height: 30px;
-    border-radius: 100px;
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: var(--surface); border: none;
+    width: 30px; height: 30px; border-radius: 100px;
+    cursor: pointer; font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
     color: var(--muted);
   }
 
-  .modal-body {
-    overflow-y: auto;
-    padding: 20px;
-    flex: 1;
-  }
-
-  .modal-meta {
-    font-size: 11px;
-    color: var(--muted);
-    margin-bottom: 20px;
-    font-weight: 300;
-  }
+  .modal-body { overflow-y: auto; padding: 20px; flex: 1; }
+  .modal-meta { font-size: 11px; color: var(--muted); margin-bottom: 20px; font-weight: 300; }
 
   .modal-body h2 {
     font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text);
-    margin: 20px 0 6px;
-    padding-bottom: 6px;
+    font-size: 13px; font-weight: 700; color: var(--text);
+    margin: 20px 0 6px; padding-bottom: 6px;
     border-bottom: 1px solid var(--border);
   }
   .modal-body h2:first-of-type { margin-top: 0; }
 
-  .modal-body p {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 8px;
-    font-weight: 300;
-  }
+  .modal-body p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 8px; font-weight: 300; }
   .modal-body p strong { color: var(--text); font-weight: 500; }
-
-  .modal-body ul {
-    padding-left: 1rem;
-    margin-bottom: 8px;
-  }
-  .modal-body ul li {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.7;
-    font-weight: 300;
-    margin-bottom: 3px;
-  }
+  .modal-body ul { padding-left: 1rem; margin-bottom: 8px; }
+  .modal-body ul li { font-size: 13px; color: var(--muted); line-height: 1.7; font-weight: 300; margin-bottom: 3px; }
 
   .modal-highlight {
     background: var(--green-light);
     border-left: 3px solid var(--green-mid);
     border-radius: 0 8px 8px 0;
-    padding: 10px 12px;
-    margin: 8px 0;
-    font-size: 12px;
-    color: var(--green);
-    line-height: 1.6;
+    padding: 10px 12px; margin: 8px 0;
+    font-size: 12px; color: var(--green); line-height: 1.6;
   }
 
-  .modal-contact {
-    background: var(--surface);
-    border-radius: 12px;
-    padding: 12px 14px;
-    margin-top: 16px;
-  }
+  .modal-contact { background: var(--surface); border-radius: 12px; padding: 12px 14px; margin-top: 16px; }
   .modal-contact p { margin: 0 0 4px; font-size: 12px; }
   .modal-contact p:last-child { margin: 0; }
   .email-text { color: var(--green); font-weight: 500; }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 40px; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--text); color: white;
+    padding: 12px 20px; border-radius: 100px;
+    font-size: 13px; font-weight: 500;
+    opacity: 0; transition: all 0.3s;
+    white-space: nowrap; pointer-events: none; z-index: 999;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.erro { background: var(--error); }
 
   @media (max-width: 430px) {
     body { padding: 0; background: var(--white); }
@@ -441,39 +579,26 @@
     </div>
     <div class="modal-body">
       <p class="modal-meta">Última atualização: abril de 2026 · Raj Studios</p>
-
       <h2>1. Sobre o FlowDay</h2>
       <p>O FlowDay é um aplicativo de bem-estar desenvolvido e operado pela <strong>Raj Studios</strong>, com o objetivo de ajudar pessoas a criarem hábitos saudáveis. O FlowDay <strong>não é um aplicativo médico</strong> e não substitui orientação profissional de saúde.</p>
-
       <h2>2. Elegibilidade</h2>
       <p>Para utilizar o FlowDay você deve ter ao menos <strong>13 anos de idade</strong>. Usuários menores de 18 anos devem ter autorização dos pais ou responsáveis legais.</p>
-
       <h2>3. Criação de conta</h2>
       <p>Você é responsável por manter a confidencialidade da sua senha e por todas as atividades realizadas na sua conta. Notifique-nos imediatamente em caso de uso não autorizado.</p>
-
       <h2>4. Dados de saúde</h2>
-      <div class="modal-highlight">
-        O fornecimento de dados de saúde (sono, alimentação, tempo de tela) é completamente <strong>opcional</strong>. A experiência será mais personalizada quando fornecidos, mas o app funciona sem eles.
-      </div>
-
+      <div class="modal-highlight">O fornecimento de dados de saúde (sono, alimentação, tempo de tela) é completamente <strong>opcional</strong>. A experiência será mais personalizada quando fornecidos, mas o app funciona sem eles.</div>
       <h2>5. Uso permitido</h2>
       <p>Ao usar o FlowDay, você concorda em não usar o app para fins ilegais, acessar contas de terceiros, interferir no serviço, redistribuir o conteúdo sem autorização ou usar bots e automações.</p>
-
       <h2>6. Publicidade</h2>
       <p>O FlowDay pode exibir anúncios de terceiros no futuro. Seus dados de saúde <strong>nunca serão usados</strong> para fins publicitários. Você será avisado antes de qualquer mudança.</p>
-
       <h2>7. Propriedade intelectual</h2>
       <p>Todo o conteúdo do FlowDay — nome, logotipo, design e funcionalidades — é propriedade da <strong>Raj Studios</strong> e está protegido pelas leis de propriedade intelectual.</p>
-
       <h2>8. Limitação de responsabilidade</h2>
-      <p>O FlowDay é fornecido "como está". A Raj Studios não se responsabiliza por danos decorrentes do uso ou impossibilidade de uso do aplicativo. Sempre consulte um profissional de saúde para decisões relacionadas à sua saúde.</p>
-
+      <p>O FlowDay é fornecido "como está". A Raj Studios não se responsabiliza por danos decorrentes do uso do aplicativo. Sempre consulte um profissional de saúde para decisões relacionadas à sua saúde.</p>
       <h2>9. Alterações nos termos</h2>
       <p>Podemos atualizar estes termos a qualquer momento. Você será notificado por e-mail ou aviso no app. O uso contínuo implica aceitação dos novos termos.</p>
-
       <h2>10. Lei aplicável</h2>
       <p>Estes termos são regidos pelas leis do Brasil, em especial pela LGPD (Lei nº 13.709/2018) e pelo Código de Defesa do Consumidor. Para usuários europeus, aplica-se também o GDPR.</p>
-
       <h2>11. Contato</h2>
       <div class="modal-contact">
         <p>📧 Suporte: <span class="email-text">flowday.support&#64;gmail.com</span></p>
@@ -483,7 +608,7 @@
   </div>
 </div>
 
-<!-- ==================== MODAL POLÍTICA DE PRIVACIDADE ==================== -->
+<!-- ==================== MODAL PRIVACIDADE ==================== -->
 <div class="modal-overlay" id="modal-privacidade">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -493,13 +618,11 @@
     </div>
     <div class="modal-body">
       <p class="modal-meta">Última atualização: abril de 2026 · Raj Studios</p>
-
       <h2>1. Quais dados coletamos</h2>
       <p><strong>Cadastro:</strong> nome, e-mail e senha (criptografada).</p>
       <p><strong>Uso:</strong> hábitos concluídos, streaks, pontuações e progresso diário.</p>
       <p><strong>Saúde (opcionais):</strong> sono, alimentação e tempo de tela — fornecidos voluntariamente.</p>
       <p><strong>Técnicos:</strong> tipo de dispositivo e sistema operacional, coletados automaticamente.</p>
-
       <h2>2. Como usamos seus dados</h2>
       <ul>
         <li>Criar e manter sua conta</li>
@@ -509,15 +632,10 @@
         <li>Melhorar o funcionamento do app</li>
         <li>Cumprir obrigações legais</li>
       </ul>
-
       <h2>3. Dados de saúde</h2>
-      <div class="modal-highlight">
-        Dados de saúde são <strong>100% opcionais</strong> e usados apenas para personalizar sua experiência. <strong>Nunca são compartilhados com terceiros nem usados para publicidade.</strong>
-      </div>
-
+      <div class="modal-highlight">Dados de saúde são <strong>100% opcionais</strong> e usados apenas para personalizar sua experiência. <strong>Nunca são compartilhados com terceiros nem usados para publicidade.</strong></div>
       <h2>4. Compartilhamento de dados</h2>
       <p>A Raj Studios <strong>não vende seus dados</strong>. Compartilhamos apenas com o Firebase (Google) para autenticação e banco de dados, ou quando exigido por lei.</p>
-
       <h2>5. Seus direitos (LGPD e GDPR)</h2>
       <ul>
         <li>Acessar os dados que temos sobre você</li>
@@ -526,16 +644,12 @@
         <li>Revogar o consentimento a qualquer momento</li>
         <li>Portabilidade dos seus dados</li>
       </ul>
-
       <h2>6. Segurança</h2>
       <p>Usamos o Firebase com criptografia em trânsito (TLS) e em repouso. Senhas são armazenadas de forma criptografada e nunca visíveis para nossa equipe.</p>
-
       <h2>7. Exclusão de dados</h2>
       <p>Ao solicitar exclusão da conta, seus dados serão removidos em até <strong>30 dias</strong>, salvo obrigação legal de retenção.</p>
-
       <h2>8. Menores de idade</h2>
       <p>Não coletamos dados de crianças menores de 13 anos intencionalmente. Contas identificadas serão encerradas e os dados removidos.</p>
-
       <h2>9. Contato</h2>
       <div class="modal-contact">
         <p>📧 Suporte: <span class="email-text">flowday.support&#64;gmail.com</span></p>
@@ -545,108 +659,190 @@
   </div>
 </div>
 
-<!-- ==================== APP ==================== -->
+<!-- ==================== PHONE FRAME ==================== -->
 <div class="phone-frame">
-  <div class="top-blob">
-    <div class="logo">FlowDay<span class="logo-dot"></span></div>
-    <div class="logo-tagline">Viva com intenção e equilíbrio</div>
+
+  <!-- ===== TELA 1: LOGIN / CADASTRO ===== -->
+  <div class="screen active" id="screen-login">
+    <div class="top-blob">
+      <div class="logo">FlowDay<span class="logo-dot"></span></div>
+      <div class="logo-tagline">Viva com intenção e equilíbrio</div>
+    </div>
+    <div class="content">
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab('login')">Entrar</button>
+        <button class="tab" onclick="switchTab('cadastro')">Cadastrar</button>
+      </div>
+
+      <!-- FORM LOGIN -->
+      <div class="form active" id="form-login">
+        <div>
+          <label class="field-label">E-mail</label>
+          <input type="email" id="login-email" placeholder="seu@email.com" />
+          <div class="error-msg" id="err-login-email">Informe um e-mail válido</div>
+        </div>
+        <div>
+          <label class="field-label">Senha</label>
+          <div class="field-wrap">
+            <input type="password" id="login-senha" placeholder="••••••••" />
+            <button class="toggle-pw" onclick="togglePw('login-senha', this)">👁</button>
+          </div>
+          <div class="error-msg" id="err-login-senha">Informe sua senha</div>
+        </div>
+        <a class="forgot" onclick="handleForgotPassword()">Esqueceu a senha?</a>
+        <button class="btn-main" id="btn-login" onclick="handleLogin()">
+          <span class="spinner"></span>
+          <span class="btn-text">Entrar</span>
+        </button>
+        <div class="divider">ou continue com</div>
+        <button class="btn-google" onclick="handleGoogle()">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+            <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
+            <path d="M3.964 10.707A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"/>
+            <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+          </svg>
+          Entrar com Google
+        </button>
+        <p class="terms">
+          Ao entrar, você concorda com nossos<br>
+          <a onclick="abrirModal('modal-termos')">Termos de Uso</a> e <a onclick="abrirModal('modal-privacidade')">Política de Privacidade</a>
+        </p>
+      </div>
+
+      <!-- FORM CADASTRO -->
+      <div class="form" id="form-cadastro">
+        <div>
+          <label class="field-label">Nome completo</label>
+          <input type="text" id="cad-nome" placeholder="Seu nome" />
+          <div class="error-msg" id="err-cad-nome">Informe seu nome</div>
+        </div>
+        <div>
+          <label class="field-label">E-mail</label>
+          <input type="email" id="cad-email" placeholder="seu@email.com" />
+          <div class="error-msg" id="err-cad-email">Informe um e-mail válido</div>
+        </div>
+        <div>
+          <label class="field-label">Senha</label>
+          <div class="field-wrap">
+            <input type="password" id="cad-senha" placeholder="Mínimo 6 caracteres" />
+            <button class="toggle-pw" onclick="togglePw('cad-senha', this)">👁</button>
+          </div>
+          <div class="error-msg" id="err-cad-senha">A senha deve ter ao menos 6 caracteres</div>
+        </div>
+        <div>
+          <label class="field-label">Confirmar senha</label>
+          <div class="field-wrap">
+            <input type="password" id="cad-confirma" placeholder="Repita sua senha" />
+            <button class="toggle-pw" onclick="togglePw('cad-confirma', this)">👁</button>
+          </div>
+          <div class="error-msg" id="err-cad-confirma">As senhas não coincidem</div>
+        </div>
+        <button class="btn-main" id="btn-cadastro" onclick="handleCadastro()">
+          <span class="spinner"></span>
+          <span class="btn-text">Criar conta</span>
+        </button>
+        <div class="divider">ou cadastre-se com</div>
+        <button class="btn-google" onclick="handleGoogle()">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+            <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
+            <path d="M3.964 10.707A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"/>
+            <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+          </svg>
+          Cadastrar com Google
+        </button>
+        <p class="terms">
+          Ao criar uma conta, você concorda com nossos<br>
+          <a onclick="abrirModal('modal-termos')">Termos de Uso</a> e <a onclick="abrirModal('modal-privacidade')">Política de Privacidade</a>
+        </p>
+      </div>
+    </div>
   </div>
 
-  <div class="content">
-    <div class="tabs">
-      <button class="tab active" onclick="switchTab('login')">Entrar</button>
-      <button class="tab" onclick="switchTab('cadastro')">Cadastrar</button>
+  <!-- ===== TELA 2: ONBOARDING ===== -->
+  <div class="screen" id="screen-onboarding">
+    <div class="ob-header">
+      <div class="progress-steps">
+        <div class="step-bar active" id="bar-1"></div>
+        <div class="step-bar" id="bar-2"></div>
+        <div class="step-bar" id="bar-3"></div>
+      </div>
+      <div class="ob-label" id="ob-label">Passo 1 de 3</div>
+      <div class="ob-title" id="ob-title">O que você quer melhorar?</div>
+      <div class="ob-sub" id="ob-sub">Escolha ao menos um hábito para começar. Você pode mudar depois.</div>
     </div>
 
-    <!-- FORM LOGIN -->
-    <div class="form active" id="form-login">
-      <div>
-        <label class="field-label">E-mail</label>
-        <input type="email" id="login-email" placeholder="seu@email.com" />
-        <div class="error-msg" id="err-login-email">Informe um e-mail válido</div>
-      </div>
-      <div>
-        <label class="field-label">Senha</label>
-        <div class="field-wrap">
-          <input type="password" id="login-senha" placeholder="••••••••" />
-          <button class="toggle-pw" onclick="togglePw('login-senha', this)">👁</button>
+    <div class="ob-content">
+      <!-- STEP 1: HÁBITOS -->
+      <div class="ob-step active" id="ob-step-1">
+        <div class="habits-grid">
+          <button class="habit-option" data-id="agua" onclick="toggleHabito(this)">
+            <span class="habit-option-emoji">💧</span>
+            <span class="habit-option-name">Hidratação</span>
+            <span class="habit-option-desc">Beber mais água</span>
+          </button>
+          <button class="habit-option" data-id="sono" onclick="toggleHabito(this)">
+            <span class="habit-option-emoji">😴</span>
+            <span class="habit-option-name">Sono</span>
+            <span class="habit-option-desc">Regular o horário</span>
+          </button>
+          <button class="habit-option" data-id="celular" onclick="toggleHabito(this)">
+            <span class="habit-option-emoji">📵</span>
+            <span class="habit-option-name">Menos tela</span>
+            <span class="habit-option-desc">Usar menos o celular</span>
+          </button>
+          <button class="habit-option" data-id="alimentacao" onclick="toggleHabito(this)">
+            <span class="habit-option-emoji">🥗</span>
+            <span class="habit-option-name">Alimentação</span>
+            <span class="habit-option-desc">Comer melhor</span>
+          </button>
+          <button class="habit-option" data-id="movimento" onclick="toggleHabito(this)">
+            <span class="habit-option-emoji">🚶</span>
+            <span class="habit-option-name">Movimento</span>
+            <span class="habit-option-desc">Se mexer mais</span>
+          </button>
+          <button class="habit-option" data-id="mental" onclick="toggleHabito(this)">
+            <span class="habit-option-emoji">🧘</span>
+            <span class="habit-option-name">Bem-estar</span>
+            <span class="habit-option-desc">Saúde mental</span>
+          </button>
         </div>
-        <div class="error-msg" id="err-login-senha">Informe sua senha</div>
+        <p class="select-hint">Selecione quantos quiser</p>
       </div>
-      <a class="forgot" onclick="handleForgotPassword()">Esqueceu a senha?</a>
-      <button class="btn-main" id="btn-login" onclick="handleLogin()">
-        <span class="spinner"></span>
-        <span class="btn-text">Entrar</span>
-      </button>
-      <div class="divider">ou continue com</div>
-      <button class="btn-google" onclick="handleGoogle()">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
-          <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
-          <path d="M3.964 10.707A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"/>
-          <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
-        </svg>
-        Entrar com Google
-      </button>
-      <p class="terms">
-        Ao entrar, você concorda com nossos<br>
-        <a onclick="abrirModal('modal-termos')">Termos de Uso</a> e <a onclick="abrirModal('modal-privacidade')">Política de Privacidade</a>
-      </p>
+
+      <!-- STEP 2: METAS -->
+      <div class="ob-step" id="ob-step-2">
+        <div class="metas-list" id="metas-list"></div>
+      </div>
+
+      <!-- STEP 3: CONFIRMAÇÃO -->
+      <div class="ob-step" id="ob-step-3">
+        <div class="confirm-wrap">
+          <div class="confirm-icon">🎉</div>
+          <div class="confirm-title">Tudo pronto!</div>
+          <div class="confirm-sub">Sua rotina foi configurada. Vamos construir hábitos melhores juntos!</div>
+          <div class="confirm-habits" id="confirm-habits"></div>
+        </div>
+      </div>
     </div>
 
-    <!-- FORM CADASTRO -->
-    <div class="form" id="form-cadastro">
-      <div>
-        <label class="field-label">Nome completo</label>
-        <input type="text" id="cad-nome" placeholder="Seu nome" />
-        <div class="error-msg" id="err-cad-nome">Informe seu nome</div>
+    <div class="ob-footer">
+      <div class="footer-row">
+        <button class="btn-back" id="btn-back" onclick="voltarStep()" style="display:none">←</button>
+        <button class="btn-next" id="btn-next" onclick="avancarStep()">
+          <span class="spinner"></span>
+          <span class="btn-next-text">Continuar</span>
+        </button>
       </div>
-      <div>
-        <label class="field-label">E-mail</label>
-        <input type="email" id="cad-email" placeholder="seu@email.com" />
-        <div class="error-msg" id="err-cad-email">Informe um e-mail válido</div>
-      </div>
-      <div>
-        <label class="field-label">Senha</label>
-        <div class="field-wrap">
-          <input type="password" id="cad-senha" placeholder="Mínimo 6 caracteres" />
-          <button class="toggle-pw" onclick="togglePw('cad-senha', this)">👁</button>
-        </div>
-        <div class="error-msg" id="err-cad-senha">A senha deve ter ao menos 6 caracteres</div>
-      </div>
-      <div>
-        <label class="field-label">Confirmar senha</label>
-        <div class="field-wrap">
-          <input type="password" id="cad-confirma" placeholder="Repita sua senha" />
-          <button class="toggle-pw" onclick="togglePw('cad-confirma', this)">👁</button>
-        </div>
-        <div class="error-msg" id="err-cad-confirma">As senhas não coincidem</div>
-      </div>
-      <button class="btn-main" id="btn-cadastro" onclick="handleCadastro()">
-        <span class="spinner"></span>
-        <span class="btn-text">Criar conta</span>
-      </button>
-      <div class="divider">ou cadastre-se com</div>
-      <button class="btn-google" onclick="handleGoogle()">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
-          <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
-          <path d="M3.964 10.707A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"/>
-          <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
-        </svg>
-        Cadastrar com Google
-      </button>
-      <p class="terms">
-        Ao criar uma conta, você concorda com nossos<br>
-        <a onclick="abrirModal('modal-termos')">Termos de Uso</a> e <a onclick="abrirModal('modal-privacidade')">Política de Privacidade</a>
-      </p>
     </div>
   </div>
+
 </div>
 
 <div class="toast" id="toast"></div>
 
-<!-- FIREBASE -->
+<!-- ==================== FIREBASE ==================== -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import {
@@ -656,12 +852,15 @@
     updateProfile,
     GoogleAuthProvider,
     signInWithPopup,
-    sendPasswordResetEmail
+    sendPasswordResetEmail,
+    onAuthStateChanged
   } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
   import {
     getFirestore,
     doc,
     setDoc,
+    getDoc,
+    updateDoc,
     serverTimestamp
   } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
@@ -680,13 +879,26 @@
   const db = getFirestore(app);
   const provider = new GoogleAuthProvider();
 
+  // Se já estiver logado, redireciona direto pro dashboard
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const snap = await getDoc(doc(db, "usuarios", user.uid));
+      if (snap.exists() && snap.data().onboardingFeito) {
+        window.location.href = 'dashboard.html';
+      } else if (snap.exists()) {
+        mostrarTela('screen-onboarding');
+      }
+    }
+  });
+
   async function salvarUsuario(user, nome) {
     await setDoc(doc(db, "usuarios", user.uid), {
       nome: nome || user.displayName || "Usuário",
       email: user.email,
       criadoEm: serverTimestamp(),
       streak: 0,
-      pontos: 0
+      pontos: 0,
+      onboardingFeito: false
     }, { merge: true });
   }
 
@@ -714,9 +926,14 @@
     if (!valid) return;
     setLoading('btn-login', true, 'Entrando...');
     try {
-      await signInWithEmailAndPassword(auth, email, senha);
+      const cred = await signInWithEmailAndPassword(auth, email, senha);
+      const snap = await getDoc(doc(db, "usuarios", cred.user.uid));
       showToast('✅ Bem-vindo de volta!');
-      setTimeout(() => window.location.href = 'dashboard.html', 1200);
+      if (snap.exists() && snap.data().onboardingFeito) {
+        setTimeout(() => window.location.href = 'dashboard.html', 1200);
+      } else {
+        setTimeout(() => mostrarTela('screen-onboarding'), 1200);
+      }
     } catch (e) {
       showToast('❌ ' + traduzirErro(e.code), true);
     } finally {
@@ -742,7 +959,7 @@
       await updateProfile(cred.user, { displayName: nome });
       await salvarUsuario(cred.user, nome);
       showToast('🎉 Conta criada com sucesso!');
-      setTimeout(() => window.location.href = 'onboarding.html', 1200);
+      setTimeout(() => mostrarTela('screen-onboarding'), 1200);
     } catch (e) {
       showToast('❌ ' + traduzirErro(e.code), true);
     } finally {
@@ -754,8 +971,13 @@
     try {
       const cred = await signInWithPopup(auth, provider);
       await salvarUsuario(cred.user);
+      const snap = await getDoc(doc(db, "usuarios", cred.user.uid));
       showToast('✅ Entrou com Google!');
-      setTimeout(() => window.location.href = 'dashboard.html', 1200);
+      if (snap.exists() && snap.data().onboardingFeito) {
+        setTimeout(() => window.location.href = 'dashboard.html', 1200);
+      } else {
+        setTimeout(() => mostrarTela('screen-onboarding'), 1200);
+      }
     } catch (e) {
       showToast('❌ ' + traduzirErro(e.code), true);
     }
@@ -775,9 +997,21 @@
       showToast('❌ ' + traduzirErro(e.code), true);
     }
   };
+
+  window.salvarOnboarding = async function (habitos, metas) {
+    const user = auth.currentUser;
+    if (!user) return;
+    await updateDoc(doc(db, "usuarios", user.uid), {
+      habitos,
+      metas,
+      onboardingFeito: true
+    });
+  };
 </script>
 
+<!-- ==================== JS GERAL ==================== -->
 <script>
+  // ---- LOGIN ----
   function switchTab(tab) {
     document.querySelectorAll('.tab').forEach((t, i) => {
       t.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'cadastro'));
@@ -790,14 +1024,6 @@
     const input = document.getElementById(id);
     input.type = input.type === 'password' ? 'text' : 'password';
     btn.textContent = input.type === 'password' ? '👁' : '🙈';
-  }
-
-  function showToast(msg, erro = false) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.toggle('erro', erro);
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3500);
   }
 
   function setLoading(btnId, loading, texto) {
@@ -819,20 +1045,197 @@
     });
   }
 
-  function abrirModal(id) {
+  // ---- TELAS ----
+  function mostrarTela(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
   }
 
-  function fecharModal(id) {
-    document.getElementById(id).classList.remove('active');
-  }
-
-  // Fechar modal clicando fora
+  // ---- MODAIS ----
+  function abrirModal(id) { document.getElementById(id).classList.add('active'); }
+  function fecharModal(id) { document.getElementById(id).classList.remove('active'); }
   document.querySelectorAll('.modal-overlay').forEach(overlay => {
     overlay.addEventListener('click', function(e) {
       if (e.target === this) fecharModal(this.id);
     });
   });
+
+  // ---- TOAST ----
+  function showToast(msg, erro = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.toggle('erro', erro);
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  // ---- ONBOARDING ----
+  let obStep = 1;
+  let habitosSelecionados = [];
+
+  const habitosConfig = {
+    agua:        { emoji: '💧', nome: 'Hidratação' },
+    sono:        { emoji: '😴', nome: 'Sono' },
+    celular:     { emoji: '📵', nome: 'Menos tela' },
+    alimentacao: { emoji: '🥗', nome: 'Alimentação' },
+    movimento:   { emoji: '🚶', nome: 'Movimento' },
+    mental:      { emoji: '🧘', nome: 'Bem-estar' },
+  };
+
+  const metasConfig = {
+    agua: {
+      titulo: 'Hidratação',
+      campos: [{ label: 'Quantos copos de água por dia?', id: 'meta-agua-copos', opcoes: ['4 copos (1L)', '6 copos (1,5L)', '8 copos (2L)', '10 copos (2,5L)', '12 copos (3L)'] }]
+    },
+    sono: {
+      titulo: 'Sono',
+      campos: [
+        { label: 'Que horas quer dormir?', id: 'meta-sono-dormir', opcoes: ['21h00', '22h00', '22h30', '23h00', '23h30', '00h00', '00h30'] },
+        { label: 'Que horas quer acordar?', id: 'meta-sono-acordar', opcoes: ['05h00', '06h00', '06h30', '07h00', '07h30', '08h00', '09h00'] }
+      ]
+    },
+    celular: {
+      titulo: 'Menos tela',
+      campos: [
+        { label: 'Limite diário de uso do celular?', id: 'meta-celular-limite', opcoes: ['1 hora', '2 horas', '3 horas', '4 horas', '5 horas'] },
+        { label: 'Horário sem celular?', id: 'meta-celular-horario', opcoes: ['30 min antes de dormir', '1h antes de dormir', 'Durante as refeições', 'Ao acordar (1h)'] }
+      ]
+    },
+    alimentacao: {
+      titulo: 'Alimentação',
+      campos: [
+        { label: 'Quantas refeições por dia?', id: 'meta-alim-refeicoes', opcoes: ['2 refeições', '3 refeições', '4 refeições', '5 refeições', '6 refeições'] },
+        { label: 'Principal objetivo?', id: 'meta-alim-objetivo', opcoes: ['Comer mais saudável', 'Reduzir açúcar', 'Comer menos', 'Comer mais', 'Mais frutas e vegetais'] }
+      ]
+    },
+    movimento: {
+      titulo: 'Movimento',
+      campos: [
+        { label: 'Quantos minutos por dia?', id: 'meta-mov-minutos', opcoes: ['15 minutos', '20 minutos', '30 minutos', '45 minutos', '1 hora'] },
+        { label: 'Tipo de atividade?', id: 'meta-mov-tipo', opcoes: ['Caminhada', 'Corrida', 'Ciclismo', 'Academia', 'Yoga', 'Qualquer uma'] }
+      ]
+    },
+    mental: {
+      titulo: 'Bem-estar mental',
+      campos: [
+        { label: 'Minutos de pausa por dia?', id: 'meta-mental-minutos', opcoes: ['5 minutos', '10 minutos', '15 minutos', '20 minutos', '30 minutos'] },
+        { label: 'Melhor horário?', id: 'meta-mental-horario', opcoes: ['Ao acordar', 'Manhã', 'Almoço', 'Tarde', 'Noite', 'Antes de dormir'] }
+      ]
+    }
+  };
+
+  function toggleHabito(btn) {
+    const id = btn.dataset.id;
+    btn.classList.toggle('selected');
+    if (habitosSelecionados.includes(id)) {
+      habitosSelecionados = habitosSelecionados.filter(h => h !== id);
+    } else {
+      habitosSelecionados.push(id);
+    }
+  }
+
+  function atualizarObHeader() {
+    const labels = ['Passo 1 de 3', 'Passo 2 de 3', 'Passo 3 de 3'];
+    const titles = ['O que você quer melhorar?', 'Defina suas metas', 'Tudo pronto!'];
+    const subs = [
+      'Escolha ao menos um hábito para começar. Você pode mudar depois.',
+      'Configure seus objetivos para cada hábito selecionado.',
+      'Sua rotina foi configurada com sucesso!'
+    ];
+    document.getElementById('ob-label').textContent = labels[obStep - 1];
+    document.getElementById('ob-title').textContent = titles[obStep - 1];
+    document.getElementById('ob-sub').textContent = subs[obStep - 1];
+    for (let i = 1; i <= 3; i++) {
+      const bar = document.getElementById('bar-' + i);
+      bar.className = 'step-bar';
+      if (i < obStep) bar.classList.add('done');
+      else if (i === obStep) bar.classList.add('active');
+    }
+    document.getElementById('btn-back').style.display = obStep > 1 ? 'flex' : 'none';
+    document.querySelector('.btn-next-text').textContent = obStep === 3 ? 'Começar agora!' : 'Continuar';
+  }
+
+  function gerarMetas() {
+    const lista = document.getElementById('metas-list');
+    lista.innerHTML = '';
+    habitosSelecionados.forEach(id => {
+      const config = metasConfig[id];
+      if (!config) return;
+      const card = document.createElement('div');
+      card.className = 'meta-card';
+      let html = `<div class="meta-card-header"><span class="meta-emoji">${habitosConfig[id].emoji}</span><span class="meta-card-title">${config.titulo}</span></div>`;
+      config.campos.forEach(campo => {
+        html += `<label class="meta-field-label">${campo.label}</label><select class="meta-input" id="${campo.id}">`;
+        campo.opcoes.forEach(op => { html += `<option>${op}</option>`; });
+        html += `</select>`;
+      });
+      card.innerHTML = html;
+      lista.appendChild(card);
+    });
+  }
+
+  function gerarConfirmacao() {
+    const wrap = document.getElementById('confirm-habits');
+    wrap.innerHTML = '';
+    habitosSelecionados.forEach(id => {
+      const badge = document.createElement('div');
+      badge.className = 'confirm-badge';
+      badge.textContent = habitosConfig[id].emoji + ' ' + habitosConfig[id].nome;
+      wrap.appendChild(badge);
+    });
+  }
+
+  function coletarMetas() {
+    const metas = {};
+    habitosSelecionados.forEach(id => {
+      const config = metasConfig[id];
+      if (!config) return;
+      metas[id] = {};
+      config.campos.forEach(campo => {
+        const el = document.getElementById(campo.id);
+        if (el) metas[id][campo.id] = el.value;
+      });
+    });
+    return metas;
+  }
+
+  async function avancarStep() {
+    if (obStep === 1) {
+      if (habitosSelecionados.length === 0) { showToast('⚠️ Selecione ao menos um hábito', true); return; }
+      gerarMetas();
+    }
+    if (obStep === 2) { gerarConfirmacao(); }
+    if (obStep === 3) {
+      const btn = document.getElementById('btn-next');
+      btn.disabled = true;
+      btn.classList.add('loading');
+      document.querySelector('.btn-next-text').textContent = 'Salvando...';
+      try {
+        await window.salvarOnboarding(habitosSelecionados, coletarMetas());
+        showToast('✅ Rotina salva!');
+        setTimeout(() => window.location.href = 'dashboard.html', 1200);
+      } catch (e) {
+        showToast('❌ Erro ao salvar. Tente novamente.', true);
+        btn.disabled = false;
+        btn.classList.remove('loading');
+        document.querySelector('.btn-next-text').textContent = 'Começar agora!';
+      }
+      return;
+    }
+    document.getElementById('ob-step-' + obStep).classList.remove('active');
+    obStep++;
+    document.getElementById('ob-step-' + obStep).classList.add('active');
+    atualizarObHeader();
+  }
+
+  function voltarStep() {
+    document.getElementById('ob-step-' + obStep).classList.remove('active');
+    obStep--;
+    document.getElementById('ob-step-' + obStep).classList.add('active');
+    atualizarObHeader();
+  }
+
+  atualizarObHeader();
 </script>
 
 </body>
