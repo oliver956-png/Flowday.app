@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>FlowDay – Dashboard</title>
+<title>FlowDay</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  /* ===== TEMA CLARO ===== */
   :root {
     --green: #3B6D11;
     --green-light: #EAF3DE;
     --green-mid: #639922;
     --teal-mid: #1D9E75;
-    --teal-light: #E1F5EE;
     --text: #1a1a18;
     --muted: #5F5E5A;
     --border: #E8E8E4;
@@ -22,8 +22,30 @@
     --error: #E24B4A;
     --blue: #3B82F6;
     --blue-light: #EFF6FF;
+    --blue-border: #BFDBFE;
     --purple: #8B5CF6;
     --purple-light: #F5F3FF;
+    --purple-border: #DDD6FE;
+    --header-bg: #0F1F08;
+    --card-bg: #ffffff;
+    --nav-bg: #ffffff;
+  }
+
+  /* ===== TEMA ESCURO ===== */
+  [data-theme="dark"] {
+    --text: #F0F0EC;
+    --muted: #A0A09A;
+    --border: #2A2A26;
+    --surface: #1A1A16;
+    --white: #222220;
+    --header-bg: #050E02;
+    --card-bg: #222220;
+    --nav-bg: #1A1A16;
+    --blue-light: #1E2A3A;
+    --blue-border: #2A4A6A;
+    --purple-light: #1E1A2E;
+    --purple-border: #3A2A5A;
+    --green-light: #1A2810;
   }
 
   body {
@@ -32,315 +54,296 @@
     min-height: 100vh;
     display: flex; align-items: center; justify-content: center;
     padding: 24px;
+    transition: background 0.3s;
   }
 
   .phone-frame {
     width: 100%; max-width: 390px;
     min-height: 100vh; max-height: 844px;
     background: var(--white); border-radius: 40px;
-    overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.12);
+    overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.18);
     display: flex; flex-direction: column; position: relative;
+    transition: background 0.3s;
   }
 
+  /* ===== TELAS ===== */
   .screen { display: none; flex-direction: column; flex: 1; min-height: 0; }
   .screen.active { display: flex; }
 
-  /* ==================== HEADER ==================== */
+  /* ===== HEADER ESCURO ===== */
   .dash-header {
-    background: #0F1F08;
+    background: var(--header-bg);
     padding: 48px 20px 20px;
-    flex-shrink: 0;
-    position: relative; overflow: hidden;
+    flex-shrink: 0; position: relative; overflow: hidden;
+    transition: background 0.3s;
   }
-  .dash-header::before { content: ''; position: absolute; width: 220px; height: 220px; border-radius: 50%; background: rgba(99,153,34,0.1); top: -60px; right: -60px; }
-  .dash-header::after { content: ''; position: absolute; width: 120px; height: 120px; border-radius: 50%; background: rgba(29,158,117,0.08); bottom: -30px; left: 20px; }
+  .dash-header::before { content:''; position:absolute; width:220px; height:220px; border-radius:50%; background:rgba(99,153,34,0.1); top:-60px; right:-60px; }
+  .dash-header::after { content:''; position:absolute; width:120px; height:120px; border-radius:50%; background:rgba(29,158,117,0.08); bottom:-30px; left:20px; }
 
-  .dash-header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; position: relative; z-index: 1; }
-  .dash-greeting small { font-size: 12px; color: rgba(255,255,255,0.45); font-weight: 300; display: block; margin-bottom: 2px; }
-  .dash-greeting strong { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: white; letter-spacing: -0.8px; display: block; }
+  .dash-header-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; position:relative; z-index:1; }
+  .dash-greeting small { font-size:12px; color:rgba(255,255,255,0.45); font-weight:300; display:block; margin-bottom:2px; }
+  .dash-greeting strong { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:white; letter-spacing:-0.8px; display:block; }
 
-  .dash-avatar { width: 44px; height: 44px; border-radius: 100px; background: linear-gradient(135deg, var(--green-mid), var(--teal-mid)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: white; cursor: pointer; flex-shrink: 0; border: 2px solid rgba(255,255,255,0.15); }
+  .dash-avatar { width:44px; height:44px; border-radius:100px; background:linear-gradient(135deg,var(--green-mid),var(--teal-mid)); display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-size:17px; font-weight:700; color:white; cursor:pointer; flex-shrink:0; border:2px solid rgba(255,255,255,0.15); }
 
-  .dash-stats { display: flex; gap: 8px; margin-bottom: 18px; position: relative; z-index: 1; }
-  .dash-stat { flex: 1; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; }
-  .dash-stat-emoji { font-size: 16px; margin-bottom: 2px; }
-  .dash-stat-value { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 800; color: white; letter-spacing: -0.3px; }
-  .dash-stat-label { font-size: 10px; color: rgba(255,255,255,0.4); font-weight: 300; }
+  .dash-stats { display:flex; gap:8px; margin-bottom:18px; position:relative; z-index:1; }
+  .dash-stat { flex:1; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:10px 12px; display:flex; flex-direction:column; gap:2px; }
+  .dash-stat-emoji { font-size:16px; margin-bottom:2px; }
+  .dash-stat-value { font-family:'Syne',sans-serif; font-size:15px; font-weight:800; color:white; letter-spacing:-0.3px; }
+  .dash-stat-label { font-size:10px; color:rgba(255,255,255,0.4); font-weight:300; }
 
-  .dash-progress { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 12px 14px; position: relative; z-index: 1; }
-  .dash-progress-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-  .dash-progress-top span { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 300; }
-  .dash-progress-top strong { font-size: 12px; color: var(--green-mid); font-weight: 600; }
-  .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 100px; overflow: hidden; margin-bottom: 6px; }
-  .progress-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--green-mid), var(--teal-mid)); transition: width 0.5s ease; }
-  .dash-progress-msg { font-size: 11px; color: rgba(255,255,255,0.35); font-weight: 300; }
+  .dash-progress { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:12px 14px; position:relative; z-index:1; }
+  .dash-progress-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+  .dash-progress-top span { font-size:12px; color:rgba(255,255,255,0.5); font-weight:300; }
+  .dash-progress-top strong { font-size:12px; color:var(--green-mid); font-weight:600; }
+  .progress-bar { height:6px; background:rgba(255,255,255,0.1); border-radius:100px; overflow:hidden; margin-bottom:6px; }
+  .progress-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--green-mid),var(--teal-mid)); transition:width 0.5s ease; }
+  .dash-progress-msg { font-size:11px; color:rgba(255,255,255,0.35); font-weight:300; }
 
-  /* ==================== CONTEÚDO ==================== */
-  .dash-content { flex: 1; overflow-y: auto; padding: 16px 20px 100px; }
+  /* ===== CONTEÚDO ===== */
+  .dash-content { flex:1; overflow-y:auto; padding:16px 20px 100px; }
 
-  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; margin-top: 20px; }
-  .section-header:first-child { margin-top: 0; }
-  .section-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
-  .section-link { font-size: 12px; color: var(--green); font-weight: 500; cursor: pointer; background: none; border: none; font-family: 'DM Sans', sans-serif; }
+  .section-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--text); letter-spacing:-0.3px; }
 
   /* Frase motivacional */
-  .motivacional { background: linear-gradient(135deg, #0F1F08, #1a3a0a); border-radius: 18px; padding: 16px 18px; margin-bottom: 4px; display: flex; align-items: center; gap: 12px; position: relative; overflow: hidden; }
-  .motivacional::after { content: ''; position: absolute; width: 100px; height: 100px; border-radius: 50%; background: rgba(99,153,34,0.12); right: -20px; top: -20px; }
-  .motivacional-icon { font-size: 28px; flex-shrink: 0; position: relative; z-index: 1; }
-  .motivacional-text { position: relative; z-index: 1; }
-  .motivacional-text small { font-size: 10px; color: rgba(255,255,255,0.4); font-weight: 300; display: block; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.8px; }
-  .motivacional-text span { font-size: 13px; color: rgba(255,255,255,0.85); font-weight: 400; line-height: 1.5; display: block; font-style: italic; }
+  .motivacional { background:linear-gradient(135deg,#0F1F08,#1a3a0a); border-radius:18px; padding:16px 18px; margin-bottom:20px; display:flex; align-items:center; gap:12px; position:relative; overflow:hidden; }
+  .motivacional::after { content:''; position:absolute; width:100px; height:100px; border-radius:50%; background:rgba(99,153,34,0.12); right:-20px; top:-20px; }
+  .motivacional-icon { font-size:28px; flex-shrink:0; position:relative; z-index:1; }
+  .motivacional-text { position:relative; z-index:1; }
+  .motivacional-text small { font-size:10px; color:rgba(255,255,255,0.4); font-weight:300; display:block; margin-bottom:2px; text-transform:uppercase; letter-spacing:0.8px; }
+  .motivacional-text span { font-size:13px; color:rgba(255,255,255,0.85); font-weight:400; line-height:1.5; display:block; font-style:italic; }
 
-  /* ==================== CARD ÁGUA ==================== */
-  .agua-card {
-    background: var(--blue-light);
-    border: 1px solid #BFDBFE;
-    border-radius: 20px;
-    padding: 16px;
-    margin-bottom: 12px;
-  }
+  /* Hábitos */
+  .habit-card { display:flex; align-items:center; gap:12px; padding:12px 14px; background:var(--card-bg); border:1px solid var(--border); border-radius:16px; margin-bottom:10px; cursor:pointer; transition:all 0.2s; }
+  .habit-card.done { background:var(--green-light); border-color:rgba(99,153,34,0.25); }
+  .habit-icon { width:40px; height:40px; border-radius:12px; background:var(--surface); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+  .habit-card.done .habit-icon { background:rgba(99,153,34,0.15); }
+  .habit-info { flex:1; }
+  .habit-name { font-size:14px; font-weight:500; color:var(--text); display:block; }
+  .habit-card.done .habit-name { text-decoration:line-through; color:var(--muted); }
+  .habit-meta { font-size:11px; color:var(--muted); font-weight:300; display:block; margin-top:1px; }
+  .habit-check { width:26px; height:26px; border-radius:100px; border:1.5px solid var(--border); background:transparent; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all 0.2s; font-size:12px; color:white; }
+  .habit-card.done .habit-check { background:var(--green-mid); border-color:var(--green-mid); }
 
-  .agua-card-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 14px;
-  }
+  .empty-state { text-align:center; padding:40px 20px; }
+  .empty-state-icon { font-size:40px; margin-bottom:12px; }
+  .empty-state-title { font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:var(--text); margin-bottom:6px; }
+  .empty-state-sub { font-size:13px; color:var(--muted); font-weight:300; line-height:1.6; }
 
-  .agua-card-title {
-    display: flex; align-items: center; gap: 8px;
-  }
+  /* ===== ABA ÁGUA ===== */
+  .agua-screen-header { background:var(--header-bg); padding:48px 20px 24px; flex-shrink:0; position:relative; overflow:hidden; transition:background 0.3s; }
+  .agua-screen-header::before { content:''; position:absolute; width:180px; height:180px; border-radius:50%; background:rgba(59,130,246,0.15); top:-50px; right:-40px; }
 
-  .agua-card-title span {
-    font-family: 'Syne', sans-serif;
-    font-size: 14px; font-weight: 700;
-    color: #1E40AF;
-  }
+  .agua-screen-title { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:white; letter-spacing:-0.8px; margin-bottom:4px; position:relative; z-index:1; }
+  .agua-screen-sub { font-size:13px; color:rgba(255,255,255,0.4); font-weight:300; position:relative; z-index:1; }
 
-  .agua-badge {
-    font-size: 11px; font-weight: 500;
-    color: #3B82F6; background: white;
-    border-radius: 100px; padding: 3px 10px;
-    border: 1px solid #BFDBFE;
-  }
+  .agua-screen-content { flex:1; overflow-y:auto; padding:20px 20px 100px; }
 
-  /* Copos de água */
-  .copos-grid {
-    display: flex; flex-wrap: wrap; gap: 8px;
-    justify-content: center;
-    margin-bottom: 12px;
-  }
+  .agua-big-card { background:var(--blue-light); border:1px solid var(--blue-border); border-radius:22px; padding:20px; margin-bottom:16px; }
 
-  .copo {
-    width: 36px; height: 44px;
-    cursor: pointer;
-    transition: transform 0.15s;
-    position: relative;
-  }
-  .copo:active { transform: scale(0.9); }
+  .agua-litros-big { font-family:'Syne',sans-serif; font-size:48px; font-weight:800; color:#1E40AF; letter-spacing:-2px; line-height:1; }
+  [data-theme="dark"] .agua-litros-big { color:#60A5FA; }
+  .agua-litros-meta { font-size:13px; color:#60A5FA; font-weight:300; margin-top:4px; margin-bottom:16px; display:block; }
 
-  .copo svg { width: 100%; height: 100%; }
+  .agua-progress-bar { height:8px; background:rgba(59,130,246,0.15); border-radius:100px; overflow:hidden; margin-bottom:16px; }
+  .agua-progress-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,#3B82F6,#60A5FA); transition:width 0.4s ease; }
 
-  .agua-info {
-    display: flex; justify-content: space-between; align-items: center;
-  }
+  .copos-grid { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:16px; }
+  .copo { width:40px; height:50px; cursor:pointer; transition:transform 0.15s; }
+  .copo:active { transform:scale(0.88); }
+  .copo svg { width:100%; height:100%; }
 
-  .agua-litros {
-    font-family: 'Syne', sans-serif;
-    font-size: 22px; font-weight: 800;
-    color: #1E40AF; letter-spacing: -0.8px;
-  }
+  .agua-actions { display:flex; gap:10px; }
+  .agua-btn { flex:1; padding:12px; border-radius:14px; border:1.5px solid var(--blue-border); background:var(--card-bg); font-size:13px; font-weight:500; color:#3B82F6; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background 0.2s; }
+  .agua-btn:hover { background:var(--blue-light); }
+  .agua-btn.primary { background:#3B82F6; color:white; border-color:#3B82F6; }
+  .agua-btn.primary:hover { background:#2563EB; }
 
-  .agua-meta-text { font-size: 11px; color: #60A5FA; font-weight: 300; }
+  /* ===== ABA SONO ===== */
+  .sono-screen-header { background:var(--header-bg); padding:48px 20px 24px; flex-shrink:0; position:relative; overflow:hidden; transition:background 0.3s; }
+  .sono-screen-header::before { content:''; position:absolute; width:180px; height:180px; border-radius:50%; background:rgba(139,92,246,0.15); top:-50px; right:-40px; }
 
-  .agua-reset {
-    font-size: 11px; color: #93C5FD; cursor: pointer;
-    background: none; border: none; font-family: 'DM Sans', sans-serif;
-    text-decoration: underline;
-  }
+  .sono-screen-title { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:white; letter-spacing:-0.8px; margin-bottom:4px; position:relative; z-index:1; }
+  .sono-screen-sub { font-size:13px; color:rgba(255,255,255,0.4); font-weight:300; position:relative; z-index:1; }
 
-  /* ==================== CARD SONO ==================== */
-  .sono-card {
-    background: var(--purple-light);
-    border: 1px solid #DDD6FE;
-    border-radius: 20px;
-    padding: 16px;
-    margin-bottom: 12px;
-  }
+  .sono-screen-content { flex:1; overflow-y:auto; padding:20px 20px 100px; }
 
-  .sono-card-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 14px;
-  }
+  .sono-big-card { background:var(--purple-light); border:1px solid var(--purple-border); border-radius:22px; padding:20px; margin-bottom:16px; }
 
-  .sono-card-title {
-    display: flex; align-items: center; gap: 8px;
-  }
+  .sono-horas-big { font-family:'Syne',sans-serif; font-size:48px; font-weight:800; color:#5B21B6; letter-spacing:-2px; line-height:1; }
+  [data-theme="dark"] .sono-horas-big { color:#A78BFA; }
+  .sono-horas-sub { font-size:13px; color:#7C3AED; font-weight:300; margin-top:4px; display:block; }
+  [data-theme="dark"] .sono-horas-sub { color:#C4B5FD; }
 
-  .sono-card-title span {
-    font-family: 'Syne', sans-serif;
-    font-size: 14px; font-weight: 700; color: #5B21B6;
-  }
+  .sono-horarios-row { display:flex; gap:10px; margin:16px 0; }
+  .sono-horario-item { flex:1; background:var(--card-bg); border-radius:14px; padding:12px; text-align:center; border:1px solid var(--purple-border); }
+  .sono-horario-label { font-size:10px; color:#7C3AED; font-weight:400; display:block; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.5px; }
+  [data-theme="dark"] .sono-horario-label { color:#C4B5FD; }
+  .sono-horario-valor { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:#5B21B6; letter-spacing:-0.5px; display:block; }
+  [data-theme="dark"] .sono-horario-valor { color:#A78BFA; }
 
-  .sono-horarios {
-    display: flex; gap: 10px; margin-bottom: 14px;
-  }
+  .sono-qualidade-label { font-size:13px; color:#5B21B6; font-weight:500; margin-bottom:10px; display:block; }
+  [data-theme="dark"] .sono-qualidade-label { color:#C4B5FD; }
 
-  .sono-horario-card {
-    flex: 1; background: white;
-    border-radius: 14px; padding: 12px;
-    text-align: center;
-    border: 1px solid #EDE9FE;
-  }
+  .sono-opcoes { display:flex; gap:8px; }
+  .sono-opcao { flex:1; padding:10px 4px; border-radius:12px; border:1.5px solid var(--purple-border); background:var(--card-bg); cursor:pointer; font-size:10px; font-weight:500; color:#7C3AED; font-family:'DM Sans',sans-serif; transition:all 0.2s; text-align:center; display:flex; flex-direction:column; align-items:center; gap:4px; }
+  [data-theme="dark"] .sono-opcao { color:#C4B5FD; }
+  .sono-opcao.selected { border-color:#8B5CF6; background:#EDE9FE; color:#5B21B6; }
+  [data-theme="dark"] .sono-opcao.selected { background:#3B2A6A; color:#E9D5FF; }
+  .sono-opcao-emoji { font-size:18px; }
 
-  .sono-horario-label { font-size: 10px; color: #7C3AED; font-weight: 400; display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .sono-horario-valor { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #5B21B6; letter-spacing: -0.5px; display: block; }
+  .sono-dica { background:var(--card-bg); border:1px solid var(--purple-border); border-radius:16px; padding:14px 16px; margin-top:16px; }
+  .sono-dica-title { font-size:13px; font-weight:500; color:var(--text); margin-bottom:6px; }
+  .sono-dica-text { font-size:12px; color:var(--muted); font-weight:300; line-height:1.6; }
 
-  /* Status do sono */
-  .sono-status-label { font-size: 12px; color: #7C3AED; font-weight: 500; margin-bottom: 8px; display: block; }
+  /* ===== CONFIGURAÇÕES ===== */
+  .config-header { background:var(--white); padding:48px 20px 16px; flex-shrink:0; border-bottom:1px solid var(--border); transition:background 0.3s; }
+  .config-header-top { display:flex; align-items:center; gap:12px; }
+  .config-back { background:none; border:none; font-size:20px; cursor:pointer; color:var(--muted); padding:0; }
+  .config-page-title { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--text); letter-spacing:-0.5px; }
+  .config-content { flex:1; overflow-y:auto; padding:16px 20px 100px; }
 
-  .sono-opcoes {
-    display: flex; gap: 8px;
-  }
+  .config-profile { display:flex; align-items:center; gap:14px; background:var(--surface); border-radius:18px; padding:16px; margin-bottom:20px; transition:background 0.3s; }
+  .config-avatar { width:56px; height:56px; border-radius:100px; background:linear-gradient(135deg,var(--green-mid),var(--teal-mid)); display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-size:22px; font-weight:700; color:white; flex-shrink:0; }
+  .config-profile-info strong { display:block; font-size:15px; font-weight:600; color:var(--text); }
+  .config-profile-info small { font-size:12px; color:var(--muted); font-weight:300; }
 
-  .sono-opcao {
-    flex: 1; padding: 10px 6px;
-    border-radius: 12px; border: 1.5px solid #EDE9FE;
-    background: white; cursor: pointer;
-    font-size: 11px; font-weight: 500;
-    color: #7C3AED; font-family: 'DM Sans', sans-serif;
-    transition: all 0.2s; text-align: center;
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
-  }
+  .config-section { margin-bottom:20px; }
+  .config-section-title { font-size:11px; font-weight:500; color:var(--muted); letter-spacing:1px; text-transform:uppercase; margin-bottom:8px; padding-left:4px; }
+  .config-group { background:var(--card-bg); border:1px solid var(--border); border-radius:18px; overflow:hidden; transition:background 0.3s; }
+  .config-item { display:flex; align-items:center; gap:12px; padding:14px 16px; border-bottom:1px solid var(--border); cursor:pointer; transition:background 0.15s; }
+  .config-item:last-child { border-bottom:none; }
+  .config-item:hover { background:var(--surface); }
+  .config-item-icon { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .config-item-info { flex:1; }
+  .config-item-label { font-size:14px; font-weight:400; color:var(--text); display:block; }
+  .config-item-desc { font-size:11px; color:var(--muted); font-weight:300; display:block; margin-top:1px; }
+  .config-item-right { display:flex; align-items:center; gap:8px; }
+  .config-item-value { font-size:13px; color:var(--muted); font-weight:300; }
+  .config-arrow { font-size:16px; color:var(--border); }
 
-  .sono-opcao.selected {
-    border-color: var(--purple);
-    background: #EDE9FE;
-  }
+  .toggle-wrap { position:relative; width:44px; height:26px; flex-shrink:0; }
+  .toggle-input { opacity:0; width:0; height:0; position:absolute; }
+  .toggle-slider { position:absolute; inset:0; background:var(--border); border-radius:100px; cursor:pointer; transition:background 0.2s; }
+  .toggle-slider::before { content:''; position:absolute; width:20px; height:20px; border-radius:50%; background:white; top:3px; left:3px; transition:transform 0.2s; box-shadow:0 1px 3px rgba(0,0,0,0.15); }
+  .toggle-input:checked + .toggle-slider { background:var(--green-mid); }
+  .toggle-input:checked + .toggle-slider::before { transform:translateX(18px); }
 
-  .sono-opcao-emoji { font-size: 18px; }
+  /* Modal idioma */
+  .modal-overlay { display:none; position:fixed; inset:0; z-index:900; background:rgba(0,0,0,0.5); align-items:flex-end; justify-content:center; }
+  .modal-overlay.active { display:flex; }
+  .modal-sheet { background:var(--white); border-radius:24px 24px 0 0; width:100%; max-width:430px; display:flex; flex-direction:column; animation:slideUp 0.3s ease; }
+  @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
+  .modal-handle { width:40px; height:4px; background:var(--border); border-radius:100px; margin:12px auto 0; flex-shrink:0; }
+  .modal-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px 12px; border-bottom:1px solid var(--border); }
+  .modal-title { font-family:'Syne',sans-serif; font-size:17px; font-weight:700; color:var(--text); }
+  .modal-close { background:var(--surface); border:none; width:30px; height:30px; border-radius:100px; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; color:var(--muted); }
+  .modal-body { padding:16px 20px 32px; }
 
-  /* ==================== OUTROS HÁBITOS ==================== */
-  .habit-card {
-    display: flex; align-items: center; gap: 12px;
-    padding: 12px 14px; background: var(--white);
-    border: 1px solid var(--border); border-radius: 16px;
-    margin-bottom: 10px; cursor: pointer; transition: all 0.2s;
-  }
-  .habit-card.done { background: var(--green-light); border-color: rgba(99,153,34,0.25); }
-  .habit-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-  .habit-card.done .habit-icon { background: rgba(99,153,34,0.15); }
-  .habit-info { flex: 1; }
-  .habit-name { font-size: 14px; font-weight: 500; color: var(--text); display: block; }
-  .habit-card.done .habit-name { text-decoration: line-through; color: var(--muted); }
-  .habit-meta { font-size: 11px; color: var(--muted); font-weight: 300; display: block; margin-top: 1px; }
-  .habit-check { width: 26px; height: 26px; border-radius: 100px; border: 1.5px solid var(--border); background: transparent; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; font-size: 12px; color: white; }
-  .habit-card.done .habit-check { background: var(--green-mid); border-color: var(--green-mid); }
+  .idioma-opcao { display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--border); cursor:pointer; }
+  .idioma-opcao:last-child { border-bottom:none; }
+  .idioma-opcao-info { display:flex; align-items:center; gap:12px; }
+  .idioma-flag { font-size:22px; }
+  .idioma-nome { font-size:14px; color:var(--text); font-weight:400; }
+  .idioma-check { color:var(--green-mid); font-size:18px; font-weight:700; display:none; }
+  .idioma-opcao.selected .idioma-check { display:block; }
 
-  .empty-state { text-align: center; padding: 30px 20px; }
-  .empty-state-icon { font-size: 36px; margin-bottom: 10px; }
-  .empty-state-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-  .empty-state-sub { font-size: 12px; color: var(--muted); font-weight: 300; line-height: 1.6; }
+  /* Senha modal */
+  .senha-input { width:100%; padding:12px 14px; border:1px solid var(--border); border-radius:12px; font-size:14px; font-family:'DM Sans',sans-serif; color:var(--text); background:var(--white); outline:none; transition:border-color 0.2s; margin-bottom:10px; }
+  .senha-input:focus { border-color:var(--green); }
+  .btn-enviar-senha { width:100%; padding:13px; background:var(--green); color:white; border:none; border-radius:100px; font-size:14px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background 0.2s; margin-top:4px; }
+  .btn-enviar-senha:hover { background:#2d5509; }
 
-  /* ==================== CONFIGURAÇÕES ==================== */
-  .config-header { background: var(--white); padding: 48px 20px 16px; flex-shrink: 0; border-bottom: 1px solid var(--border); }
-  .config-header-top { display: flex; align-items: center; gap: 12px; }
-  .config-back { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--muted); padding: 0; }
-  .config-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
-  .config-content { flex: 1; overflow-y: auto; padding: 16px 20px 100px; }
-  .config-profile { display: flex; align-items: center; gap: 14px; background: var(--surface); border-radius: 18px; padding: 16px; margin-bottom: 20px; }
-  .config-avatar { width: 56px; height: 56px; border-radius: 100px; background: linear-gradient(135deg, var(--green-mid), var(--teal-mid)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: white; flex-shrink: 0; }
-  .config-profile-info strong { display: block; font-size: 15px; font-weight: 600; color: var(--text); }
-  .config-profile-info small { font-size: 12px; color: var(--muted); font-weight: 300; }
-  .config-section { margin-bottom: 20px; }
-  .config-section-title { font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; padding-left: 4px; }
-  .config-group { background: var(--white); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; }
-  .config-item { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
-  .config-item:last-child { border-bottom: none; }
-  .config-item:hover { background: var(--surface); }
-  .config-item-icon { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-  .config-item-info { flex: 1; }
-  .config-item-label { font-size: 14px; font-weight: 400; color: var(--text); display: block; }
-  .config-item-desc { font-size: 11px; color: var(--muted); font-weight: 300; display: block; margin-top: 1px; }
-  .config-item-right { display: flex; align-items: center; gap: 8px; }
-  .config-item-value { font-size: 13px; color: var(--muted); font-weight: 300; }
-  .config-arrow { font-size: 16px; color: var(--border); }
-  .toggle-wrap { position: relative; width: 44px; height: 26px; flex-shrink: 0; }
-  .toggle-input { opacity: 0; width: 0; height: 0; position: absolute; }
-  .toggle-slider { position: absolute; inset: 0; background: var(--border); border-radius: 100px; cursor: pointer; transition: background 0.2s; }
-  .toggle-slider::before { content: ''; position: absolute; width: 20px; height: 20px; border-radius: 50%; background: white; top: 3px; left: 3px; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
-  .toggle-input:checked + .toggle-slider { background: var(--green-mid); }
-  .toggle-input:checked + .toggle-slider::before { transform: translateX(18px); }
-  .btn-sair { width: 100%; padding: 14px; background: #FEF2F2; border: 1px solid #FECACA; border-radius: 14px; color: var(--error); font-size: 14px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.2s; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .btn-sair:hover { background: #FEE2E2; }
-  .config-version { text-align: center; font-size: 11px; color: var(--muted); margin-top: 16px; font-weight: 300; }
+  .btn-sair { width:100%; padding:14px; background:#FEF2F2; border:1px solid #FECACA; border-radius:14px; color:var(--error); font-size:14px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background 0.2s; margin-top:8px; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .btn-sair:hover { background:#FEE2E2; }
+  .config-version { text-align:center; font-size:11px; color:var(--muted); margin-top:16px; font-weight:300; }
 
-  /* ==================== BOTTOM NAV ==================== */
-  .bottom-nav { position: absolute; bottom: 0; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--border); display: flex; align-items: center; padding: 10px 8px 20px; z-index: 10; }
-  .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; border: none; background: none; font-family: 'DM Sans', sans-serif; padding: 4px 0; }
-  .nav-item-icon { font-size: 20px; line-height: 1; }
-  .nav-item-label { font-size: 10px; color: var(--muted); font-weight: 400; }
-  .nav-item.active .nav-item-label { color: var(--green); font-weight: 500; }
-  .nav-add { width: 48px; height: 48px; background: var(--green); border-radius: 100px; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; flex-shrink: 0; transition: background 0.2s; margin: 0 4px; }
-  .nav-add:hover { background: #2d5509; }
-  .nav-add svg { width: 22px; height: 22px; }
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav { position:absolute; bottom:0; left:0; right:0; background:var(--nav-bg); border-top:1px solid var(--border); display:flex; align-items:center; padding:10px 4px 20px; z-index:10; transition:background 0.3s; }
+  .nav-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; border:none; background:none; font-family:'DM Sans',sans-serif; padding:4px 0; }
+  .nav-item-icon { font-size:20px; line-height:1; }
+  .nav-item-label { font-size:9px; color:var(--muted); font-weight:400; }
+  .nav-item.active .nav-item-label { color:var(--green); font-weight:500; }
 
   /* TOAST */
-  .toast { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--text); color: white; padding: 12px 20px; border-radius: 100px; font-size: 13px; font-weight: 500; opacity: 0; transition: all 0.3s; white-space: nowrap; pointer-events: none; z-index: 999; }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .toast.erro { background: var(--error); }
+  .toast { position:fixed; bottom:40px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--text); color:var(--white); padding:12px 20px; border-radius:100px; font-size:13px; font-weight:500; opacity:0; transition:all 0.3s; white-space:nowrap; pointer-events:none; z-index:999; }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+  .toast.erro { background:var(--error); }
 
-  @media (max-width: 430px) {
-    body { padding: 0; background: var(--white); }
-    .phone-frame { border-radius: 0; box-shadow: none; max-height: none; min-height: 100vh; }
+  @media (max-width:430px) {
+    body { padding:0; background:var(--surface); }
+    .phone-frame { border-radius:0; box-shadow:none; max-height:none; min-height:100vh; }
   }
 </style>
 </head>
 <body>
 
+<!-- MODAL IDIOMA -->
+<div class="modal-overlay" id="modal-idioma">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <span class="modal-title">Idioma</span>
+      <button class="modal-close" onclick="fecharModal('modal-idioma')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="idioma-opcao selected" data-lang="pt-BR" onclick="selecionarIdioma(this)">
+        <div class="idioma-opcao-info"><span class="idioma-flag">🇧🇷</span><span class="idioma-nome">Português (Brasil)</span></div>
+        <span class="idioma-check">✓</span>
+      </div>
+      <div class="idioma-opcao" data-lang="en" onclick="selecionarIdioma(this)">
+        <div class="idioma-opcao-info"><span class="idioma-flag">🇺🇸</span><span class="idioma-nome">English</span></div>
+        <span class="idioma-check">✓</span>
+      </div>
+      <div class="idioma-opcao" data-lang="es" onclick="selecionarIdioma(this)">
+        <div class="idioma-opcao-info"><span class="idioma-flag">🇪🇸</span><span class="idioma-nome">Español</span></div>
+        <span class="idioma-check">✓</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ALTERAR SENHA -->
+<div class="modal-overlay" id="modal-senha">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <span class="modal-title">Alterar senha</span>
+      <button class="modal-close" onclick="fecharModal('modal-senha')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:var(--muted);font-weight:300;margin-bottom:16px;line-height:1.6;">Enviaremos um e-mail para você redefinir sua senha. Verifique sua caixa de entrada após clicar.</p>
+      <p style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:16px;" id="senha-email-display"></p>
+      <button class="btn-enviar-senha" onclick="enviarRedefinicao()">Enviar e-mail de redefinição</button>
+    </div>
+  </div>
+</div>
+
 <div class="phone-frame">
 
-  <!-- ===== DASHBOARD ===== -->
-  <div class="screen active" id="screen-dash">
-
+  <!-- ===== TELA INÍCIO ===== -->
+  <div class="screen active" id="screen-inicio">
     <div class="dash-header">
       <div class="dash-header-top">
         <div class="dash-greeting">
           <small id="dash-saudacao">Bom dia ✦</small>
           <strong id="dash-nome">Carregando...</strong>
         </div>
-        <div class="dash-avatar" id="dash-avatar" onclick="irParaConfig()">?</div>
+        <div class="dash-avatar" id="dash-avatar" onclick="navegar('config')">?</div>
       </div>
       <div class="dash-stats">
-        <div class="dash-stat">
-          <span class="dash-stat-emoji">🔥</span>
-          <span class="dash-stat-value" id="stat-streak">0</span>
-          <span class="dash-stat-label">dias seguidos</span>
-        </div>
-        <div class="dash-stat">
-          <span class="dash-stat-emoji">⭐</span>
-          <span class="dash-stat-value" id="stat-pontos">0</span>
-          <span class="dash-stat-label">pontos</span>
-        </div>
-        <div class="dash-stat">
-          <span class="dash-stat-emoji">✅</span>
-          <span class="dash-stat-value" id="stat-feitos">0</span>
-          <span class="dash-stat-label">concluídos</span>
-        </div>
+        <div class="dash-stat"><span class="dash-stat-emoji">🔥</span><span class="dash-stat-value" id="stat-streak">0</span><span class="dash-stat-label">dias seguidos</span></div>
+        <div class="dash-stat"><span class="dash-stat-emoji">⭐</span><span class="dash-stat-value" id="stat-pontos">0</span><span class="dash-stat-label">pontos</span></div>
+        <div class="dash-stat"><span class="dash-stat-emoji">✅</span><span class="dash-stat-value" id="stat-feitos">0</span><span class="dash-stat-label">concluídos</span></div>
       </div>
       <div class="dash-progress">
-        <div class="dash-progress-top">
-          <span>Progresso de hoje</span>
-          <strong id="prog-texto">0 de 0</strong>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="prog-fill" style="width:0%"></div>
-        </div>
-        <div class="dash-progress-msg" id="prog-msg">Carregando seus hábitos...</div>
+        <div class="dash-progress-top"><span>Progresso de hoje</span><strong id="prog-texto">0 de 0</strong></div>
+        <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+        <div class="dash-progress-msg" id="prog-msg">Carregando...</div>
       </div>
     </div>
 
     <div class="dash-content">
-
-      <!-- Frase motivacional -->
       <div class="motivacional" style="margin-bottom:20px">
         <div class="motivacional-icon" id="motiv-icon">🌱</div>
         <div class="motivacional-text">
@@ -349,122 +352,134 @@
         </div>
       </div>
 
-      <!-- CARD ÁGUA (aparece só se tiver o hábito) -->
-      <div id="agua-section" style="display:none">
-        <div class="section-header" style="margin-top:0">
-          <span class="section-title">💧 Hidratação</span>
-          <span class="agua-badge" id="agua-badge">0 / 8 copos</span>
-        </div>
-        <div class="agua-card">
-          <div class="agua-card-header">
-            <div class="agua-card-title">
-              <span>Marque cada copo bebido</span>
-            </div>
-            <button class="agua-reset" onclick="resetarAgua()">Resetar</button>
-          </div>
-          <div class="copos-grid" id="copos-grid"></div>
-          <div class="agua-info">
-            <div>
-              <div class="agua-litros" id="agua-litros">0L</div>
-              <div class="agua-meta-text" id="agua-meta-text">Meta: 2L</div>
-            </div>
-          </div>
-        </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <span class="section-title">Seus hábitos</span>
+        <button style="font-size:12px;color:var(--green);font-weight:500;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif" onclick="window.location.href='index.html'">Editar</button>
       </div>
-
-      <!-- CARD SONO (aparece só se tiver o hábito) -->
-      <div id="sono-section" style="display:none">
-        <div class="section-header">
-          <span class="section-title">😴 Sono</span>
-        </div>
-        <div class="sono-card">
-          <div class="sono-horarios">
-            <div class="sono-horario-card">
-              <span class="sono-horario-label">🌙 Dormir</span>
-              <span class="sono-horario-valor" id="sono-dormir">—</span>
-            </div>
-            <div class="sono-horario-card">
-              <span class="sono-horario-label">☀️ Acordar</span>
-              <span class="sono-horario-valor" id="sono-acordar">—</span>
-            </div>
-            <div class="sono-horario-card">
-              <span class="sono-horario-label">⏱️ Horas</span>
-              <span class="sono-horario-valor" id="sono-horas">—</span>
-            </div>
-          </div>
-          <span class="sono-status-label">Como foi seu sono hoje?</span>
-          <div class="sono-opcoes">
-            <button class="sono-opcao" data-val="pessimo" onclick="marcarSono(this)">
-              <span class="sono-opcao-emoji">😫</span>
-              Péssimo
-            </button>
-            <button class="sono-opcao" data-val="ruim" onclick="marcarSono(this)">
-              <span class="sono-opcao-emoji">😕</span>
-              Ruim
-            </button>
-            <button class="sono-opcao" data-val="ok" onclick="marcarSono(this)">
-              <span class="sono-opcao-emoji">😐</span>
-              Ok
-            </button>
-            <button class="sono-opcao" data-val="bom" onclick="marcarSono(this)">
-              <span class="sono-opcao-emoji">😊</span>
-              Bom
-            </button>
-            <button class="sono-opcao" data-val="otimo" onclick="marcarSono(this)">
-              <span class="sono-opcao-emoji">🤩</span>
-              Ótimo
-            </button>
-          </div>
-        </div>
+      <div id="habitos-lista">
+        <div class="empty-state"><div class="empty-state-icon">⏳</div><div class="empty-state-title">Carregando...</div></div>
       </div>
-
-      <!-- OUTROS HÁBITOS -->
-      <div id="outros-section">
-        <div class="section-header" id="outros-header" style="display:none">
-          <span class="section-title">Outros hábitos</span>
-          <button class="section-link" onclick="window.location.href='index.html'">Editar</button>
-        </div>
-        <div id="habitos-lista">
-          <div class="empty-state">
-            <div class="empty-state-icon">⏳</div>
-            <div class="empty-state-title">Carregando...</div>
-          </div>
-        </div>
-      </div>
-
     </div>
 
     <div class="bottom-nav">
-      <button class="nav-item active" onclick="irParaDash()">
-        <span class="nav-item-icon">🏠</span>
-        <span class="nav-item-label">Início</span>
-      </button>
-      <button class="nav-item">
-        <span class="nav-item-icon">📊</span>
-        <span class="nav-item-label">Progresso</span>
-      </button>
-      <button class="nav-add" onclick="showToast('Em breve: adicionar hábitos!')">
-        <svg viewBox="0 0 22 22" fill="none">
-          <path d="M11 4v14M4 11h14" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
-        </svg>
-      </button>
-      <button class="nav-item">
-        <span class="nav-item-icon">🔔</span>
-        <span class="nav-item-label">Lembretes</span>
-      </button>
-      <button class="nav-item" onclick="irParaConfig()">
-        <span class="nav-item-icon">⚙️</span>
-        <span class="nav-item-label">Config.</span>
-      </button>
+      <button class="nav-item active" id="nav-inicio" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label">Início</span></button>
+      <button class="nav-item" id="nav-agua" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label">Água</span></button>
+      <button class="nav-item" id="nav-sono" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label">Sono</span></button>
+      <button class="nav-item" id="nav-progresso" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label">Progresso</span></button>
+      <button class="nav-item" id="nav-config" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label">Config.</span></button>
     </div>
   </div>
 
-  <!-- ===== CONFIGURAÇÕES ===== -->
+  <!-- ===== TELA ÁGUA ===== -->
+  <div class="screen" id="screen-agua">
+    <div class="agua-screen-header">
+      <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:8px;position:relative;z-index:1">💧 Hidratação</div>
+      <div class="agua-screen-title">Beba mais água</div>
+      <div class="agua-screen-sub" id="agua-screen-sub">Meta: 8 copos por dia</div>
+    </div>
+
+    <div class="agua-screen-content">
+      <div class="agua-big-card">
+        <div class="agua-litros-big" id="agua-litros-big">0L</div>
+        <span class="agua-litros-meta" id="agua-litros-meta">de 2L — 0%</span>
+        <div class="agua-progress-bar"><div class="agua-progress-fill" id="agua-prog-fill" style="width:0%"></div></div>
+        <div class="copos-grid" id="copos-grid"></div>
+        <div class="agua-actions">
+          <button class="agua-btn" onclick="resetarAgua()">🔄 Resetar</button>
+          <button class="agua-btn primary" onclick="adicionarCopo()">+ 1 copo</button>
+        </div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:14px 16px">
+        <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:6px">💡 Dica de hidratação</div>
+        <div style="font-size:12px;color:var(--muted);font-weight:300;line-height:1.6" id="agua-dica">Beber água ao acordar ativa o metabolismo e ajuda a eliminar toxinas acumuladas durante o sono.</div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <button class="nav-item" id="nav-inicio2" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label">Início</span></button>
+      <button class="nav-item active" id="nav-agua2" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label">Água</span></button>
+      <button class="nav-item" id="nav-sono2" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label">Sono</span></button>
+      <button class="nav-item" id="nav-progresso2" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label">Progresso</span></button>
+      <button class="nav-item" id="nav-config2" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label">Config.</span></button>
+    </div>
+  </div>
+
+  <!-- ===== TELA SONO ===== -->
+  <div class="screen" id="screen-sono">
+    <div class="sono-screen-header">
+      <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:8px;position:relative;z-index:1">😴 Sono</div>
+      <div class="sono-screen-title">Qualidade do sono</div>
+      <div class="sono-screen-sub">Acompanhe seu descanso diário</div>
+    </div>
+
+    <div class="sono-screen-content">
+      <div class="sono-big-card">
+        <div class="sono-horas-big" id="sono-horas-big">—</div>
+        <span class="sono-horas-sub">horas de sono planejadas</span>
+        <div class="sono-horarios-row">
+          <div class="sono-horario-item">
+            <span class="sono-horario-label">🌙 Dormir</span>
+            <span class="sono-horario-valor" id="sono-dormir">—</span>
+          </div>
+          <div class="sono-horario-item">
+            <span class="sono-horario-label">☀️ Acordar</span>
+            <span class="sono-horario-valor" id="sono-acordar">—</span>
+          </div>
+        </div>
+        <span class="sono-qualidade-label">Como foi seu sono hoje?</span>
+        <div class="sono-opcoes">
+          <button class="sono-opcao" data-val="pessimo" onclick="marcarSono(this)"><span class="sono-opcao-emoji">😫</span>Péssimo</button>
+          <button class="sono-opcao" data-val="ruim" onclick="marcarSono(this)"><span class="sono-opcao-emoji">😕</span>Ruim</button>
+          <button class="sono-opcao" data-val="ok" onclick="marcarSono(this)"><span class="sono-opcao-emoji">😐</span>Ok</button>
+          <button class="sono-opcao" data-val="bom" onclick="marcarSono(this)"><span class="sono-opcao-emoji">😊</span>Bom</button>
+          <button class="sono-opcao" data-val="otimo" onclick="marcarSono(this)"><span class="sono-opcao-emoji">🤩</span>Ótimo</button>
+        </div>
+      </div>
+
+      <div class="sono-dica">
+        <div class="sono-dica-title">💡 Dica para dormir melhor</div>
+        <div class="sono-dica-text" id="sono-dica">Evite telas por pelo menos 30 minutos antes de dormir. A luz azul inibe a produção de melatonina e dificulta o sono.</div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <button class="nav-item" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label">Início</span></button>
+      <button class="nav-item" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label">Água</span></button>
+      <button class="nav-item active" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label">Sono</span></button>
+      <button class="nav-item" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label">Progresso</span></button>
+      <button class="nav-item" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label">Config.</span></button>
+    </div>
+  </div>
+
+  <!-- ===== TELA PROGRESSO ===== -->
+  <div class="screen" id="screen-progresso">
+    <div class="dash-header">
+      <div class="dash-header-top">
+        <div class="dash-greeting"><small>Seu progresso ✦</small><strong>Histórico</strong></div>
+      </div>
+    </div>
+    <div class="dash-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center">
+      <div class="empty-state">
+        <div class="empty-state-icon">📊</div>
+        <div class="empty-state-title">Em breve!</div>
+        <div class="empty-state-sub">A tela de progresso com gráficos e histórico está sendo desenvolvida.</div>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <button class="nav-item" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label">Início</span></button>
+      <button class="nav-item" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label">Água</span></button>
+      <button class="nav-item" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label">Sono</span></button>
+      <button class="nav-item active" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label">Progresso</span></button>
+      <button class="nav-item" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label">Config.</span></button>
+    </div>
+  </div>
+
+  <!-- ===== TELA CONFIGURAÇÕES ===== -->
   <div class="screen" id="screen-config">
     <div class="config-header">
       <div class="config-header-top">
-        <button class="config-back" onclick="irParaDash()">←</button>
-        <div class="config-title">Configurações</div>
+        <div class="config-page-title">Configurações</div>
       </div>
     </div>
     <div class="config-content">
@@ -476,6 +491,7 @@
         </div>
       </div>
 
+      <!-- Conta -->
       <div class="config-section">
         <div class="config-section-title">Conta</div>
         <div class="config-group">
@@ -489,51 +505,62 @@
             <div class="config-item-info"><span class="config-item-label">E-mail</span><span class="config-item-desc" id="cfg-email-desc">—</span></div>
             <div class="config-item-right"><span class="config-arrow">›</span></div>
           </div>
-          <div class="config-item">
+          <div class="config-item" onclick="abrirModal('modal-senha')">
             <div class="config-item-icon" style="background:#EAF3DE">🔒</div>
-            <div class="config-item-info"><span class="config-item-label">Alterar senha</span><span class="config-item-desc">Enviar e-mail de redefinição</span></div>
+            <div class="config-item-info"><span class="config-item-label">Alterar senha</span><span class="config-item-desc">Redefinir via e-mail</span></div>
             <div class="config-item-right"><span class="config-arrow">›</span></div>
           </div>
         </div>
       </div>
 
+      <!-- Notificações -->
       <div class="config-section">
         <div class="config-section-title">Notificações</div>
         <div class="config-group">
           <div class="config-item">
             <div class="config-item-icon" style="background:#E1F5EE">🔔</div>
-            <div class="config-item-info"><span class="config-item-label">Lembretes diários</span><span class="config-item-desc">Receber notificações dos hábitos</span></div>
-            <div class="config-item-right"><label class="toggle-wrap"><input type="checkbox" class="toggle-input" checked><span class="toggle-slider"></span></label></div>
+            <div class="config-item-info"><span class="config-item-label">Lembretes diários</span><span class="config-item-desc" id="notif-desc">Ativado</span></div>
+            <div class="config-item-right">
+              <label class="toggle-wrap"><input type="checkbox" class="toggle-input" id="toggle-notif" checked onchange="salvarConfig('notif', this.checked)"><span class="toggle-slider"></span></label>
+            </div>
           </div>
           <div class="config-item">
             <div class="config-item-icon" style="background:#E1F5EE">🏆</div>
-            <div class="config-item-info"><span class="config-item-label">Conquistas</span><span class="config-item-desc">Notificar ao desbloquear badges</span></div>
-            <div class="config-item-right"><label class="toggle-wrap"><input type="checkbox" class="toggle-input" checked><span class="toggle-slider"></span></label></div>
+            <div class="config-item-info"><span class="config-item-label">Conquistas</span><span class="config-item-desc" id="conquistas-desc">Ativado</span></div>
+            <div class="config-item-right">
+              <label class="toggle-wrap"><input type="checkbox" class="toggle-input" id="toggle-conquistas" checked onchange="salvarConfig('conquistas', this.checked)"><span class="toggle-slider"></span></label>
+            </div>
           </div>
           <div class="config-item">
             <div class="config-item-icon" style="background:#E1F5EE">📣</div>
-            <div class="config-item-info"><span class="config-item-label">Novidades do app</span><span class="config-item-desc">Atualizações e novos recursos</span></div>
-            <div class="config-item-right"><label class="toggle-wrap"><input type="checkbox" class="toggle-input"><span class="toggle-slider"></span></label></div>
+            <div class="config-item-info"><span class="config-item-label">Novidades</span><span class="config-item-desc" id="news-desc">Desativado</span></div>
+            <div class="config-item-right">
+              <label class="toggle-wrap"><input type="checkbox" class="toggle-input" id="toggle-news" onchange="salvarConfig('news', this.checked)"><span class="toggle-slider"></span></label>
+            </div>
           </div>
         </div>
       </div>
 
+      <!-- Aparência -->
       <div class="config-section">
         <div class="config-section-title">Aparência</div>
         <div class="config-group">
           <div class="config-item">
             <div class="config-item-icon" style="background:#EEEDFE">🌙</div>
-            <div class="config-item-info"><span class="config-item-label">Tema escuro</span><span class="config-item-desc">Em breve</span></div>
-            <div class="config-item-right"><label class="toggle-wrap"><input type="checkbox" class="toggle-input" disabled><span class="toggle-slider" style="opacity:0.4;cursor:not-allowed"></span></label></div>
+            <div class="config-item-info"><span class="config-item-label">Modo escuro</span><span class="config-item-desc" id="dark-desc">Desativado</span></div>
+            <div class="config-item-right">
+              <label class="toggle-wrap"><input type="checkbox" class="toggle-input" id="toggle-dark" onchange="toggleDarkMode(this.checked)"><span class="toggle-slider"></span></label>
+            </div>
           </div>
-          <div class="config-item">
+          <div class="config-item" onclick="abrirModal('modal-idioma')">
             <div class="config-item-icon" style="background:#EEEDFE">🌍</div>
-            <div class="config-item-info"><span class="config-item-label">Idioma</span><span class="config-item-desc">Português (BR)</span></div>
-            <div class="config-item-right"><span class="config-item-value">PT-BR</span><span class="config-arrow">›</span></div>
+            <div class="config-item-info"><span class="config-item-label">Idioma</span><span class="config-item-desc" id="idioma-desc">Português (Brasil)</span></div>
+            <div class="config-item-right"><span class="config-item-value" id="idioma-val">PT-BR</span><span class="config-arrow">›</span></div>
           </div>
         </div>
       </div>
 
+      <!-- Mais -->
       <div class="config-section">
         <div class="config-section-title">Mais</div>
         <div class="config-group">
@@ -560,16 +587,11 @@
     </div>
 
     <div class="bottom-nav">
-      <button class="nav-item" onclick="irParaDash()">
-        <span class="nav-item-icon">🏠</span>
-        <span class="nav-item-label">Início</span>
-      </button>
-      <button class="nav-item"><span class="nav-item-icon">📊</span><span class="nav-item-label">Progresso</span></button>
-      <button class="nav-add" onclick="showToast('Em breve!')">
-        <svg viewBox="0 0 22 22" fill="none"><path d="M11 4v14M4 11h14" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg>
-      </button>
-      <button class="nav-item"><span class="nav-item-icon">🔔</span><span class="nav-item-label">Lembretes</span></button>
-      <button class="nav-item active"><span class="nav-item-icon">⚙️</span><span class="nav-item-label">Config.</span></button>
+      <button class="nav-item" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label">Início</span></button>
+      <button class="nav-item" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label">Água</span></button>
+      <button class="nav-item" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label">Sono</span></button>
+      <button class="nav-item" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label">Progresso</span></button>
+      <button class="nav-item active" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label">Config.</span></button>
     </div>
   </div>
 
@@ -580,7 +602,7 @@
 <!-- FIREBASE -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getAuth, onAuthStateChanged, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
   import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -598,271 +620,323 @@
   const db = getFirestore(app);
 
   const habitosInfo = {
-    alimentacao: { emoji: '🥗', nome: 'Comer bem',       meta: (m) => m?.['meta-alim-objetivo'] || 'Alimentação equilibrada' },
-    movimento:   { emoji: '🚶', nome: 'Se movimentar',   meta: (m) => m?.['meta-mov-minutos'] ? `${m['meta-mov-minutos']} de atividade` : '20 min por dia' },
-    mental:      { emoji: '🧘', nome: 'Pausa mental',    meta: (m) => m?.['meta-mental-minutos'] ? `${m['meta-mental-minutos']} de pausa` : '10 min de foco' },
+    alimentacao: { emoji:'🥗', nome:'Comer bem', meta:(m)=>m?.['meta-alim-objetivo']||'Alimentação equilibrada' },
+    movimento:   { emoji:'🚶', nome:'Se movimentar', meta:(m)=>m?.['meta-mov-minutos']?`${m['meta-mov-minutos']} de atividade`:'20 min por dia' },
+    mental:      { emoji:'🧘', nome:'Pausa mental', meta:(m)=>m?.['meta-mental-minutos']?`${m['meta-mental-minutos']} de pausa`:'10 min de foco' },
   };
 
   const frases = [
-    { icon: '🌱', texto: '"Cada dia é uma nova chance de ser melhor."' },
-    { icon: '💪', texto: '"Consistência vence intensidade. Sempre."' },
-    { icon: '🌊', texto: '"Pequenos passos todos os dias constroem grandes resultados."' },
-    { icon: '🌟', texto: '"Você não precisa ser perfeito, só precisa continuar."' },
-    { icon: '🧠', texto: '"Cuide da sua mente como cuida do seu corpo."' },
-    { icon: '🔥', texto: '"A disciplina de hoje é a liberdade de amanhã."' },
-    { icon: '🌙', texto: '"Descansar também faz parte da jornada."' },
+    {icon:'🌱', texto:'"Cada dia é uma nova chance de ser melhor."'},
+    {icon:'💪', texto:'"Consistência vence intensidade. Sempre."'},
+    {icon:'🌊', texto:'"Pequenos passos todos os dias constroem grandes resultados."'},
+    {icon:'🌟', texto:'"Você não precisa ser perfeito, só precisa continuar."'},
+    {icon:'🧠', texto:'"Cuide da sua mente como cuida do seu corpo."'},
+    {icon:'🔥', texto:'"A disciplina de hoje é a liberdade de amanhã."'},
+    {icon:'🌙', texto:'"Descansar também faz parte da jornada."'},
   ];
 
-  let _uid, _hoje, _dados, _habitos, _metas, _feitos;
+  const dicasAgua = [
+    'Beber água ao acordar ativa o metabolismo e ajuda a eliminar toxinas.',
+    'Adicione rodelas de limão ou folhas de hortelã para tornar a água mais gostosa.',
+    'Mantenha uma garrafinha sempre por perto para lembrar de beber água.',
+    'Beba um copo de água antes de cada refeição — ajuda na digestão.',
+  ];
+
+  const dicasSono = [
+    'Evite telas 30 min antes de dormir. A luz azul dificulta o sono.',
+    'Mantenha o quarto escuro e fresco para uma noite mais repousante.',
+    'Tente dormir e acordar no mesmo horário todos os dias, inclusive fins de semana.',
+    'Uma caminhada leve à tarde pode melhorar significativamente a qualidade do sono.',
+  ];
+
+  let _uid, _hoje, _dados, _habitos, _metas, _feitos, _userEmail;
 
   onAuthStateChanged(auth, async (user) => {
     if (!user) { window.location.href = 'index.html'; return; }
     const snap = await getDoc(doc(db, "usuarios", user.uid));
     if (!snap.exists() || !snap.data().onboardingFeito) { window.location.href = 'index.html'; return; }
 
-    const dados = snap.data();
-    _uid = user.uid; _dados = dados;
-    const nome = dados.nome || user.displayName || 'Usuário';
-    const inicial = nome.charAt(0).toUpperCase();
-    const primeiroNome = nome.split(' ')[0];
+    _uid = user.uid; _userEmail = user.email;
+    _dados = snap.data();
+    _habitos = _dados.habitos || [];
+    _metas = _dados.metas || {};
+    _hoje = new Date().toISOString().split('T')[0];
+    _feitos = _dados.feitosHoje?.[_hoje] || [];
 
-    document.getElementById('dash-nome').textContent = `Olá, ${primeiroNome}!`;
+    const nome = _dados.nome || user.displayName || 'Usuário';
+    const inicial = nome.charAt(0).toUpperCase();
+
+    // Header
+    document.getElementById('dash-nome').textContent = `Olá, ${nome.split(' ')[0]}!`;
     document.getElementById('dash-avatar').textContent = inicial;
     document.getElementById('dash-saudacao').textContent = saudacao() + ' ✦';
-    document.getElementById('stat-streak').textContent = dados.streak || 0;
-    document.getElementById('stat-pontos').textContent = dados.pontos || 0;
+    document.getElementById('stat-streak').textContent = _dados.streak || 0;
+    document.getElementById('stat-pontos').textContent = _dados.pontos || 0;
 
-    const fraseIdx = new Date().getDay() % frases.length;
-    document.getElementById('motiv-icon').textContent = frases[fraseIdx].icon;
-    document.getElementById('motiv-texto').textContent = frases[fraseIdx].texto;
+    // Frase
+    const fi = new Date().getDay() % frases.length;
+    document.getElementById('motiv-icon').textContent = frases[fi].icon;
+    document.getElementById('motiv-texto').textContent = frases[fi].texto;
 
+    // Config
     document.getElementById('cfg-avatar').textContent = inicial;
     document.getElementById('cfg-nome').textContent = nome;
     document.getElementById('cfg-email').textContent = user.email;
     document.getElementById('cfg-nome-desc').textContent = nome;
     document.getElementById('cfg-email-desc').textContent = user.email;
-
-    _habitos = dados.habitos || [];
-    _metas = dados.metas || {};
-    _hoje = new Date().toISOString().split('T')[0];
-    _feitos = dados.feitosHoje?.[_hoje] || [];
-
-    inicializarDashboard();
-  });
-
-  function inicializarDashboard() {
-    const temAgua = _habitos.includes('agua');
-    const temSono = _habitos.includes('sono');
-    const outros = _habitos.filter(h => !['agua', 'sono'].includes(h));
+    document.getElementById('senha-email-display').textContent = user.email;
 
     // Água
-    if (temAgua) {
-      document.getElementById('agua-section').style.display = 'block';
-      inicializarAgua();
-    }
+    const metaCopos = parseInt(_metas?.agua?.['meta-agua-copos']?.match(/\d+/)?.[0]) || 8;
+    window._metaCopos = metaCopos;
+    document.getElementById('agua-screen-sub').textContent = `Meta: ${metaCopos} copos por dia`;
+    document.getElementById('agua-dica').textContent = dicasAgua[new Date().getDay() % dicasAgua.length];
+    const coposBebidos = _dados.aguaHoje?.[_hoje] || 0;
+    window._coposBebidos = coposBebidos;
+    renderCopos(coposBebidos, metaCopos);
 
     // Sono
-    if (temSono) {
-      document.getElementById('sono-section').style.display = 'block';
-      inicializarSono();
+    const dormir = _metas?.sono?.['meta-sono-dormir'] || '23h00';
+    const acordar = _metas?.sono?.['meta-sono-acordar'] || '07h00';
+    document.getElementById('sono-dormir').textContent = dormir;
+    document.getElementById('sono-acordar').textContent = acordar;
+    const [hD] = dormir.replace('h',':').split(':').map(Number);
+    const [hA, mA] = acordar.replace('h',':').split(':').map(Number);
+    const minutos = ((hA*60+mA)-(hD*60)+1440)%1440;
+    const horas = Math.floor(minutos/60), mins = minutos%60;
+    document.getElementById('sono-horas-big').textContent = `${horas}h${mins>0?mins+'m':''}`;
+    document.getElementById('sono-dica').textContent = dicasSono[new Date().getDay() % dicasSono.length];
+    const sonoHoje = _dados.sonoHoje?.[_hoje];
+    if (sonoHoje) {
+      const btn = document.querySelector(`.sono-opcao[data-val="${sonoHoje}"]`);
+      if (btn) btn.classList.add('selected');
     }
 
-    // Outros hábitos
-    const lista = document.getElementById('habitos-lista');
-    const header = document.getElementById('outros-header');
-
-    if (outros.length > 0) {
-      header.style.display = 'flex';
-      lista.innerHTML = '';
-      outros.forEach(id => {
-        const info = habitosInfo[id];
-        if (!info) return;
-        const done = _feitos.includes(id);
-        const card = document.createElement('div');
-        card.className = 'habit-card' + (done ? ' done' : '');
-        card.innerHTML = `
-          <div class="habit-icon">${info.emoji}</div>
-          <div class="habit-info">
-            <span class="habit-name">${info.nome}</span>
-            <span class="habit-meta">${info.meta(_metas[id])}</span>
-          </div>
-          <div class="habit-check">${done ? '✓' : ''}</div>
-        `;
-        card.onclick = () => toggleHabito(id, done);
-        lista.appendChild(card);
-      });
-    } else if (!temAgua && !temSono) {
-      lista.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🌱</div><div class="empty-state-title">Nenhum hábito ainda</div><div class="empty-state-sub">Volte ao início e configure seus hábitos.</div></div>`;
-    } else {
-      lista.innerHTML = '';
-    }
-
+    // Carregar config salva
+    carregarConfigs();
+    renderHabitos();
     atualizarProgresso();
+  });
+
+  function renderHabitos() {
+    const lista = document.getElementById('habitos-lista');
+    const outros = _habitos.filter(h => !['agua','sono'].includes(h));
+    if (outros.length === 0) {
+      lista.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🌱</div><div class="empty-state-title">Nenhum hábito aqui</div><div class="empty-state-sub">Água e sono têm abas próprias na navegação!</div></div>`;
+      return;
+    }
+    lista.innerHTML = '';
+    outros.forEach(id => {
+      const info = habitosInfo[id]; if (!info) return;
+      const done = _feitos.includes(id);
+      const card = document.createElement('div');
+      card.className = 'habit-card' + (done ? ' done' : '');
+      card.innerHTML = `<div class="habit-icon">${info.emoji}</div><div class="habit-info"><span class="habit-name">${info.nome}</span><span class="habit-meta">${info.meta(_metas[id])}</span></div><div class="habit-check">${done?'✓':''}</div>`;
+      card.onclick = () => toggleHabito(id, done);
+      lista.appendChild(card);
+    });
+  }
+
+  async function toggleHabito(id, done) {
+    if (done) { _feitos = _feitos.filter(f=>f!==id); } else { _feitos.push(id); }
+    const pts = Math.max(0, (_dados.pontos||0)+(done?-10:10));
+    _dados.pontos = pts;
+    await updateDoc(doc(db,"usuarios",_uid),{[`feitosHoje.${_hoje}`]:_feitos, pontos:pts});
+    document.getElementById('stat-pontos').textContent = pts;
+    renderHabitos(); atualizarProgresso();
   }
 
   // ---- ÁGUA ----
-  function inicializarAgua() {
-    const metaCopos = parseInt(_metas?.agua?.['meta-agua-copos']?.match(/\d+/)?.[0]) || 8;
-    const coposBebidos = _dados.aguaHoje?.[_hoje] || 0;
-    window._metaCopos = metaCopos;
-    window._coposBebidos = coposBebidos;
-    renderCopos(coposBebidos, metaCopos);
-  }
-
   window.renderCopos = function(bebidos, meta) {
     const grid = document.getElementById('copos-grid');
     grid.innerHTML = '';
-    for (let i = 0; i < meta; i++) {
+    for (let i=0; i<meta; i++) {
       const cheio = i < bebidos;
       const div = document.createElement('div');
       div.className = 'copo';
       div.onclick = () => clicarCopo(i, bebidos, meta);
-      div.innerHTML = `
-        <svg viewBox="0 0 36 44" fill="none">
-          <path d="M6 4h24l-3 36H9L6 4z" fill="${cheio ? '#BFDBFE' : '#F1F5F9'}" stroke="${cheio ? '#3B82F6' : '#CBD5E1'}" stroke-width="1.5" stroke-linejoin="round"/>
-          ${cheio ? `<path d="M8 20h20" stroke="#93C5FD" stroke-width="1" opacity="0.5"/>
-          <path d="M7 12h22" stroke="#93C5FD" stroke-width="1" opacity="0.3"/>` : ''}
-          <text x="18" y="28" text-anchor="middle" font-size="11" fill="${cheio ? '#1D4ED8' : '#94A3B8'}">${i + 1}</text>
-        </svg>
-      `;
+      div.innerHTML = `<svg viewBox="0 0 36 44" fill="none"><path d="M6 4h24l-3 36H9L6 4z" fill="${cheio?'#BFDBFE':'#F1F5F9'}" stroke="${cheio?'#3B82F6':'#CBD5E1'}" stroke-width="1.5" stroke-linejoin="round"/>${cheio?`<path d="M8 20h20" stroke="#93C5FD" stroke-width="1" opacity="0.5"/><path d="M7 12h22" stroke="#93C5FD" stroke-width="1" opacity="0.3"/><text x="18" y="30" text-anchor="middle" font-size="9" fill="#1D4ED8">${i+1}</text>`:''}</svg>`;
       grid.appendChild(div);
     }
+    const litrosVal = bebidos * 0.25;
+    const metaLitros = meta * 0.25;
+    const pct = meta===0?0:Math.round((bebidos/meta)*100);
+    document.getElementById('agua-litros-big').textContent = litrosVal % 1 === 0 ? litrosVal+'L' : litrosVal.toFixed(2).replace('.',',')+'L';
+    document.getElementById('agua-litros-meta').textContent = `de ${metaLitros % 1 === 0 ? metaLitros+'L' : metaLitros.toFixed(2).replace('.',',')}L — ${pct}%`;
+    document.getElementById('agua-prog-fill').style.width = pct+'%';
 
-    const litros = (bebidos * 0.25).toFixed(2).replace('.', ',');
-    const metaLitros = (meta * 0.25).toFixed(2).replace('.', ',');
-    document.getElementById('agua-litros').textContent = litros.endsWith(',00') ? litros.replace(',00', 'L') : litros + 'L';
-    document.getElementById('agua-meta-text').textContent = `Meta: ${metaLitros.endsWith(',00') ? metaLitros.replace(',00', 'L') : metaLitros + 'L'}`;
-    document.getElementById('agua-badge').textContent = `${bebidos} / ${meta} copos`;
-
-    // Marcar hábito água como feito se atingiu a meta
-    const atingiu = bebidos >= meta;
-    if (atingiu && !_feitos.includes('agua')) {
+    // Sincronizar com feitos
+    if (bebidos >= meta && !_feitos.includes('agua')) {
       _feitos.push('agua');
-      salvarFeitos();
-    } else if (!atingiu && _feitos.includes('agua')) {
-      _feitos = _feitos.filter(f => f !== 'agua');
-      salvarFeitos();
+      updateDoc(doc(db,"usuarios",_uid),{[`feitosHoje.${_hoje}`]:_feitos});
+    } else if (bebidos < meta && _feitos.includes('agua')) {
+      _feitos = _feitos.filter(f=>f!=='agua');
+      updateDoc(doc(db,"usuarios",_uid),{[`feitosHoje.${_hoje}`]:_feitos});
     }
     atualizarProgresso();
   };
 
   async function clicarCopo(idx, atual, meta) {
-    const novo = idx < atual ? idx : idx + 1;
+    const novo = idx < atual ? idx : idx+1;
     window._coposBebidos = novo;
-    await updateDoc(doc(db, "usuarios", _uid), { [`aguaHoje.${_hoje}`]: novo });
-    _dados.aguaHoje = { ..._dados.aguaHoje, [_hoje]: novo };
+    await updateDoc(doc(db,"usuarios",_uid),{[`aguaHoje.${_hoje}`]:novo});
+    _dados.aguaHoje = {..._dados.aguaHoje,[_hoje]:novo};
     renderCopos(novo, meta);
   }
 
+  window.adicionarCopo = async function() {
+    const novo = Math.min(window._coposBebidos+1, window._metaCopos);
+    window._coposBebidos = novo;
+    await updateDoc(doc(db,"usuarios",_uid),{[`aguaHoje.${_hoje}`]:novo});
+    _dados.aguaHoje = {..._dados.aguaHoje,[_hoje]:novo};
+    renderCopos(novo, window._metaCopos);
+  };
+
   window.resetarAgua = async function() {
     window._coposBebidos = 0;
-    await updateDoc(doc(db, "usuarios", _uid), { [`aguaHoje.${_hoje}`]: 0 });
-    _dados.aguaHoje = { ..._dados.aguaHoje, [_hoje]: 0 };
+    await updateDoc(doc(db,"usuarios",_uid),{[`aguaHoje.${_hoje}`]:0});
+    _dados.aguaHoje = {..._dados.aguaHoje,[_hoje]:0};
     renderCopos(0, window._metaCopos);
   };
 
   // ---- SONO ----
-  function inicializarSono() {
-    const dormir = _metas?.sono?.['meta-sono-dormir'] || '23h00';
-    const acordar = _metas?.sono?.['meta-sono-acordar'] || '07h00';
-    document.getElementById('sono-dormir').textContent = dormir;
-    document.getElementById('sono-acordar').textContent = acordar;
-
-    // Calcular horas de sono
-    const [hD, mD] = dormir.replace('h', ':').split(':').map(Number);
-    const [hA, mA] = acordar.replace('h', ':').split(':').map(Number);
-    let minutos = ((hA * 60 + mA) - (hD * 60 + mD) + 1440) % 1440;
-    const horas = Math.floor(minutos / 60);
-    const mins = minutos % 60;
-    document.getElementById('sono-horas').textContent = `${horas}h${mins > 0 ? mins + 'm' : ''}`;
-
-    // Restaurar seleção salva
-    const sonoHoje = _dados.sonoHoje?.[_hoje];
-    if (sonoHoje) {
-      const btn = document.querySelector(`.sono-opcao[data-val="${sonoHoje}"]`);
-      if (btn) btn.classList.add('selected');
-      if (!_feitos.includes('sono')) {
-        _feitos.push('sono');
-        salvarFeitos();
-      }
-    }
-    atualizarProgresso();
-  }
-
   window.marcarSono = async function(btn) {
-    document.querySelectorAll('.sono-opcao').forEach(b => b.classList.remove('selected'));
+    document.querySelectorAll('.sono-opcao').forEach(b=>b.classList.remove('selected'));
     btn.classList.add('selected');
     const val = btn.dataset.val;
-    await updateDoc(doc(db, "usuarios", _uid), { [`sonoHoje.${_hoje}`]: val });
-    _dados.sonoHoje = { ..._dados.sonoHoje, [_hoje]: val };
+    await updateDoc(doc(db,"usuarios",_uid),{[`sonoHoje.${_hoje}`]:val});
     if (!_feitos.includes('sono')) {
       _feitos.push('sono');
-      await salvarFeitos();
+      await updateDoc(doc(db,"usuarios",_uid),{[`feitosHoje.${_hoje}`]:_feitos});
     }
     atualizarProgresso();
     showToast('😴 Sono registrado!');
   };
 
-  // ---- OUTROS HÁBITOS ----
-  async function toggleHabito(id, done) {
-    if (done) { _feitos = _feitos.filter(f => f !== id); }
-    else { _feitos.push(id); }
-    const novosPontos = Math.max(0, (_dados.pontos || 0) + (done ? -10 : 10));
-    _dados.pontos = novosPontos;
-    await updateDoc(doc(db, "usuarios", _uid), {
-      [`feitosHoje.${_hoje}`]: _feitos, pontos: novosPontos
-    });
-    document.getElementById('stat-pontos').textContent = novosPontos;
-    inicializarDashboard();
-  }
-
-  async function salvarFeitos() {
-    const novosPontos = Math.max(0, (_dados.pontos || 0));
-    await updateDoc(doc(db, "usuarios", _uid), { [`feitosHoje.${_hoje}`]: _feitos });
-  }
-
+  // ---- PROGRESSO ----
   function atualizarProgresso() {
     const total = _habitos.length;
     const feitos = _feitos.length;
-    const pct = total === 0 ? 0 : Math.round((feitos / total) * 100);
-    document.getElementById('prog-fill').style.width = pct + '%';
+    const pct = total===0?0:Math.round((feitos/total)*100);
+    document.getElementById('prog-fill').style.width = pct+'%';
     document.getElementById('prog-texto').textContent = `${feitos} de ${total}`;
     document.getElementById('stat-feitos').textContent = feitos;
     let msg = 'Vamos lá! Cada hábito conta.';
-    if (total === 0) msg = 'Configure seus hábitos para começar!';
-    else if (pct === 100) msg = '🎉 Parabéns! Você completou todos hoje!';
-    else if (pct >= 50) msg = '💪 Mais da metade! Continue assim!';
+    if (total===0) msg='Configure seus hábitos para começar!';
+    else if (pct===100) msg='🎉 Parabéns! Todos concluídos hoje!';
+    else if (pct>=50) msg='💪 Mais da metade! Continue assim!';
     document.getElementById('prog-msg').textContent = msg;
   }
 
-  window.handleLogout = async function () {
+  // ---- CONFIG ----
+  window.salvarConfig = function(chave, valor) {
+    localStorage.setItem('cfg_'+chave, JSON.stringify(valor));
+    const desc = document.getElementById(chave+'-desc');
+    if (desc) desc.textContent = valor ? 'Ativado' : 'Desativado';
+    showToast(valor ? '✅ Ativado' : '🔕 Desativado');
+  };
+
+  window.toggleDarkMode = function(ativo) {
+    document.documentElement.setAttribute('data-theme', ativo ? 'dark' : 'light');
+    localStorage.setItem('cfg_dark', JSON.stringify(ativo));
+    document.getElementById('dark-desc').textContent = ativo ? 'Ativado' : 'Desativado';
+    showToast(ativo ? '🌙 Modo escuro ativado' : '☀️ Modo claro ativado');
+  };
+
+  function carregarConfigs() {
+    // Dark mode
+    const dark = JSON.parse(localStorage.getItem('cfg_dark') || 'false');
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    document.getElementById('toggle-dark').checked = dark;
+    document.getElementById('dark-desc').textContent = dark ? 'Ativado' : 'Desativado';
+
+    // Notificações
+    const notif = JSON.parse(localStorage.getItem('cfg_notif') ?? 'true');
+    document.getElementById('toggle-notif').checked = notif;
+    document.getElementById('notif-desc').textContent = notif ? 'Ativado' : 'Desativado';
+
+    const conquistas = JSON.parse(localStorage.getItem('cfg_conquistas') ?? 'true');
+    document.getElementById('toggle-conquistas').checked = conquistas;
+    document.getElementById('conquistas-desc').textContent = conquistas ? 'Ativado' : 'Desativado';
+
+    const news = JSON.parse(localStorage.getItem('cfg_news') || 'false');
+    document.getElementById('toggle-news').checked = news;
+    document.getElementById('news-desc').textContent = news ? 'Ativado' : 'Desativado';
+
+    // Idioma
+    const lang = localStorage.getItem('cfg_idioma') || 'pt-BR';
+    aplicarIdioma(lang, false);
+  }
+
+  window.enviarRedefinicao = async function() {
+    try {
+      await sendPasswordResetEmail(auth, _userEmail);
+      fecharModal('modal-senha');
+      showToast('📧 E-mail de redefinição enviado!');
+    } catch(e) {
+      showToast('❌ Erro ao enviar e-mail', true);
+    }
+  };
+
+  window.handleLogout = async function() {
     await signOut(auth);
     window.location.href = 'index.html';
   };
 
   function saudacao() {
     const h = new Date().getHours();
-    if (h < 12) return 'Bom dia';
-    if (h < 18) return 'Boa tarde';
+    if (h<12) return 'Bom dia';
+    if (h<18) return 'Boa tarde';
     return 'Boa noite';
   }
 </script>
 
 <script>
-  function irParaConfig() {
-    document.getElementById('screen-dash').classList.remove('active');
-    document.getElementById('screen-config').classList.add('active');
+  // ---- NAVEGAÇÃO ----
+  function navegar(tela) {
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById('screen-'+tela).classList.add('active');
   }
-  function irParaDash() {
-    document.getElementById('screen-config').classList.remove('active');
-    document.getElementById('screen-dash').classList.add('active');
+
+  // ---- MODAIS ----
+  function abrirModal(id) { document.getElementById(id).classList.add('active'); }
+  function fecharModal(id) { document.getElementById(id).classList.remove('active'); }
+  document.querySelectorAll('.modal-overlay').forEach(o=>{
+    o.addEventListener('click',function(e){ if(e.target===this) fecharModal(this.id); });
+  });
+
+  // ---- IDIOMA ----
+  function selecionarIdioma(el) {
+    document.querySelectorAll('.idioma-opcao').forEach(o=>o.classList.remove('selected'));
+    el.classList.add('selected');
+    const lang = el.dataset.lang;
+    localStorage.setItem('cfg_idioma', lang);
+    aplicarIdioma(lang, true);
+    fecharModal('modal-idioma');
   }
-  function showToast(msg, erro = false) {
+
+  function aplicarIdioma(lang, mostrarToast) {
+    const mapa = {
+      'pt-BR': { nome:'Português (Brasil)', val:'PT-BR', toast:'🇧🇷 Idioma: Português' },
+      'en':    { nome:'English', val:'EN', toast:'🇺🇸 Language: English' },
+      'es':    { nome:'Español', val:'ES', toast:'🇪🇸 Idioma: Español' },
+    };
+    const info = mapa[lang] || mapa['pt-BR'];
+    document.getElementById('idioma-desc').textContent = info.nome;
+    document.getElementById('idioma-val').textContent = info.val;
+    document.querySelectorAll('.idioma-opcao').forEach(o=>{
+      o.classList.toggle('selected', o.dataset.lang===lang);
+    });
+    if (mostrarToast) showToast(info.toast);
+  }
+
+  // ---- TOAST ----
+  function showToast(msg, erro=false) {
     const t = document.getElementById('toast');
     t.textContent = msg;
     t.classList.toggle('erro', erro);
     t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
+    setTimeout(()=>t.classList.remove('show'), 3000);
   }
 </script>
 
