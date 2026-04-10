@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -9,390 +9,195 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --green: #3B6D11;
-    --green-light: #EAF3DE;
-    --green-mid: #639922;
-    --teal-mid: #1D9E75;
-    --text: #1a1a18;
-    --muted: #5F5E5A;
-    --border: #E8E8E4;
-    --surface: #F7F9F4;
-    --white: #ffffff;
-    --error: #E24B4A;
-    --premium: #F59E0B;
-    --premium-light: #FEF3C7;
+    --green: #3B6D11; --green-light: #EAF3DE; --green-mid: #639922;
+    --teal-mid: #1D9E75; --text: #1a1a18; --muted: #5F5E5A;
+    --border: #E8E8E4; --surface: #F7F9F4; --white: #ffffff;
+    --error: #E24B4A; --premium: #F59E0B; --premium-light: #FEF3C7;
   }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--surface);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
+  body { font-family:'DM Sans',sans-serif; background:var(--surface); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+  .phone-frame { width:100%; max-width:390px; min-height:100vh; max-height:844px; background:var(--white); border-radius:40px; overflow:hidden; position:relative; box-shadow:0 40px 80px rgba(0,0,0,0.12); display:flex; flex-direction:column; }
+  .screen { display:none; flex-direction:column; flex:1; min-height:0; }
+  .screen.active { display:flex; }
 
-  .phone-frame {
-    width: 100%;
-    max-width: 390px;
-    min-height: 100vh;
-    max-height: 844px;
-    background: var(--white);
-    border-radius: 40px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.12);
-    display: flex;
-    flex-direction: column;
-  }
+  /* ===== INTRO ===== */
+  #screen-intro { background:#0F1F08; align-items:center; justify-content:space-between; padding:60px 28px 48px; position:relative; overflow:hidden; }
+  .intro-bg-circle { position:absolute; border-radius:50%; background:rgba(99,153,34,0.08); }
+  .intro-bg-circle.c1 { width:300px; height:300px; top:-80px; right:-80px; }
+  .intro-bg-circle.c2 { width:200px; height:200px; bottom:100px; left:-60px; }
+  .intro-top { position:relative; z-index:1; width:100%; }
+  .intro-logo { font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--green-mid); letter-spacing:-1px; display:flex; align-items:center; gap:8px; margin-bottom:48px; }
+  .intro-logo-dot { width:8px; height:8px; background:var(--teal-mid); border-radius:50%; }
 
-  .screen { display: none; flex-direction: column; flex: 1; min-height: 0; }
-  .screen.active { display: flex; }
+  /* Seletor de idioma na intro */
+  .intro-lang-row { display:flex; gap:8px; }
+  .intro-lang-btn { padding:5px 12px; border-radius:100px; border:1px solid rgba(255,255,255,0.15); background:transparent; color:rgba(255,255,255,0.5); font-size:11px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; transition:all 0.2s; }
+  .intro-lang-btn.active { background:rgba(255,255,255,0.12); color:white; border-color:rgba(255,255,255,0.3); }
+  .intro-lang-btn:hover { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.8); }
 
-  /* ==================== SPLASH / INTRO ==================== */
-  #screen-intro {
-    background: #0F1F08;
-    align-items: center;
-    justify-content: space-between;
-    padding: 60px 28px 48px;
-    position: relative;
-    overflow: hidden;
-  }
+  .intro-illustration { position:relative; z-index:1; width:100%; display:flex; justify-content:center; margin-bottom:40px; }
+  .intro-illustration svg { width:280px; height:280px; }
+  .intro-bottom { position:relative; z-index:1; width:100%; }
+  .intro-title { font-family:'Syne',sans-serif; font-size:30px; font-weight:800; color:white; letter-spacing:-1.2px; line-height:1.15; margin-bottom:12px; }
+  .intro-title span { color:var(--green-mid); }
+  .intro-sub { font-size:14px; color:rgba(255,255,255,0.5); font-weight:300; line-height:1.6; margin-bottom:32px; }
+  .intro-actions { display:flex; flex-direction:column; gap:10px; }
+  .btn-intro-main { width:100%; padding:15px; background:var(--green-mid); color:white; border:none; border-radius:100px; font-size:15px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background 0.2s; }
+  .btn-intro-main:hover { background:var(--green); }
+  .btn-intro-sec { width:100%; padding:14px; background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.8); border:1px solid rgba(255,255,255,0.12); border-radius:100px; font-size:15px; font-weight:400; font-family:'DM Sans',sans-serif; cursor:pointer; }
 
-  .intro-bg-circle {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(99,153,34,0.08);
-  }
-  .intro-bg-circle.c1 { width: 300px; height: 300px; top: -80px; right: -80px; }
-  .intro-bg-circle.c2 { width: 200px; height: 200px; bottom: 100px; left: -60px; }
-  .intro-bg-circle.c3 { width: 120px; height: 120px; top: 180px; left: 40px; background: rgba(29,158,117,0.06); }
+  /* ===== LOGIN ===== */
+  #screen-login { background:var(--white); }
+  .login-header { padding:48px 24px 20px; flex-shrink:0; }
+  .login-header-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
+  .login-back { display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--muted); cursor:pointer; background:none; border:none; font-family:'DM Sans',sans-serif; padding:0; }
 
-  .intro-top { position: relative; z-index: 1; width: 100%; }
+  /* Seletor de idioma no login */
+  .login-lang-row { display:flex; gap:6px; }
+  .login-lang-btn { padding:4px 10px; border-radius:100px; border:1px solid var(--border); background:var(--surface); color:var(--muted); font-size:11px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; transition:all 0.2s; }
+  .login-lang-btn.active { background:var(--green-light); color:var(--green); border-color:rgba(99,153,34,0.3); }
 
-  .intro-logo {
-    font-family: 'Syne', sans-serif;
-    font-size: 28px; font-weight: 800;
-    color: var(--green-mid); letter-spacing: -1px;
-    display: flex; align-items: center; gap: 8px;
-    margin-bottom: 48px;
-  }
+  .login-title { font-family:'Syne',sans-serif; font-size:26px; font-weight:800; color:var(--text); letter-spacing:-1px; line-height:1.15; margin-bottom:6px; }
+  .login-sub { font-size:13px; color:var(--muted); font-weight:300; }
+  .login-content { flex:1; padding:8px 24px 32px; overflow-y:auto; display:flex; flex-direction:column; }
 
-  .intro-logo-dot {
-    width: 8px; height: 8px;
-    background: var(--teal-mid); border-radius: 50%;
-  }
+  .tabs { display:flex; background:var(--surface); border-radius:12px; padding:4px; margin-bottom:24px; flex-shrink:0; }
+  .tab { flex:1; text-align:center; padding:9px; border-radius:9px; font-size:14px; font-weight:500; cursor:pointer; transition:all 0.2s; color:var(--muted); border:none; background:transparent; font-family:'DM Sans',sans-serif; }
+  .tab.active { background:var(--white); color:var(--text); box-shadow:0 1px 4px rgba(0,0,0,0.08); }
 
-  /* Ilustração SVG central */
-  .intro-illustration {
-    position: relative; z-index: 1;
-    width: 100%; display: flex;
-    justify-content: center; margin-bottom: 40px;
-  }
+  .form { display:none; flex-direction:column; gap:14px; flex:1; }
+  .form.active { display:flex; }
+  .field-label { font-size:12px; font-weight:500; color:var(--muted); margin-bottom:6px; display:block; }
+  .field-wrap { position:relative; }
+  input[type="text"], input[type="email"], input[type="password"] { width:100%; padding:13px 16px; border:1px solid var(--border); border-radius:14px; font-size:15px; font-family:'DM Sans',sans-serif; color:var(--text); background:var(--white); outline:none; transition:border-color 0.2s; -webkit-appearance:none; }
+  input:focus { border-color:var(--green); }
+  input.error { border-color:var(--error); }
+  .error-msg { font-size:11px; color:var(--error); margin-top:4px; display:none; }
+  .error-msg.show { display:block; }
+  .toggle-pw { position:absolute; right:14px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:var(--muted); font-size:16px; padding:4px; }
+  .forgot { text-align:right; font-size:12px; color:var(--green); font-weight:500; cursor:pointer; text-decoration:none; margin-top:-6px; }
+  .btn-main { width:100%; padding:15px; background:var(--green); color:white; border:none; border-radius:100px; font-size:15px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background 0.2s, transform 0.15s; margin-top:4px; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .btn-main:hover { background:#2d5509; }
+  .btn-main:active { transform:scale(0.98); }
+  .btn-main:disabled { background:var(--green-mid); cursor:not-allowed; opacity:0.7; }
+  .spinner { width:16px; height:16px; border:2px solid rgba(255,255,255,0.4); border-top-color:white; border-radius:50%; animation:spin 0.7s linear infinite; display:none; }
+  .btn-main.loading .spinner { display:block; }
+  @keyframes spin { to{transform:rotate(360deg)} }
+  .divider { display:flex; align-items:center; gap:12px; color:var(--muted); font-size:12px; }
+  .divider::before, .divider::after { content:''; flex:1; height:1px; background:var(--border); }
+  .btn-google { width:100%; padding:13px; background:var(--white); border:1px solid var(--border); border-radius:100px; font-size:14px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; color:var(--text); display:flex; align-items:center; justify-content:center; gap:10px; transition:background 0.2s; }
+  .btn-google:hover { background:var(--surface); }
+  .terms { font-size:11px; color:var(--muted); text-align:center; line-height:1.6; margin-top:auto; padding-top:16px; }
+  .terms a { color:var(--green); text-decoration:none; cursor:pointer; }
 
-  .intro-illustration svg { width: 280px; height: 280px; }
+  /* ===== ONBOARDING ===== */
+  .ob-header { padding:48px 24px 20px; background:var(--white); flex-shrink:0; }
+  .progress-steps { display:flex; gap:6px; margin-bottom:24px; }
+  .step-bar { flex:1; height:4px; border-radius:100px; background:var(--border); transition:background 0.3s; }
+  .step-bar.done { background:var(--green-mid); }
+  .step-bar.active { background:var(--green); }
+  .ob-label { font-size:11px; font-weight:500; color:var(--green); letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; }
+  .ob-title { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--text); letter-spacing:-0.8px; line-height:1.2; margin-bottom:6px; }
+  .ob-sub { font-size:13px; color:var(--muted); font-weight:300; line-height:1.5; }
+  .ob-content { flex:1; overflow-y:auto; padding:8px 24px 24px; }
+  .ob-step { display:none; }
+  .ob-step.active { display:block; }
+  .habits-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px; }
+  .habit-option { border:1.5px solid var(--border); border-radius:16px; padding:14px 12px; cursor:pointer; transition:all 0.2s; background:var(--white); text-align:left; width:100%; position:relative; }
+  .habit-option.selected { border-color:var(--green-mid); background:var(--green-light); }
+  .habit-option.premium-locked { border-color:var(--premium); background:var(--premium-light); cursor:not-allowed; opacity:0.85; }
+  .habit-option-emoji { font-size:24px; display:block; margin-bottom:8px; }
+  .habit-option-name { font-size:13px; font-weight:500; color:var(--text); display:block; margin-bottom:2px; }
+  .habit-option-desc { font-size:11px; color:var(--muted); font-weight:300; display:block; }
+  .habit-option.selected .habit-option-name { color:var(--green); }
+  .habit-option.premium-locked .habit-option-name { color:var(--premium); }
+  .premium-badge { position:absolute; top:8px; right:8px; background:var(--premium); color:white; font-size:11px; font-weight:700; padding:2px 6px; border-radius:100px; display:flex; align-items:center; gap:3px; line-height:1.4; }
+  .select-hint { font-size:11px; color:var(--muted); text-align:center; margin-top:12px; font-weight:300; }
+  .metas-list { display:flex; flex-direction:column; gap:14px; margin-top:8px; }
+  .meta-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:14px 16px; }
+  .meta-card-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .meta-emoji { font-size:20px; }
+  .meta-card-title { font-size:14px; font-weight:500; color:var(--text); }
+  .meta-field-label { font-size:11px; color:var(--muted); font-weight:400; margin-bottom:6px; display:block; }
+  .meta-input { width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:10px; font-size:14px; font-family:'DM Sans',sans-serif; color:var(--text); background:var(--white); outline:none; transition:border-color 0.2s; -webkit-appearance:none; margin-bottom:8px; }
+  .meta-input:last-child { margin-bottom:0; }
+  .meta-input:focus { border-color:var(--green); }
+  select.meta-input { cursor:pointer; background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 7L11 1' stroke='%235F5E5A' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; appearance:none; }
+  .confirm-wrap { display:flex; flex-direction:column; align-items:center; text-align:center; padding-top:20px; }
+  .confirm-icon { width:80px; height:80px; background:var(--green-light); border-radius:100px; display:flex; align-items:center; justify-content:center; font-size:36px; margin-bottom:20px; }
+  .confirm-title { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--text); letter-spacing:-0.8px; margin-bottom:8px; }
+  .confirm-sub { font-size:14px; color:var(--muted); font-weight:300; line-height:1.6; margin-bottom:24px; max-width:280px; }
+  .confirm-habits { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+  .confirm-badge { background:var(--green-light); border:1px solid #C0DD97; border-radius:100px; padding:6px 14px; font-size:12px; font-weight:500; color:var(--green); }
+  .ob-footer { padding:16px 24px 32px; flex-shrink:0; background:var(--white); border-top:1px solid var(--border); }
+  .footer-row { display:flex; align-items:center; gap:12px; }
+  .btn-back { width:46px; height:46px; border-radius:100px; border:1px solid var(--border); background:var(--white); cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .btn-next { flex:1; padding:14px; background:var(--green); color:white; border:none; border-radius:100px; font-size:15px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background 0.2s; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .btn-next:disabled { background:var(--green-mid); opacity:0.6; cursor:not-allowed; }
+  .btn-next.loading .spinner { display:block; }
 
-  .intro-bottom { position: relative; z-index: 1; width: 100%; }
+  /* MODAIS */
+  .modal-overlay { display:none; position:fixed; inset:0; z-index:900; background:rgba(0,0,0,0.5); align-items:flex-end; justify-content:center; }
+  .modal-overlay.active { display:flex; }
+  .modal-sheet { background:var(--white); border-radius:24px 24px 0 0; width:100%; max-width:430px; max-height:85vh; display:flex; flex-direction:column; animation:slideUp 0.3s ease; }
+  @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
+  .modal-handle { width:40px; height:4px; background:var(--border); border-radius:100px; margin:12px auto 0; flex-shrink:0; }
+  .modal-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px 12px; border-bottom:1px solid var(--border); }
+  .modal-title { font-family:'Syne',sans-serif; font-size:17px; font-weight:700; color:var(--text); }
+  .modal-close { background:var(--surface); border:none; width:30px; height:30px; border-radius:100px; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; color:var(--muted); }
+  .modal-body { overflow-y:auto; padding:20px; flex:1; }
+  .modal-meta { font-size:11px; color:var(--muted); margin-bottom:20px; font-weight:300; }
+  .modal-body h2 { font-family:'Syne',sans-serif; font-size:13px; font-weight:700; color:var(--text); margin:20px 0 6px; padding-bottom:6px; border-bottom:1px solid var(--border); }
+  .modal-body h2:first-of-type { margin-top:0; }
+  .modal-body p { font-size:13px; color:var(--muted); line-height:1.7; margin-bottom:8px; font-weight:300; }
+  .modal-body p strong { color:var(--text); font-weight:500; }
+  .modal-body ul { padding-left:1rem; margin-bottom:8px; }
+  .modal-body ul li { font-size:13px; color:var(--muted); line-height:1.7; font-weight:300; margin-bottom:3px; }
+  .modal-highlight { background:var(--green-light); border-left:3px solid var(--green-mid); border-radius:0 8px 8px 0; padding:10px 12px; margin:8px 0; font-size:12px; color:var(--green); line-height:1.6; }
+  .modal-contact { background:var(--surface); border-radius:12px; padding:12px 14px; margin-top:16px; }
+  .modal-contact p { margin:0 0 4px; font-size:12px; }
+  .modal-contact p:last-child { margin:0; }
+  .email-text { color:var(--green); font-weight:500; }
+  .premium-modal-body { padding:24px; text-align:center; }
+  .premium-modal-icon { font-size:48px; margin-bottom:12px; }
+  .premium-modal-title { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--text); letter-spacing:-0.5px; margin-bottom:8px; }
+  .premium-modal-sub { font-size:13px; color:var(--muted); font-weight:300; line-height:1.6; margin-bottom:20px; }
+  .premium-features { display:flex; flex-direction:column; gap:10px; margin-bottom:24px; text-align:left; }
+  .premium-feature { display:flex; align-items:center; gap:10px; font-size:13px; color:var(--text); font-weight:400; }
+  .premium-feature-icon { width:30px; height:30px; background:var(--premium-light); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0; }
+  .btn-premium { width:100%; padding:14px; background:var(--premium); color:white; border:none; border-radius:100px; font-size:15px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; }
+  .premium-note { font-size:11px; color:var(--muted); margin-top:10px; font-weight:300; }
 
-  .intro-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 30px; font-weight: 800;
-    color: white; letter-spacing: -1.2px;
-    line-height: 1.15; margin-bottom: 12px;
-  }
+  .toast { position:fixed; bottom:40px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--text); color:white; padding:12px 20px; border-radius:100px; font-size:13px; font-weight:500; opacity:0; transition:all 0.3s; white-space:nowrap; pointer-events:none; z-index:999; }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+  .toast.erro { background:var(--error); }
 
-  .intro-title span { color: var(--green-mid); }
-
-  .intro-sub {
-    font-size: 14px; color: rgba(255,255,255,0.5);
-    font-weight: 300; line-height: 1.6; margin-bottom: 32px;
-  }
-
-  .intro-actions { display: flex; flex-direction: column; gap: 10px; }
-
-  .btn-intro-main {
-    width: 100%; padding: 15px;
-    background: var(--green-mid); color: white;
-    border: none; border-radius: 100px;
-    font-size: 15px; font-weight: 500;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer; transition: background 0.2s;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-  }
-  .btn-intro-main:hover { background: var(--green); }
-
-  .btn-intro-sec {
-    width: 100%; padding: 14px;
-    background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.8);
-    border: 1px solid rgba(255,255,255,0.12); border-radius: 100px;
-    font-size: 15px; font-weight: 400;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer; transition: background 0.2s;
-  }
-  .btn-intro-sec:hover { background: rgba(255,255,255,0.12); }
-
-  /* ==================== LOGIN / CADASTRO ==================== */
-  #screen-login { background: var(--white); }
-
-  .login-header {
-    padding: 48px 24px 20px;
-    flex-shrink: 0;
-  }
-
-  .login-back {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 13px; color: var(--muted); cursor: pointer;
-    background: none; border: none; font-family: 'DM Sans', sans-serif;
-    margin-bottom: 24px; padding: 0;
-  }
-
-  .login-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 26px; font-weight: 800;
-    color: var(--text); letter-spacing: -1px;
-    line-height: 1.15; margin-bottom: 6px;
-  }
-
-  .login-sub { font-size: 13px; color: var(--muted); font-weight: 300; }
-
-  .login-content {
-    flex: 1; padding: 8px 24px 32px;
-    overflow-y: auto; display: flex; flex-direction: column;
-  }
-
-  .tabs {
-    display: flex; background: var(--surface);
-    border-radius: 12px; padding: 4px;
-    margin-bottom: 24px; flex-shrink: 0;
-  }
-  .tab {
-    flex: 1; text-align: center; padding: 9px;
-    border-radius: 9px; font-size: 14px; font-weight: 500;
-    cursor: pointer; transition: all 0.2s; color: var(--muted);
-    border: none; background: transparent; font-family: 'DM Sans', sans-serif;
-  }
-  .tab.active { background: var(--white); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-
-  .form { display: none; flex-direction: column; gap: 14px; flex: 1; }
-  .form.active { display: flex; }
-
-  .field-label { font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 6px; display: block; }
-  .field-wrap { position: relative; }
-
-  input[type="text"], input[type="email"], input[type="password"] {
-    width: 100%; padding: 13px 16px;
-    border: 1px solid var(--border); border-radius: 14px;
-    font-size: 15px; font-family: 'DM Sans', sans-serif;
-    color: var(--text); background: var(--white);
-    outline: none; transition: border-color 0.2s; -webkit-appearance: none;
-  }
-  input:focus { border-color: var(--green); }
-  input.error { border-color: var(--error); }
-
-  .error-msg { font-size: 11px; color: var(--error); margin-top: 4px; display: none; }
-  .error-msg.show { display: block; }
-
-  .toggle-pw {
-    position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-    background: none; border: none; cursor: pointer; color: var(--muted); font-size: 16px; padding: 4px;
-  }
-
-  .forgot { text-align: right; font-size: 12px; color: var(--green); font-weight: 500; cursor: pointer; text-decoration: none; margin-top: -6px; }
-
-  .btn-main {
-    width: 100%; padding: 15px; background: var(--green); color: white;
-    border: none; border-radius: 100px; font-size: 15px; font-weight: 500;
-    font-family: 'DM Sans', sans-serif; cursor: pointer;
-    transition: background 0.2s, transform 0.15s; margin-top: 4px;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-  }
-  .btn-main:hover { background: #2d5509; }
-  .btn-main:active { transform: scale(0.98); }
-  .btn-main:disabled { background: var(--green-mid); cursor: not-allowed; opacity: 0.7; }
-
-  .spinner {
-    width: 16px; height: 16px;
-    border: 2px solid rgba(255,255,255,0.4); border-top-color: white;
-    border-radius: 50%; animation: spin 0.7s linear infinite; display: none;
-  }
-  .btn-main.loading .spinner { display: block; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .divider { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 12px; }
-  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-  .btn-google {
-    width: 100%; padding: 13px; background: var(--white);
-    border: 1px solid var(--border); border-radius: 100px;
-    font-size: 14px; font-weight: 500; font-family: 'DM Sans', sans-serif;
-    cursor: pointer; color: var(--text);
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    transition: background 0.2s;
-  }
-  .btn-google:hover { background: var(--surface); }
-
-  .terms { font-size: 11px; color: var(--muted); text-align: center; line-height: 1.6; margin-top: auto; padding-top: 16px; }
-  .terms a { color: var(--green); text-decoration: none; cursor: pointer; }
-
-  /* ==================== ONBOARDING ==================== */
-  .ob-header { padding: 48px 24px 20px; background: var(--white); flex-shrink: 0; }
-  .progress-steps { display: flex; gap: 6px; margin-bottom: 24px; }
-  .step-bar { flex: 1; height: 4px; border-radius: 100px; background: var(--border); transition: background 0.3s; }
-  .step-bar.done { background: var(--green-mid); }
-  .step-bar.active { background: var(--green); }
-  .ob-label { font-size: 11px; font-weight: 500; color: var(--green); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
-  .ob-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.8px; line-height: 1.2; margin-bottom: 6px; }
-  .ob-sub { font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.5; }
-
-  .ob-content { flex: 1; overflow-y: auto; padding: 8px 24px 24px; }
-  .ob-step { display: none; }
-  .ob-step.active { display: block; }
-
-  .habits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
-
-  .habit-option {
-    border: 1.5px solid var(--border); border-radius: 16px;
-    padding: 14px 12px; cursor: pointer; transition: all 0.2s;
-    background: var(--white); text-align: left; width: 100%; position: relative;
-  }
-  .habit-option.selected { border-color: var(--green-mid); background: var(--green-light); }
-  .habit-option.premium-locked { border-color: var(--premium); background: var(--premium-light); cursor: not-allowed; opacity: 0.85; }
-  .habit-option-emoji { font-size: 24px; display: block; margin-bottom: 8px; }
-  .habit-option-name { font-size: 13px; font-weight: 500; color: var(--text); display: block; margin-bottom: 2px; }
-  .habit-option-desc { font-size: 11px; color: var(--muted); font-weight: 300; display: block; }
-  .habit-option.selected .habit-option-name { color: var(--green); }
-  .habit-option.premium-locked .habit-option-name { color: var(--premium); }
-  .habit-option.premium-locked .habit-option-desc { color: #92400E; }
-
-  .premium-badge {
-    position: absolute; top: 8px; right: 8px;
-    background: var(--premium); color: white;
-    font-size: 11px; font-weight: 700;
-    padding: 2px 6px; border-radius: 100px;
-    display: flex; align-items: center; gap: 3px; line-height: 1.4;
-  }
-
-  .select-hint { font-size: 11px; color: var(--muted); text-align: center; margin-top: 12px; font-weight: 300; }
-
-  .metas-list { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
-  .meta-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 14px 16px; }
-  .meta-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-  .meta-emoji { font-size: 20px; }
-  .meta-card-title { font-size: 14px; font-weight: 500; color: var(--text); }
-  .meta-field-label { font-size: 11px; color: var(--muted); font-weight: 400; margin-bottom: 6px; display: block; }
-
-  .meta-input {
-    width: 100%; padding: 10px 14px; border: 1px solid var(--border);
-    border-radius: 10px; font-size: 14px; font-family: 'DM Sans', sans-serif;
-    color: var(--text); background: var(--white); outline: none;
-    transition: border-color 0.2s; -webkit-appearance: none; margin-bottom: 8px;
-  }
-  .meta-input:last-child { margin-bottom: 0; }
-  .meta-input:focus { border-color: var(--green); }
-  select.meta-input {
-    cursor: pointer;
-    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 7L11 1' stroke='%235F5E5A' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 14px center;
-    padding-right: 36px; appearance: none;
-  }
-
-  .confirm-wrap { display: flex; flex-direction: column; align-items: center; text-align: center; padding-top: 20px; }
-  .confirm-icon { width: 80px; height: 80px; background: var(--green-light); border-radius: 100px; display: flex; align-items: center; justify-content: center; font-size: 36px; margin-bottom: 20px; }
-  .confirm-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.8px; margin-bottom: 8px; }
-  .confirm-sub { font-size: 14px; color: var(--muted); font-weight: 300; line-height: 1.6; margin-bottom: 24px; max-width: 280px; }
-  .confirm-habits { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-  .confirm-badge { background: var(--green-light); border: 1px solid #C0DD97; border-radius: 100px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: var(--green); }
-
-  .ob-footer { padding: 16px 24px 32px; flex-shrink: 0; background: var(--white); border-top: 1px solid var(--border); }
-  .footer-row { display: flex; align-items: center; gap: 12px; }
-  .btn-back { width: 46px; height: 46px; border-radius: 100px; border: 1px solid var(--border); background: var(--white); cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s; }
-  .btn-back:hover { background: var(--surface); }
-  .btn-next { flex: 1; padding: 14px; background: var(--green); color: white; border: none; border-radius: 100px; font-size: 15px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.2s, transform 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .btn-next:hover { background: #2d5509; }
-  .btn-next:active { transform: scale(0.98); }
-  .btn-next:disabled { background: var(--green-mid); opacity: 0.6; cursor: not-allowed; }
-  .btn-next.loading .spinner { display: block; }
-
-  /* ==================== MODAIS ==================== */
-  .modal-overlay { display: none; position: fixed; inset: 0; z-index: 900; background: rgba(0,0,0,0.5); align-items: flex-end; justify-content: center; }
-  .modal-overlay.active { display: flex; }
-  .modal-sheet { background: var(--white); border-radius: 24px 24px 0 0; width: 100%; max-width: 430px; max-height: 85vh; display: flex; flex-direction: column; animation: slideUp 0.3s ease; }
-  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-  .modal-handle { width: 40px; height: 4px; background: var(--border); border-radius: 100px; margin: 12px auto 0; flex-shrink: 0; }
-  .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px 12px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
-  .modal-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
-  .modal-close { background: var(--surface); border: none; width: 30px; height: 30px; border-radius: 100px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; color: var(--muted); }
-  .modal-body { overflow-y: auto; padding: 20px; flex: 1; }
-  .modal-meta { font-size: 11px; color: var(--muted); margin-bottom: 20px; font-weight: 300; }
-  .modal-body h2 { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--text); margin: 20px 0 6px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
-  .modal-body h2:first-of-type { margin-top: 0; }
-  .modal-body p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 8px; font-weight: 300; }
-  .modal-body p strong { color: var(--text); font-weight: 500; }
-  .modal-body ul { padding-left: 1rem; margin-bottom: 8px; }
-  .modal-body ul li { font-size: 13px; color: var(--muted); line-height: 1.7; font-weight: 300; margin-bottom: 3px; }
-  .modal-highlight { background: var(--green-light); border-left: 3px solid var(--green-mid); border-radius: 0 8px 8px 0; padding: 10px 12px; margin: 8px 0; font-size: 12px; color: var(--green); line-height: 1.6; }
-  .modal-contact { background: var(--surface); border-radius: 12px; padding: 12px 14px; margin-top: 16px; }
-  .modal-contact p { margin: 0 0 4px; font-size: 12px; }
-  .modal-contact p:last-child { margin: 0; }
-  .email-text { color: var(--green); font-weight: 500; }
-
-  /* Modal premium */
-  .premium-modal-body { padding: 24px; text-align: center; }
-  .premium-modal-icon { font-size: 48px; margin-bottom: 12px; }
-  .premium-modal-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; margin-bottom: 8px; }
-  .premium-modal-sub { font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.6; margin-bottom: 20px; }
-  .premium-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; text-align: left; }
-  .premium-feature { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text); font-weight: 400; }
-  .premium-feature-icon { width: 30px; height: 30px; background: var(--premium-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
-  .btn-premium { width: 100%; padding: 14px; background: var(--premium); color: white; border: none; border-radius: 100px; font-size: 15px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.2s; }
-  .btn-premium:hover { background: #D97706; }
-  .premium-note { font-size: 11px; color: var(--muted); margin-top: 10px; font-weight: 300; }
-
-  /* TOAST */
-  .toast { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--text); color: white; padding: 12px 20px; border-radius: 100px; font-size: 13px; font-weight: 500; opacity: 0; transition: all 0.3s; white-space: nowrap; pointer-events: none; z-index: 999; }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .toast.erro { background: var(--error); }
-
-  @media (max-width: 430px) {
-    body { padding: 0; background: var(--white); }
-    .phone-frame { border-radius: 0; box-shadow: none; max-height: none; min-height: 100vh; }
+  @media (max-width:430px) {
+    body { padding:0; background:var(--white); }
+    .phone-frame { border-radius:0; box-shadow:none; max-height:none; min-height:100vh; }
   }
 </style>
 </head>
 <body>
 
-<!-- ==================== MODAL TERMOS ==================== -->
+<!-- MODAIS TERMOS / PRIVACIDADE / PREMIUM -->
 <div class="modal-overlay" id="modal-termos">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
-    <div class="modal-header">
-      <span class="modal-title">Termos de Uso</span>
-      <button class="modal-close" onclick="fecharModal('modal-termos')">✕</button>
-    </div>
+    <div class="modal-header"><span class="modal-title">Termos de Uso</span><button class="modal-close" onclick="fecharModal('modal-termos')">✕</button></div>
     <div class="modal-body">
-      <p class="modal-meta">Última atualização: abril de 2026 · Raj Studios</p>
+      <p class="modal-meta">Abril de 2026 · Raj Studios</p>
       <h2>1. Sobre o FlowDay</h2>
-      <p>O FlowDay é um aplicativo de bem-estar desenvolvido e operado pela <strong>Raj Studios</strong>, com o objetivo de ajudar pessoas a criarem hábitos saudáveis. O FlowDay <strong>não é um aplicativo médico</strong> e não substitui orientação profissional de saúde.</p>
+      <p>O FlowDay é um aplicativo de bem-estar desenvolvido pela <strong>Raj Studios</strong>. <strong>Não é um aplicativo médico</strong> e não substitui orientação profissional de saúde.</p>
       <h2>2. Elegibilidade</h2>
-      <p>Para utilizar o FlowDay você deve ter ao menos <strong>13 anos de idade</strong>. Usuários menores de 18 anos devem ter autorização dos pais ou responsáveis legais.</p>
-      <h2>3. Criação de conta</h2>
-      <p>Você é responsável por manter a confidencialidade da sua senha e por todas as atividades realizadas na sua conta. Notifique-nos imediatamente em caso de uso não autorizado.</p>
-      <h2>4. Dados de saúde</h2>
-      <div class="modal-highlight">O fornecimento de dados de saúde é completamente <strong>opcional</strong>. A experiência será mais personalizada quando fornecidos, mas o app funciona sem eles.</div>
-      <h2>5. Uso permitido</h2>
-      <p>Ao usar o FlowDay, você concorda em não usar o app para fins ilegais, acessar contas de terceiros, interferir no serviço, redistribuir o conteúdo sem autorização ou usar bots e automações.</p>
-      <h2>6. Publicidade</h2>
-      <p>O FlowDay pode exibir anúncios no futuro. Seus dados de saúde <strong>nunca serão usados</strong> para fins publicitários.</p>
-      <h2>7. Propriedade intelectual</h2>
-      <p>Todo o conteúdo do FlowDay é propriedade da <strong>Raj Studios</strong> e está protegido pelas leis de propriedade intelectual.</p>
-      <h2>8. Limitação de responsabilidade</h2>
-      <p>O FlowDay é fornecido "como está". Sempre consulte um profissional de saúde para decisões relacionadas à sua saúde.</p>
-      <h2>9. Alterações nos termos</h2>
-      <p>Podemos atualizar estes termos a qualquer momento. Você será notificado por e-mail ou aviso no app.</p>
-      <h2>10. Lei aplicável</h2>
-      <p>Estes termos são regidos pelas leis do Brasil (LGPD – Lei nº 13.709/2018). Para usuários europeus, aplica-se também o GDPR.</p>
-      <h2>11. Contato</h2>
+      <p>Você deve ter ao menos <strong>13 anos</strong>. Menores de 18 precisam de autorização dos responsáveis.</p>
+      <h2>3. Dados de saúde</h2>
+      <div class="modal-highlight">Fornecer dados de saúde é <strong>opcional</strong>. A experiência será mais personalizada com eles, mas o app funciona sem.</div>
+      <h2>4. Publicidade</h2>
+      <p>O FlowDay pode exibir anúncios no futuro. Seus dados de saúde <strong>nunca serão usados</strong> para publicidade.</p>
+      <h2>5. Lei aplicável</h2>
+      <p>Regido pelas leis do Brasil (LGPD). Para europeus, aplica-se também o GDPR.</p>
+      <h2>6. Contato</h2>
       <div class="modal-contact">
         <p>📧 Suporte: <span class="email-text">flowday.support&#64;gmail.com</span></p>
         <p>📧 Raj Studios: <span class="email-text">rajstudioscontact&#64;gmail.com</span></p>
@@ -401,44 +206,23 @@
   </div>
 </div>
 
-<!-- ==================== MODAL PRIVACIDADE ==================== -->
 <div class="modal-overlay" id="modal-privacidade">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
-    <div class="modal-header">
-      <span class="modal-title">Política de Privacidade</span>
-      <button class="modal-close" onclick="fecharModal('modal-privacidade')">✕</button>
-    </div>
+    <div class="modal-header"><span class="modal-title">Política de Privacidade</span><button class="modal-close" onclick="fecharModal('modal-privacidade')">✕</button></div>
     <div class="modal-body">
-      <p class="modal-meta">Última atualização: abril de 2026 · Raj Studios</p>
-      <h2>1. Quais dados coletamos</h2>
-      <p><strong>Cadastro:</strong> nome, e-mail e senha (criptografada).</p>
-      <p><strong>Uso:</strong> hábitos concluídos, streaks, pontuações e progresso diário.</p>
-      <p><strong>Saúde (opcionais):</strong> sono, alimentação e tempo de tela — fornecidos voluntariamente.</p>
-      <p><strong>Técnicos:</strong> tipo de dispositivo e sistema operacional.</p>
-      <h2>2. Como usamos seus dados</h2>
-      <ul>
-        <li>Criar e manter sua conta</li>
-        <li>Personalizar sua experiência e hábitos</li>
-        <li>Calcular progresso, streak e pontuações</li>
-        <li>Enviar notificações (com sua autorização)</li>
-        <li>Melhorar o app e cumprir obrigações legais</li>
-      </ul>
+      <p class="modal-meta">Abril de 2026 · Raj Studios</p>
+      <h2>1. Dados coletados</h2>
+      <p><strong>Cadastro:</strong> nome, e-mail, senha. <strong>Uso:</strong> hábitos, streaks, pontos. <strong>Saúde (opcional):</strong> sono, alimentação, tela.</p>
+      <h2>2. Como usamos</h2>
+      <ul><li>Criar e manter sua conta</li><li>Personalizar hábitos e experiência</li><li>Calcular progresso e pontuações</li><li>Melhorar o app</li></ul>
       <h2>3. Dados de saúde</h2>
-      <div class="modal-highlight">Dados de saúde são <strong>100% opcionais</strong> e nunca compartilhados com terceiros nem usados para publicidade.</div>
-      <h2>4. Compartilhamento</h2>
-      <p>A Raj Studios <strong>não vende seus dados</strong>. Usamos apenas o Firebase (Google) para autenticação e banco de dados.</p>
-      <h2>5. Seus direitos (LGPD e GDPR)</h2>
-      <ul>
-        <li>Acessar, corrigir ou excluir seus dados</li>
-        <li>Revogar consentimento a qualquer momento</li>
-        <li>Portabilidade dos seus dados</li>
-      </ul>
-      <h2>6. Segurança</h2>
-      <p>Usamos Firebase com criptografia TLS. Senhas nunca ficam visíveis para nossa equipe.</p>
-      <h2>7. Exclusão de dados</h2>
-      <p>Seus dados são removidos em até <strong>30 dias</strong> após solicitação de exclusão da conta.</p>
-      <h2>8. Contato</h2>
+      <div class="modal-highlight">Dados de saúde são <strong>100% opcionais</strong> e nunca compartilhados com terceiros.</div>
+      <h2>4. Segurança</h2>
+      <p>Firebase com criptografia TLS. Senhas nunca visíveis para nossa equipe.</p>
+      <h2>5. Seus direitos</h2>
+      <ul><li>Acessar, corrigir ou excluir seus dados</li><li>Revogar consentimento</li><li>Portabilidade</li></ul>
+      <h2>6. Contato</h2>
       <div class="modal-contact">
         <p>📧 Suporte: <span class="email-text">flowday.support&#64;gmail.com</span></p>
         <p>📧 Raj Studios: <span class="email-text">rajstudioscontact&#64;gmail.com</span></p>
@@ -447,161 +231,141 @@
   </div>
 </div>
 
-<!-- ==================== MODAL PREMIUM ==================== -->
 <div class="modal-overlay" id="modal-premium">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
-    <div class="modal-header">
-      <span class="modal-title">🔥 FlowDay Premium</span>
-      <button class="modal-close" onclick="fecharModal('modal-premium')">✕</button>
-    </div>
+    <div class="modal-header"><span class="modal-title">🔥 FlowDay Premium</span><button class="modal-close" onclick="fecharModal('modal-premium')">✕</button></div>
     <div class="premium-modal-body">
       <div class="premium-modal-icon">📵</div>
       <div class="premium-modal-title">Menos tela é Premium</div>
-      <div class="premium-modal-sub">Este hábito faz parte do plano Premium. Desbloqueie para monitorar e controlar seu tempo de tela com inteligência.</div>
+      <div class="premium-modal-sub">Desbloqueie para monitorar e controlar seu tempo de tela.</div>
       <div class="premium-features">
         <div class="premium-feature"><div class="premium-feature-icon">📵</div>Controle de tempo de tela</div>
-        <div class="premium-feature"><div class="premium-feature-icon">🔔</div>Alertas personalizados de pausa</div>
-        <div class="premium-feature"><div class="premium-feature-icon">📊</div>Relatórios semanais de uso</div>
-        <div class="premium-feature"><div class="premium-feature-icon">🚫</div>Bloqueio de apps por horário</div>
+        <div class="premium-feature"><div class="premium-feature-icon">🔔</div>Alertas personalizados</div>
+        <div class="premium-feature"><div class="premium-feature-icon">📊</div>Relatórios semanais</div>
       </div>
       <button class="btn-premium" onclick="fecharModal('modal-premium')">Em breve · Fique ligado!</button>
-      <p class="premium-note">O plano Premium ainda está sendo desenvolvido. Avisaremos quando estiver disponível.</p>
+      <p class="premium-note">O plano Premium está sendo desenvolvido.</p>
     </div>
   </div>
 </div>
 
-<!-- ==================== PHONE FRAME ==================== -->
 <div class="phone-frame">
 
-  <!-- ===== TELA INTRO ===== -->
+  <!-- ===== INTRO ===== -->
   <div class="screen active" id="screen-intro">
     <div class="intro-bg-circle c1"></div>
     <div class="intro-bg-circle c2"></div>
-    <div class="intro-bg-circle c3"></div>
 
     <div class="intro-top">
-      <div class="intro-logo">
-        <span class="intro-logo-dot"></span>
-        FlowDay
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div class="intro-logo"><span class="intro-logo-dot"></span>FlowDay</div>
+        <div class="intro-lang-row" style="flex-wrap:wrap">
+          <button class="intro-lang-btn active" data-lang="pt-BR" onclick="mudarIdioma('pt-BR')">🇧🇷 PT</button>
+          <button class="intro-lang-btn" data-lang="pt-PT" onclick="mudarIdioma('pt-PT')">🇵🇹 PT</button>
+          <button class="intro-lang-btn" data-lang="en" onclick="mudarIdioma('en')">🇺🇸 EN</button>
+          <button class="intro-lang-btn" data-lang="es" onclick="mudarIdioma('es')">🇪🇸 ES</button>
+          <button class="intro-lang-btn" data-lang="fr" onclick="mudarIdioma('fr')">🇫🇷 FR</button>
+          <button class="intro-lang-btn" data-lang="de" onclick="mudarIdioma('de')">🇩🇪 DE</button>
+          <button class="intro-lang-btn" data-lang="ru" onclick="mudarIdioma('ru')">🇷🇺 RU</button>
+          <button class="intro-lang-btn" data-lang="ja" onclick="mudarIdioma('ja')">🇯🇵 JA</button>
+        </div>
       </div>
     </div>
 
     <div class="intro-illustration">
       <svg viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Fundo circular -->
         <circle cx="140" cy="140" r="110" fill="#1A3A08" opacity="0.6"/>
         <circle cx="140" cy="140" r="85" fill="#1F4A0A" opacity="0.5"/>
-
-        <!-- Planta/folha central -->
         <ellipse cx="140" cy="175" rx="18" ry="6" fill="#2d5509" opacity="0.5"/>
         <rect x="138" y="110" width="4" height="65" rx="2" fill="#4a8a1a"/>
-        <!-- Folhas -->
         <path d="M140 145 Q115 130 118 108 Q135 118 140 145Z" fill="#639922"/>
         <path d="M140 155 Q165 138 162 115 Q145 127 140 155Z" fill="#4a8a1a"/>
         <path d="M140 130 Q118 112 122 92 Q138 104 140 130Z" fill="#7ab52a"/>
         <path d="M140 135 Q160 115 158 95 Q143 108 140 135Z" fill="#639922"/>
-
-        <!-- Copo de água -->
         <rect x="58" y="148" width="34" height="42" rx="4" fill="#1D9E75" opacity="0.85"/>
         <rect x="60" y="148" width="30" height="10" rx="3" fill="#2bb88a"/>
-        <path d="M62 165 Q75 170 88 165" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
-
-        <!-- Lua/sono -->
         <path d="M198 85 Q212 95 208 112 Q195 105 191 92 Q194 86 198 85Z" fill="#8B6FD4" opacity="0.9"/>
         <circle cx="215" cy="75" r="3" fill="white" opacity="0.6"/>
         <circle cx="222" cy="88" r="2" fill="white" opacity="0.4"/>
-        <circle cx="205" cy="68" r="1.5" fill="white" opacity="0.5"/>
-
-        <!-- Coração/bem-estar -->
-        <path d="M75 95 C75 90 68 85 63 90 C58 85 51 90 51 95 C51 103 63 112 63 112 C63 112 75 103 75 95Z" fill="#E24B4A" opacity="0.8"/>
-
-        <!-- Estrelas decorativas -->
+        <path d="M88 195 Q100 188 115 192 Q118 198 112 202 Q100 204 88 200Z" fill="#639922" opacity="0.9"/>
         <circle cx="195" cy="155" r="3" fill="#F59E0B" opacity="0.7"/>
         <circle cx="185" cy="170" r="2" fill="#F59E0B" opacity="0.5"/>
-        <circle cx="200" cy="168" r="1.5" fill="#F59E0B" opacity="0.6"/>
-
-        <!-- Zapatilha/movimento -->
-        <path d="M88 195 Q100 188 115 192 Q118 198 112 202 Q100 204 88 200Z" fill="#639922" opacity="0.9"/>
-        <path d="M90 195 Q95 190 105 192" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
-
-        <!-- Anel de progresso externo -->
         <circle cx="140" cy="140" r="108" stroke="#639922" stroke-width="1" opacity="0.15" stroke-dasharray="4 8"/>
       </svg>
     </div>
 
     <div class="intro-bottom">
-      <div class="intro-title">
-        Construa hábitos que <span>transformam</span> sua vida
-      </div>
-      <div class="intro-sub">
-        Pequenas ações diárias, grandes resultados. Comece sua jornada com o FlowDay.
-      </div>
+      <div class="intro-title" id="intro-title">Construa hábitos que <span>transformam</span> sua vida</div>
+      <div class="intro-sub" id="intro-sub">Pequenas ações diárias, grandes resultados.</div>
       <div class="intro-actions">
-        <button class="btn-intro-main" onclick="irParaLogin('cadastro')">
-          Criar conta grátis →
-        </button>
-        <button class="btn-intro-sec" onclick="irParaLogin('login')">
-          Já tenho uma conta
-        </button>
+        <button class="btn-intro-main" id="btn-criar-conta" onclick="irParaLogin('cadastro')">Criar conta grátis →</button>
+        <button class="btn-intro-sec" id="btn-ja-tenho" onclick="irParaLogin('login')">Já tenho uma conta</button>
       </div>
     </div>
   </div>
 
-  <!-- ===== TELA LOGIN / CADASTRO ===== -->
+  <!-- ===== LOGIN / CADASTRO ===== -->
   <div class="screen" id="screen-login">
     <div class="login-header">
-      <button class="login-back" onclick="mostrarTela('screen-intro')">← Voltar</button>
+      <div class="login-header-top">
+        <button class="login-back" onclick="mostrarTela('screen-intro')">← <span id="back-label">Voltar</span></button>
+        <div class="login-lang-row" style="flex-wrap:wrap">
+          <button class="login-lang-btn active" data-lang="pt-BR" onclick="mudarIdioma('pt-BR')">🇧🇷 PT</button>
+          <button class="login-lang-btn" data-lang="pt-PT" onclick="mudarIdioma('pt-PT')">🇵🇹 PT</button>
+          <button class="login-lang-btn" data-lang="en" onclick="mudarIdioma('en')">🇺🇸 EN</button>
+          <button class="login-lang-btn" data-lang="es" onclick="mudarIdioma('es')">🇪🇸 ES</button>
+          <button class="login-lang-btn" data-lang="fr" onclick="mudarIdioma('fr')">🇫🇷 FR</button>
+          <button class="login-lang-btn" data-lang="de" onclick="mudarIdioma('de')">🇩🇪 DE</button>
+          <button class="login-lang-btn" data-lang="ru" onclick="mudarIdioma('ru')">🇷🇺 RU</button>
+          <button class="login-lang-btn" data-lang="ja" onclick="mudarIdioma('ja')">🇯🇵 JA</button>
+        </div>
+      </div>
       <div class="login-title" id="login-title">Bem-vindo de volta!</div>
       <div class="login-sub" id="login-sub">Entre na sua conta para continuar.</div>
     </div>
 
     <div class="login-content">
       <div class="tabs">
-        <button class="tab active" onclick="switchTab('login')">Entrar</button>
-        <button class="tab" onclick="switchTab('cadastro')">Cadastrar</button>
+        <button class="tab active" id="tab-entrar" onclick="switchTab('login')">Entrar</button>
+        <button class="tab" id="tab-cadastrar" onclick="switchTab('cadastro')">Cadastrar</button>
       </div>
 
       <!-- FORM LOGIN -->
       <div class="form active" id="form-login">
         <div>
-          <label class="field-label">E-mail</label>
+          <label class="field-label" id="lbl-email">E-mail</label>
           <input type="email" id="login-email" placeholder="seu@email.com" />
           <div class="error-msg" id="err-login-email">Informe um e-mail válido</div>
         </div>
         <div>
-          <label class="field-label">Senha</label>
+          <label class="field-label" id="lbl-senha">Senha</label>
           <div class="field-wrap">
             <input type="password" id="login-senha" placeholder="••••••••" />
-            <button class="toggle-pw" onclick="togglePw('login-senha', this)">👁</button>
+            <button class="toggle-pw" onclick="togglePw('login-senha',this)">👁</button>
           </div>
           <div class="error-msg" id="err-login-senha">Informe sua senha</div>
         </div>
-        <a class="forgot" onclick="handleForgotPassword()">Esqueceu a senha?</a>
+        <a class="forgot" id="forgot-link" onclick="handleForgotPassword()">Esqueceu a senha?</a>
         <button class="btn-main" id="btn-login" onclick="handleLogin()">
           <span class="spinner"></span>
-          <span class="btn-text">Entrar</span>
+          <span class="btn-text" id="btn-login-text">Entrar</span>
         </button>
-        <div class="divider">ou continue com</div>
+        <div class="divider" id="div-or">ou continue com</div>
         <button class="btn-google" onclick="handleGoogle()">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
-            <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
-            <path d="M3.964 10.707A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"/>
-            <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
-          </svg>
-          Entrar com Google
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/><path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/><path d="M3.964 10.707A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"/><path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/></svg>
+          <span id="btn-google-text">Entrar com Google</span>
         </button>
         <p class="terms">
-          Ao entrar, você concorda com nossos<br>
-          <a onclick="abrirModal('modal-termos')">Termos de Uso</a> e <a onclick="abrirModal('modal-privacidade')">Política de Privacidade</a>
+          <span id="terms-agree">Ao entrar, você concorda com nossos</span><br>
+          <a onclick="abrirModal('modal-termos')" id="terms-link">Termos de Uso</a> e <a onclick="abrirModal('modal-privacidade')" id="privacy-link">Política de Privacidade</a>
         </p>
       </div>
 
       <!-- FORM CADASTRO -->
       <div class="form" id="form-cadastro">
         <div>
-          <label class="field-label">Nome completo</label>
+          <label class="field-label" id="lbl-nome">Nome completo</label>
           <input type="text" id="cad-nome" placeholder="Seu nome" />
           <div class="error-msg" id="err-cad-nome">Informe seu nome</div>
         </div>
@@ -611,44 +375,39 @@
           <div class="error-msg" id="err-cad-email">Informe um e-mail válido</div>
         </div>
         <div>
-          <label class="field-label">Senha</label>
+          <label class="field-label" id="lbl-senha2">Senha</label>
           <div class="field-wrap">
             <input type="password" id="cad-senha" placeholder="Mínimo 6 caracteres" />
-            <button class="toggle-pw" onclick="togglePw('cad-senha', this)">👁</button>
+            <button class="toggle-pw" onclick="togglePw('cad-senha',this)">👁</button>
           </div>
           <div class="error-msg" id="err-cad-senha">A senha deve ter ao menos 6 caracteres</div>
         </div>
         <div>
-          <label class="field-label">Confirmar senha</label>
+          <label class="field-label" id="lbl-confirma">Confirmar senha</label>
           <div class="field-wrap">
             <input type="password" id="cad-confirma" placeholder="Repita sua senha" />
-            <button class="toggle-pw" onclick="togglePw('cad-confirma', this)">👁</button>
+            <button class="toggle-pw" onclick="togglePw('cad-confirma',this)">👁</button>
           </div>
           <div class="error-msg" id="err-cad-confirma">As senhas não coincidem</div>
         </div>
         <button class="btn-main" id="btn-cadastro" onclick="handleCadastro()">
           <span class="spinner"></span>
-          <span class="btn-text">Criar conta</span>
+          <span class="btn-text" id="btn-cadastro-text">Criar conta</span>
         </button>
-        <div class="divider">ou cadastre-se com</div>
+        <div class="divider" id="div-or2">ou cadastre-se com</div>
         <button class="btn-google" onclick="handleGoogle()">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
-            <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
-            <path d="M3.964 10.707A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"/>
-            <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
-          </svg>
-          Cadastrar com Google
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/><path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/><path d="M3.964 10.707A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"/><path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/></svg>
+          <span id="btn-google-text2">Cadastrar com Google</span>
         </button>
         <p class="terms">
-          Ao criar uma conta, você concorda com nossos<br>
-          <a onclick="abrirModal('modal-termos')">Termos de Uso</a> e <a onclick="abrirModal('modal-privacidade')">Política de Privacidade</a>
+          <span id="terms-agree2">Ao criar uma conta, você concorda com nossos</span><br>
+          <a onclick="abrirModal('modal-termos')" id="terms-link2">Termos de Uso</a> e <a onclick="abrirModal('modal-privacidade')" id="privacy-link2">Política de Privacidade</a>
         </p>
       </div>
     </div>
   </div>
 
-  <!-- ===== TELA ONBOARDING ===== -->
+  <!-- ===== ONBOARDING ===== -->
   <div class="screen" id="screen-onboarding">
     <div class="ob-header">
       <div class="progress-steps">
@@ -658,51 +417,28 @@
       </div>
       <div class="ob-label" id="ob-label">Passo 1 de 3</div>
       <div class="ob-title" id="ob-title">O que você quer melhorar?</div>
-      <div class="ob-sub" id="ob-sub">Escolha ao menos um hábito para começar. Você pode mudar depois.</div>
+      <div class="ob-sub" id="ob-sub">Escolha ao menos um hábito para começar.</div>
     </div>
-
     <div class="ob-content">
       <div class="ob-step active" id="ob-step-1">
         <div class="habits-grid">
-          <button class="habit-option" data-id="agua" onclick="toggleHabito(this)">
-            <span class="habit-option-emoji">💧</span>
-            <span class="habit-option-name">Hidratação</span>
-            <span class="habit-option-desc">Beber mais água</span>
-          </button>
-          <button class="habit-option" data-id="sono" onclick="toggleHabito(this)">
-            <span class="habit-option-emoji">😴</span>
-            <span class="habit-option-name">Sono</span>
-            <span class="habit-option-desc">Regular o horário</span>
-          </button>
+          <button class="habit-option" data-id="agua" onclick="toggleHabito(this)"><span class="habit-option-emoji">💧</span><span class="habit-option-name">Hidratação</span><span class="habit-option-desc">Beber mais água</span></button>
+          <button class="habit-option" data-id="sono" onclick="toggleHabito(this)"><span class="habit-option-emoji">😴</span><span class="habit-option-name">Sono</span><span class="habit-option-desc">Regular o horário</span></button>
           <button class="habit-option premium-locked" data-id="celular" onclick="abrirModal('modal-premium')">
             <span class="premium-badge">🔥 Premium</span>
             <span class="habit-option-emoji">📵</span>
             <span class="habit-option-name">Menos tela</span>
             <span class="habit-option-desc">Usar menos o celular</span>
           </button>
-          <button class="habit-option" data-id="alimentacao" onclick="toggleHabito(this)">
-            <span class="habit-option-emoji">🥗</span>
-            <span class="habit-option-name">Alimentação</span>
-            <span class="habit-option-desc">Comer melhor</span>
-          </button>
-          <button class="habit-option" data-id="movimento" onclick="toggleHabito(this)">
-            <span class="habit-option-emoji">🚶</span>
-            <span class="habit-option-name">Movimento</span>
-            <span class="habit-option-desc">Se mexer mais</span>
-          </button>
-          <button class="habit-option" data-id="mental" onclick="toggleHabito(this)">
-            <span class="habit-option-emoji">🧘</span>
-            <span class="habit-option-name">Bem-estar</span>
-            <span class="habit-option-desc">Saúde mental</span>
-          </button>
+          <button class="habit-option" data-id="alimentacao" onclick="toggleHabito(this)"><span class="habit-option-emoji">🥗</span><span class="habit-option-name">Alimentação</span><span class="habit-option-desc">Comer melhor</span></button>
+          <button class="habit-option" data-id="movimento" onclick="toggleHabito(this)"><span class="habit-option-emoji">🚶</span><span class="habit-option-name">Movimento</span><span class="habit-option-desc">Se mexer mais</span></button>
+          <button class="habit-option" data-id="mental" onclick="toggleHabito(this)"><span class="habit-option-emoji">🧘</span><span class="habit-option-name">Bem-estar</span><span class="habit-option-desc">Saúde mental</span></button>
         </div>
         <p class="select-hint">Selecione quantos quiser · 🔥 requer Premium</p>
       </div>
-
       <div class="ob-step" id="ob-step-2">
         <div class="metas-list" id="metas-list"></div>
       </div>
-
       <div class="ob-step" id="ob-step-3">
         <div class="confirm-wrap">
           <div class="confirm-icon">🎉</div>
@@ -712,7 +448,6 @@
         </div>
       </div>
     </div>
-
     <div class="ob-footer">
       <div class="footer-row">
         <button class="btn-back" id="btn-back" onclick="voltarStep()" style="display:none">←</button>
@@ -725,10 +460,321 @@
   </div>
 
 </div>
-
 <div class="toast" id="toast"></div>
 
-<!-- ==================== FIREBASE ==================== -->
+<!-- ==================== SISTEMA DE IDIOMAS ==================== -->
+<script>
+const TRADUCOES_INDEX = {
+  'pt-BR': {
+    intro_title: 'Construa hábitos que <span>transformam</span> sua vida',
+    intro_sub: 'Pequenas ações diárias, grandes resultados. Comece sua jornada com o FlowDay.',
+    btn_criar: 'Criar conta grátis →',
+    btn_ja_tenho: 'Já tenho uma conta',
+    back: 'Voltar',
+    welcome_back: 'Bem-vindo de volta!',
+    enter_account: 'Entre na sua conta para continuar.',
+    create_account: 'Crie sua conta!',
+    start_journey: 'Comece sua jornada de hábitos agora.',
+    tab_entrar: 'Entrar',
+    tab_cadastrar: 'Cadastrar',
+    email_lbl: 'E-mail', name_lbl: 'Nome completo',
+    pass_lbl: 'Senha', confirm_lbl: 'Confirmar senha',
+    forgot: 'Esqueceu a senha?',
+    btn_enter: 'Entrar', btn_entering: 'Entrando...',
+    btn_create: 'Criar conta', btn_creating: 'Criando conta...',
+    or_continue: 'ou continue com', or_register: 'ou cadastre-se com',
+    google_enter: 'Entrar com Google', google_register: 'Cadastrar com Google',
+    agree_enter: 'Ao entrar, você concorda com nossos',
+    agree_create: 'Ao criar uma conta, você concorda com nossos',
+    terms: 'Termos de Uso', privacy: 'Política de Privacidade',
+    err_email: 'Informe um e-mail válido', err_pass: 'Informe sua senha',
+    err_name: 'Informe seu nome', err_pass_min: 'A senha deve ter ao menos 6 caracteres',
+    err_pass_match: 'As senhas não coincidem',
+    toast_welcome: '✅ Bem-vindo de volta!', toast_created: '🎉 Conta criada com sucesso!',
+    toast_google: '✅ Entrou com Google!', toast_reset: '📧 E-mail de recuperação enviado!',
+    toast_email_first: '⚠️ Digite seu e-mail primeiro',
+  },
+  'en': {
+    intro_title: 'Build habits that <span>transform</span> your life',
+    intro_sub: 'Small daily actions, great results. Start your journey with FlowDay.',
+    btn_criar: 'Create free account →',
+    btn_ja_tenho: 'I already have an account',
+    back: 'Back',
+    welcome_back: 'Welcome back!',
+    enter_account: 'Sign in to your account to continue.',
+    create_account: 'Create your account!',
+    start_journey: 'Start your habits journey now.',
+    tab_entrar: 'Sign in',
+    tab_cadastrar: 'Sign up',
+    email_lbl: 'Email', name_lbl: 'Full name',
+    pass_lbl: 'Password', confirm_lbl: 'Confirm password',
+    forgot: 'Forgot password?',
+    btn_enter: 'Sign in', btn_entering: 'Signing in...',
+    btn_create: 'Create account', btn_creating: 'Creating account...',
+    or_continue: 'or continue with', or_register: 'or sign up with',
+    google_enter: 'Sign in with Google', google_register: 'Sign up with Google',
+    agree_enter: 'By signing in, you agree to our',
+    agree_create: 'By creating an account, you agree to our',
+    terms: 'Terms of Use', privacy: 'Privacy Policy',
+    err_email: 'Enter a valid email', err_pass: 'Enter your password',
+    err_name: 'Enter your name', err_pass_min: 'Password must be at least 6 characters',
+    err_pass_match: 'Passwords do not match',
+    toast_welcome: '✅ Welcome back!', toast_created: '🎉 Account created!',
+    toast_google: '✅ Signed in with Google!', toast_reset: '📧 Recovery email sent!',
+    toast_email_first: '⚠️ Enter your email first',
+  },
+  'es': {
+    intro_title: 'Construye hábitos que <span>transforman</span> tu vida',
+    intro_sub: 'Pequeñas acciones diarias, grandes resultados.',
+    btn_criar: 'Crear cuenta gratis →',
+    btn_ja_tenho: 'Ya tengo una cuenta',
+    back: 'Volver',
+    welcome_back: '¡Bienvenido de nuevo!',
+    enter_account: 'Inicia sesión para continuar.',
+    create_account: '¡Crea tu cuenta!',
+    start_journey: 'Comienza tu jornada de hábitos ahora.',
+    tab_entrar: 'Iniciar sesión',
+    tab_cadastrar: 'Registrarse',
+    email_lbl: 'Correo electrónico', name_lbl: 'Nombre completo',
+    pass_lbl: 'Contraseña', confirm_lbl: 'Confirmar contraseña',
+    forgot: '¿Olvidaste tu contraseña?',
+    btn_enter: 'Iniciar sesión', btn_entering: 'Iniciando...',
+    btn_create: 'Crear cuenta', btn_creating: 'Creando cuenta...',
+    or_continue: 'o continúa con', or_register: 'o regístrate con',
+    google_enter: 'Iniciar con Google', google_register: 'Registrar con Google',
+    agree_enter: 'Al iniciar sesión, aceptas nuestros',
+    agree_create: 'Al crear una cuenta, aceptas nuestros',
+    terms: 'Términos de Uso', privacy: 'Política de Privacidad',
+    err_email: 'Ingresa un correo válido', err_pass: 'Ingresa tu contraseña',
+    err_name: 'Ingresa tu nombre', err_pass_min: 'La contraseña debe tener al menos 6 caracteres',
+    err_pass_match: 'Las contraseñas no coinciden',
+    toast_welcome: '✅ ¡Bienvenido de nuevo!', toast_created: '🎉 ¡Cuenta creada!',
+    toast_google: '✅ ¡Iniciaste con Google!', toast_reset: '📧 ¡Correo de recuperación enviado!',
+    toast_email_first: '⚠️ Ingresa tu correo primero',
+  },
+  'pt-PT': {
+    intro_title: 'Construa hábitos que <span>transformam</span> a sua vida',
+    intro_sub: 'Pequenas ações diárias, grandes resultados.',
+    btn_criar: 'Criar conta grátis →', btn_ja_tenho: 'Já tenho uma conta',
+    back: '← Voltar', welcome_back: 'Bem-vindo de volta!',
+    enter_account: 'Inicie sessão para continuar.',
+    create_account: 'Crie a sua conta!', start_journey: 'Comece já a sua jornada.',
+    tab_entrar: 'Entrar', tab_cadastrar: 'Registar',
+    email_lbl: 'E-mail', name_lbl: 'Nome completo',
+    pass_lbl: 'Palavra-passe', confirm_lbl: 'Confirmar palavra-passe',
+    forgot: 'Esqueceu a palavra-passe?',
+    btn_enter: 'Entrar', btn_entering: 'A entrar...',
+    btn_create: 'Criar conta', btn_creating: 'A criar conta...',
+    or_continue: 'ou continuar com', or_register: 'ou registar com',
+    google_enter: 'Entrar com Google', google_register: 'Registar com Google',
+    agree_enter: 'Ao entrar, concorda com os nossos',
+    agree_create: 'Ao criar conta, concorda com os nossos',
+    terms: 'Termos de Utilização', privacy: 'Política de Privacidade',
+    err_email: 'Indique um e-mail válido', err_pass: 'Indique a sua palavra-passe',
+    err_name: 'Indique o seu nome', err_pass_min: 'A palavra-passe deve ter pelo menos 6 caracteres',
+    err_pass_match: 'As palavras-passe não coincidem',
+    toast_welcome: '✅ Bem-vindo de volta!', toast_created: '🎉 Conta criada com sucesso!',
+    toast_google: '✅ Entrou com Google!', toast_reset: '📧 E-mail de recuperação enviado!',
+    toast_email_first: '⚠️ Indique o seu e-mail primeiro',
+  },
+  'fr': {
+    intro_title: 'Construisez des habitudes qui <span>transforment</span> votre vie',
+    intro_sub: 'De petites actions quotidiennes, de grands résultats.',
+    btn_criar: 'Créer un compte gratuit →', btn_ja_tenho: "J'ai déjà un compte",
+    back: '← Retour', welcome_back: 'Bon retour !',
+    enter_account: 'Connectez-vous pour continuer.',
+    create_account: 'Créez votre compte !', start_journey: 'Commencez votre parcours maintenant.',
+    tab_entrar: 'Se connecter', tab_cadastrar: "S'inscrire",
+    email_lbl: 'E-mail', name_lbl: 'Nom complet',
+    pass_lbl: 'Mot de passe', confirm_lbl: 'Confirmer le mot de passe',
+    forgot: 'Mot de passe oublié ?',
+    btn_enter: 'Se connecter', btn_entering: 'Connexion...',
+    btn_create: 'Créer un compte', btn_creating: 'Création du compte...',
+    or_continue: 'ou continuez avec', or_register: 'ou inscrivez-vous avec',
+    google_enter: 'Continuer avec Google', google_register: "S'inscrire avec Google",
+    agree_enter: 'En vous connectant, vous acceptez nos',
+    agree_create: 'En créant un compte, vous acceptez nos',
+    terms: "Conditions d'utilisation", privacy: 'Politique de confidentialité',
+    err_email: 'Entrez un e-mail valide', err_pass: 'Entrez votre mot de passe',
+    err_name: 'Entrez votre nom', err_pass_min: 'Le mot de passe doit comporter au moins 6 caractères',
+    err_pass_match: 'Les mots de passe ne correspondent pas',
+    toast_welcome: '✅ Bon retour !', toast_created: '🎉 Compte créé avec succès !',
+    toast_google: '✅ Connecté avec Google !', toast_reset: '📧 E-mail de récupération envoyé !',
+    toast_email_first: '⚠️ Entrez votre e-mail d\'abord',
+  },
+  'de': {
+    intro_title: 'Baue Gewohnheiten auf, die dein <span>Leben verändern</span>',
+    intro_sub: 'Kleine tägliche Handlungen, große Ergebnisse.',
+    btn_criar: 'Kostenloses Konto erstellen →', btn_ja_tenho: 'Ich habe bereits ein Konto',
+    back: '← Zurück', welcome_back: 'Willkommen zurück!',
+    enter_account: 'Melde dich an, um fortzufahren.',
+    create_account: 'Erstelle dein Konto!', start_journey: 'Beginne jetzt deine Gewohnheitsreise.',
+    tab_entrar: 'Anmelden', tab_cadastrar: 'Registrieren',
+    email_lbl: 'E-Mail', name_lbl: 'Vollständiger Name',
+    pass_lbl: 'Passwort', confirm_lbl: 'Passwort bestätigen',
+    forgot: 'Passwort vergessen?',
+    btn_enter: 'Anmelden', btn_entering: 'Anmeldung...',
+    btn_create: 'Konto erstellen', btn_creating: 'Konto wird erstellt...',
+    or_continue: 'oder weiter mit', or_register: 'oder registrieren mit',
+    google_enter: 'Mit Google anmelden', google_register: 'Mit Google registrieren',
+    agree_enter: 'Durch die Anmeldung stimmst du unseren',
+    agree_create: 'Durch das Erstellen eines Kontos stimmst du unseren',
+    terms: 'Nutzungsbedingungen', privacy: 'Datenschutzrichtlinie',
+    err_email: 'Gib eine gültige E-Mail ein', err_pass: 'Gib dein Passwort ein',
+    err_name: 'Gib deinen Namen ein', err_pass_min: 'Das Passwort muss mindestens 6 Zeichen haben',
+    err_pass_match: 'Die Passwörter stimmen nicht überein',
+    toast_welcome: '✅ Willkommen zurück!', toast_created: '🎉 Konto erfolgreich erstellt!',
+    toast_google: '✅ Mit Google angemeldet!', toast_reset: '📧 Wiederherstellungs-E-Mail gesendet!',
+    toast_email_first: '⚠️ Gib zuerst deine E-Mail ein',
+  },
+  'ru': {
+    intro_title: 'Создавай привычки, которые <span>меняют</span> жизнь',
+    intro_sub: 'Маленькие ежедневные действия — большие результаты.',
+    btn_criar: 'Создать бесплатный аккаунт →', btn_ja_tenho: 'У меня уже есть аккаунт',
+    back: '← Назад', welcome_back: 'С возвращением!',
+    enter_account: 'Войдите, чтобы продолжить.',
+    create_account: 'Создайте аккаунт!', start_journey: 'Начните свой путь сейчас.',
+    tab_entrar: 'Войти', tab_cadastrar: 'Регистрация',
+    email_lbl: 'E-mail', name_lbl: 'Полное имя',
+    pass_lbl: 'Пароль', confirm_lbl: 'Подтвердить пароль',
+    forgot: 'Забыли пароль?',
+    btn_enter: 'Войти', btn_entering: 'Вход...',
+    btn_create: 'Создать аккаунт', btn_creating: 'Создание аккаунта...',
+    or_continue: 'или продолжить через', or_register: 'или зарегистрироваться через',
+    google_enter: 'Войти через Google', google_register: 'Зарегистрироваться через Google',
+    agree_enter: 'Входя, вы соглашаетесь с нашими',
+    agree_create: 'Создавая аккаунт, вы соглашаетесь с нашими',
+    terms: 'Условиями использования', privacy: 'Политикой конфиденциальности',
+    err_email: 'Введите корректный e-mail', err_pass: 'Введите пароль',
+    err_name: 'Введите ваше имя', err_pass_min: 'Пароль должен быть не менее 6 символов',
+    err_pass_match: 'Пароли не совпадают',
+    toast_welcome: '✅ С возвращением!', toast_created: '🎉 Аккаунт создан!',
+    toast_google: '✅ Вход через Google выполнен!', toast_reset: '📧 Письмо для восстановления отправлено!',
+    toast_email_first: '⚠️ Сначала введите e-mail',
+  },
+  'ja': {
+    intro_title: '人生を<span>変える</span>習慣を築こう',
+    intro_sub: '毎日の小さな行動が、大きな変化をもたらす。',
+    btn_criar: '無料アカウントを作成 →', btn_ja_tenho: 'すでにアカウントがある',
+    back: '← 戻る', welcome_back: 'おかえりなさい！',
+    enter_account: 'ログインして続けましょう。',
+    create_account: 'アカウントを作成！', start_journey: '今すぐ習慣の旅を始めよう。',
+    tab_entrar: 'ログイン', tab_cadastrar: '新規登録',
+    email_lbl: 'メールアドレス', name_lbl: '氏名',
+    pass_lbl: 'パスワード', confirm_lbl: 'パスワード確認',
+    forgot: 'パスワードをお忘れですか？',
+    btn_enter: 'ログイン', btn_entering: 'ログイン中...',
+    btn_create: 'アカウント作成', btn_creating: 'アカウント作成中...',
+    or_continue: 'または次で続ける', or_register: 'または次で登録',
+    google_enter: 'Googleでログイン', google_register: 'Googleで登録',
+    agree_enter: 'ログインすることで、以下に同意します：',
+    agree_create: 'アカウント作成で、以下に同意します：',
+    terms: '利用規約', privacy: 'プライバシーポリシー',
+    err_email: '有効なメールアドレスを入力してください', err_pass: 'パスワードを入力してください',
+    err_name: '名前を入力してください', err_pass_min: 'パスワードは6文字以上必要です',
+    err_pass_match: 'パスワードが一致しません',
+    toast_welcome: '✅ おかえりなさい！', toast_created: '🎉 アカウントが作成されました！',
+    toast_google: '✅ Googleでログインしました！', toast_reset: '📧 パスワードリセットメールを送信しました！',
+    toast_email_first: '⚠️ まずメールアドレスを入力してください',
+  }
+};
+
+let _lang = localStorage.getItem('cfg_idioma') || 'pt-BR';
+
+function ti(key) {
+  return (TRADUCOES_INDEX[_lang] || TRADUCOES_INDEX['pt-BR'])[key] || key;
+}
+
+function mudarIdioma(lang) {
+  _lang = lang;
+  localStorage.setItem('cfg_idioma', lang);
+  aplicarIdiomaIndex();
+}
+
+function aplicarIdiomaIndex() {
+  // Botões de idioma na intro
+  document.querySelectorAll('.intro-lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === _lang));
+  // Botões de idioma no login
+  document.querySelectorAll('.login-lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === _lang));
+
+  // Intro
+  const introTitle = document.getElementById('intro-title');
+  if (introTitle) introTitle.innerHTML = ti('intro_title');
+  const introSub = document.getElementById('intro-sub');
+  if (introSub) introSub.textContent = ti('intro_sub');
+  const btnCriar = document.getElementById('btn-criar-conta');
+  if (btnCriar) btnCriar.textContent = ti('btn_criar');
+  const btnJa = document.getElementById('btn-ja-tenho');
+  if (btnJa) btnJa.textContent = ti('btn_ja_tenho');
+
+  // Login header
+  const backLabel = document.getElementById('back-label');
+  if (backLabel) backLabel.textContent = ti('back');
+
+  // Tabs
+  const tabEntrar = document.getElementById('tab-entrar');
+  if (tabEntrar) tabEntrar.textContent = ti('tab_entrar');
+  const tabCadastrar = document.getElementById('tab-cadastrar');
+  if (tabCadastrar) tabCadastrar.textContent = ti('tab_cadastrar');
+
+  // Labels
+  const lblNome = document.getElementById('lbl-nome');
+  if (lblNome) lblNome.textContent = ti('name_lbl');
+  const lblSenha2 = document.getElementById('lbl-senha2');
+  if (lblSenha2) lblSenha2.textContent = ti('pass_lbl');
+  const lblConfirma = document.getElementById('lbl-confirma');
+  if (lblConfirma) lblConfirma.textContent = ti('confirm_lbl');
+  const forgotLink = document.getElementById('forgot-link');
+  if (forgotLink) forgotLink.textContent = ti('forgot');
+
+  // Botões
+  const btnLoginText = document.getElementById('btn-login-text');
+  if (btnLoginText) btnLoginText.textContent = ti('btn_enter');
+  const btnCadastroText = document.getElementById('btn-cadastro-text');
+  if (btnCadastroText) btnCadastroText.textContent = ti('btn_create');
+  const divOr = document.getElementById('div-or');
+  if (divOr) divOr.textContent = ti('or_continue');
+  const divOr2 = document.getElementById('div-or2');
+  if (divOr2) divOr2.textContent = ti('or_register');
+  const btnGText = document.getElementById('btn-google-text');
+  if (btnGText) btnGText.textContent = ti('google_enter');
+  const btnGText2 = document.getElementById('btn-google-text2');
+  if (btnGText2) btnGText2.textContent = ti('google_register');
+
+  // Termos
+  const termsAgree = document.getElementById('terms-agree');
+  if (termsAgree) termsAgree.textContent = ti('agree_enter');
+  const termsAgree2 = document.getElementById('terms-agree2');
+  if (termsAgree2) termsAgree2.textContent = ti('agree_create');
+  const termsLink = document.getElementById('terms-link');
+  if (termsLink) termsLink.textContent = ti('terms');
+  const termsLink2 = document.getElementById('terms-link2');
+  if (termsLink2) termsLink2.textContent = ti('terms');
+  const privLink = document.getElementById('privacy-link');
+  if (privLink) privLink.textContent = ti('privacy');
+  const privLink2 = document.getElementById('privacy-link2');
+  if (privLink2) privLink2.textContent = ti('privacy');
+
+  // Atualizar título da tela de login conforme aba ativa
+  const loginTitle = document.getElementById('login-title');
+  const loginSub = document.getElementById('login-sub');
+  const abaAtiva = document.getElementById('form-login').classList.contains('active') ? 'login' : 'cadastro';
+  if (loginTitle && loginSub) {
+    if (abaAtiva === 'login') {
+      loginTitle.textContent = ti('welcome_back');
+      loginSub.textContent = ti('enter_account');
+    } else {
+      loginTitle.textContent = ti('create_account');
+      loginSub.textContent = ti('start_journey');
+    }
+  }
+}
+
+// Aplicar ao carregar
+document.addEventListener('DOMContentLoaded', () => aplicarIdiomaIndex());
+</script>
+
+<!-- FIREBASE -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import {
@@ -771,146 +817,159 @@
       nome: nome || user.displayName || "Usuário",
       email: user.email,
       criadoEm: serverTimestamp(),
-      streak: 0, pontos: 0, onboardingFeito: false
+      streak: 0, pontos: 0, onboardingFeito: false,
+      inventario: { morango: 1, maca: 1 }
     }, { merge: true });
   }
 
   function traduzirErro(code) {
+    const lang = localStorage.getItem('cfg_idioma') || 'pt-BR';
     const erros = {
-      'auth/user-not-found': 'Usuário não encontrado',
-      'auth/wrong-password': 'Senha incorreta',
-      'auth/email-already-in-use': 'E-mail já cadastrado',
-      'auth/weak-password': 'Senha muito fraca',
-      'auth/invalid-email': 'E-mail inválido',
-      'auth/too-many-requests': 'Muitas tentativas. Tente mais tarde',
-      'auth/popup-closed-by-user': 'Login cancelado',
-      'auth/invalid-credential': 'E-mail ou senha incorretos',
+      'pt-BR': {
+        'auth/user-not-found':'Usuário não encontrado',
+        'auth/wrong-password':'Senha incorreta',
+        'auth/email-already-in-use':'E-mail já cadastrado',
+        'auth/weak-password':'Senha muito fraca',
+        'auth/invalid-email':'E-mail inválido',
+        'auth/too-many-requests':'Muitas tentativas. Tente mais tarde',
+        'auth/invalid-credential':'E-mail ou senha incorretos',
+      },
+      'en': {
+        'auth/user-not-found':'User not found',
+        'auth/wrong-password':'Incorrect password',
+        'auth/email-already-in-use':'Email already registered',
+        'auth/weak-password':'Password too weak',
+        'auth/invalid-email':'Invalid email',
+        'auth/too-many-requests':'Too many attempts. Try later',
+        'auth/invalid-credential':'Incorrect email or password',
+      },
+      'es': {
+        'auth/user-not-found':'Usuario no encontrado',
+        'auth/wrong-password':'Contraseña incorrecta',
+        'auth/email-already-in-use':'Correo ya registrado',
+        'auth/weak-password':'Contraseña muy débil',
+        'auth/invalid-email':'Correo inválido',
+        'auth/too-many-requests':'Demasiados intentos. Inténtalo más tarde',
+        'auth/invalid-credential':'Correo o contraseña incorrectos',
+      }
     };
-    return erros[code] || 'Erro inesperado. Tente novamente';
+    return (erros[lang]||erros['pt-BR'])[code] || 'Erro inesperado';
   }
 
-  window.handleLogin = async function () {
+  window.handleLogin = async function() {
     const email = document.getElementById('login-email').value.trim();
     const senha = document.getElementById('login-senha').value;
-    clearErrors('login-email', 'login-senha');
+    clearErrors('login-email','login-senha');
     let valid = true;
-    if (!email || !email.includes('@')) { markError('login-email', 'err-login-email'); valid = false; }
-    if (!senha) { markError('login-senha', 'err-login-senha'); valid = false; }
+    if (!email || !email.includes('@')) { markError('login-email','err-login-email',ti('err_email')); valid=false; }
+    if (!senha) { markError('login-senha','err-login-senha',ti('err_pass')); valid=false; }
     if (!valid) return;
-    setLoading('btn-login', true, 'Entrando...');
+    setLoading('btn-login',true,ti('btn_entering'));
     try {
       const cred = await signInWithEmailAndPassword(auth, email, senha);
-      const snap = await getDoc(doc(db, "usuarios", cred.user.uid));
-      showToast('✅ Bem-vindo de volta!');
+      const snap = await getDoc(doc(db,"usuarios",cred.user.uid));
+      showToast(ti('toast_welcome'));
       if (snap.exists() && snap.data().onboardingFeito) {
-        setTimeout(() => window.location.href = 'dashboard.html', 1200);
+        setTimeout(() => window.location.href='dashboard.html', 1200);
       } else {
         setTimeout(() => mostrarTela('screen-onboarding'), 1200);
       }
-    } catch (e) {
-      showToast('❌ ' + traduzirErro(e.code), true);
+    } catch(e) {
+      showToast('❌ '+traduzirErro(e.code), true);
     } finally {
-      setLoading('btn-login', false, 'Entrar');
+      setLoading('btn-login',false,ti('btn_enter'));
     }
   };
 
-  window.handleCadastro = async function () {
+  window.handleCadastro = async function() {
     const nome = document.getElementById('cad-nome').value.trim();
     const email = document.getElementById('cad-email').value.trim();
     const senha = document.getElementById('cad-senha').value;
     const confirma = document.getElementById('cad-confirma').value;
-    clearErrors('cad-nome', 'cad-email', 'cad-senha', 'cad-confirma');
+    clearErrors('cad-nome','cad-email','cad-senha','cad-confirma');
     let valid = true;
-    if (!nome) { markError('cad-nome', 'err-cad-nome'); valid = false; }
-    if (!email || !email.includes('@')) { markError('cad-email', 'err-cad-email'); valid = false; }
-    if (senha.length < 6) { markError('cad-senha', 'err-cad-senha'); valid = false; }
-    if (senha !== confirma) { markError('cad-confirma', 'err-cad-confirma'); valid = false; }
+    if (!nome) { markError('cad-nome','err-cad-nome',ti('err_name')); valid=false; }
+    if (!email||!email.includes('@')) { markError('cad-email','err-cad-email',ti('err_email')); valid=false; }
+    if (senha.length<6) { markError('cad-senha','err-cad-senha',ti('err_pass_min')); valid=false; }
+    if (senha!==confirma) { markError('cad-confirma','err-cad-confirma',ti('err_pass_match')); valid=false; }
     if (!valid) return;
-    setLoading('btn-cadastro', true, 'Criando conta...');
+    setLoading('btn-cadastro',true,ti('btn_creating'));
     try {
       const cred = await createUserWithEmailAndPassword(auth, email, senha);
-      await updateProfile(cred.user, { displayName: nome });
+      await updateProfile(cred.user, {displayName:nome});
       await salvarUsuario(cred.user, nome);
-      showToast('🎉 Conta criada com sucesso!');
+      showToast(ti('toast_created'));
       setTimeout(() => mostrarTela('screen-onboarding'), 1200);
-    } catch (e) {
-      showToast('❌ ' + traduzirErro(e.code), true);
+    } catch(e) {
+      showToast('❌ '+traduzirErro(e.code), true);
     } finally {
-      setLoading('btn-cadastro', false, 'Criar conta');
+      setLoading('btn-cadastro',false,ti('btn_create'));
     }
   };
 
-  window.handleGoogle = async function () {
+  window.handleGoogle = async function() {
     try {
       const cred = await signInWithPopup(auth, provider);
       await salvarUsuario(cred.user);
-      const snap = await getDoc(doc(db, "usuarios", cred.user.uid));
-      showToast('✅ Entrou com Google!');
+      const snap = await getDoc(doc(db,"usuarios",cred.user.uid));
+      showToast(ti('toast_google'));
       if (snap.exists() && snap.data().onboardingFeito) {
-        setTimeout(() => window.location.href = 'dashboard.html', 1200);
+        setTimeout(() => window.location.href='dashboard.html', 1200);
       } else {
         setTimeout(() => mostrarTela('screen-onboarding'), 1200);
       }
-    } catch (e) {
-      showToast('❌ ' + traduzirErro(e.code), true);
+    } catch(e) {
+      showToast('❌ '+traduzirErro(e.code), true);
     }
   };
 
-  window.handleForgotPassword = async function () {
+  window.handleForgotPassword = async function() {
     const email = document.getElementById('login-email').value.trim();
-    if (!email || !email.includes('@')) {
-      markError('login-email', 'err-login-email');
-      showToast('⚠️ Digite seu e-mail primeiro', true);
+    if (!email||!email.includes('@')) {
+      markError('login-email','err-login-email',ti('err_email'));
+      showToast(ti('toast_email_first'), true);
       return;
     }
     try {
       await sendPasswordResetEmail(auth, email);
-      showToast('📧 E-mail de recuperação enviado!');
-    } catch (e) {
-      showToast('❌ ' + traduzirErro(e.code), true);
+      showToast(ti('toast_reset'));
+    } catch(e) {
+      showToast('❌ '+traduzirErro(e.code), true);
     }
   };
 
-  window.salvarOnboarding = async function (habitos, metas) {
+  window.salvarOnboarding = async function(habitos, metas) {
     const user = auth.currentUser;
     if (!user) return;
-    await updateDoc(doc(db, "usuarios", user.uid), { habitos, metas, onboardingFeito: true });
+    await updateDoc(doc(db,"usuarios",user.uid), {habitos, metas, onboardingFeito:true});
   };
 </script>
 
-<!-- ==================== JS GERAL ==================== -->
 <script>
+  function ti(key) {
+    const lang = localStorage.getItem('cfg_idioma') || 'pt-BR';
+    return (TRADUCOES_INDEX[lang] || TRADUCOES_INDEX['pt-BR'])[key] || key;
+  }
+
   function irParaLogin(aba) {
     mostrarTela('screen-login');
     switchTab(aba);
-    if (aba === 'cadastro') {
-      document.getElementById('login-title').textContent = 'Crie sua conta!';
-      document.getElementById('login-sub').textContent = 'Comece sua jornada de hábitos agora.';
-    } else {
-      document.getElementById('login-title').textContent = 'Bem-vindo de volta!';
-      document.getElementById('login-sub').textContent = 'Entre na sua conta para continuar.';
-    }
   }
 
   function switchTab(tab) {
-    document.querySelectorAll('.tab').forEach((t, i) => {
-      t.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'cadastro'));
-    });
-    document.getElementById('form-login').classList.toggle('active', tab === 'login');
-    document.getElementById('form-cadastro').classList.toggle('active', tab === 'cadastro');
-    if (tab === 'cadastro') {
-      document.getElementById('login-title').textContent = 'Crie sua conta!';
-      document.getElementById('login-sub').textContent = 'Comece sua jornada de hábitos agora.';
-    } else {
-      document.getElementById('login-title').textContent = 'Bem-vindo de volta!';
-      document.getElementById('login-sub').textContent = 'Entre na sua conta para continuar.';
-    }
+    document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', (i===0&&tab==='login')||(i===1&&tab==='cadastro')));
+    document.getElementById('form-login').classList.toggle('active', tab==='login');
+    document.getElementById('form-cadastro').classList.toggle('active', tab==='cadastro');
+    const title = document.getElementById('login-title');
+    const sub = document.getElementById('login-sub');
+    if (tab==='cadastro') { title.textContent=ti('create_account'); sub.textContent=ti('start_journey'); }
+    else { title.textContent=ti('welcome_back'); sub.textContent=ti('enter_account'); }
   }
 
   function togglePw(id, btn) {
     const input = document.getElementById(id);
-    input.type = input.type === 'password' ? 'text' : 'password';
-    btn.textContent = input.type === 'password' ? '👁' : '🙈';
+    input.type = input.type==='password'?'text':'password';
+    btn.textContent = input.type==='password'?'👁':'🙈';
   }
 
   function setLoading(btnId, loading, texto) {
@@ -920,15 +979,16 @@
     btn.querySelector('.btn-text').textContent = texto;
   }
 
-  function markError(fieldId, msgId) {
+  function markError(fieldId, msgId, msg) {
     document.getElementById(fieldId)?.classList.add('error');
-    document.getElementById(msgId)?.classList.add('show');
+    const el = document.getElementById(msgId);
+    if (el) { el.textContent = msg || el.textContent; el.classList.add('show'); }
   }
 
   function clearErrors(...ids) {
     ids.forEach(id => {
       document.getElementById(id)?.classList.remove('error');
-      document.getElementById('err-' + id)?.classList.remove('show');
+      document.getElementById('err-'+id)?.classList.remove('show');
     });
   }
 
@@ -939,14 +999,11 @@
 
   function abrirModal(id) { document.getElementById(id).classList.add('active'); }
   function fecharModal(id) { document.getElementById(id).classList.remove('active'); }
-
-  document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', function(e) {
-      if (e.target === this) fecharModal(this.id);
-    });
+  document.querySelectorAll('.modal-overlay').forEach(o => {
+    o.addEventListener('click', function(e) { if(e.target===this) fecharModal(this.id); });
   });
 
-  function showToast(msg, erro = false) {
+  function showToast(msg, erro=false) {
     const t = document.getElementById('toast');
     t.textContent = msg;
     t.classList.toggle('erro', erro);
@@ -959,140 +1016,109 @@
   let habitosSelecionados = [];
 
   const habitosConfig = {
-    agua:        { emoji: '💧', nome: 'Hidratação' },
-    sono:        { emoji: '😴', nome: 'Sono' },
-    alimentacao: { emoji: '🥗', nome: 'Alimentação' },
-    movimento:   { emoji: '🚶', nome: 'Movimento' },
-    mental:      { emoji: '🧘', nome: 'Bem-estar' },
+    agua:{emoji:'💧',nome:'Hidratação'}, sono:{emoji:'😴',nome:'Sono'},
+    alimentacao:{emoji:'🥗',nome:'Alimentação'}, movimento:{emoji:'🚶',nome:'Movimento'},
+    mental:{emoji:'🧘',nome:'Bem-estar'},
   };
 
   const metasConfig = {
-    agua: { titulo: 'Hidratação', campos: [{ label: 'Quantos copos de água por dia?', id: 'meta-agua-copos', opcoes: ['4 copos (1L)', '6 copos (1,5L)', '8 copos (2L)', '10 copos (2,5L)', '12 copos (3L)'] }] },
-    sono: { titulo: 'Sono', campos: [
-      { label: 'Que horas quer dormir?', id: 'meta-sono-dormir', opcoes: ['21h00', '22h00', '22h30', '23h00', '23h30', '00h00', '00h30'] },
-      { label: 'Que horas quer acordar?', id: 'meta-sono-acordar', opcoes: ['05h00', '06h00', '06h30', '07h00', '07h30', '08h00', '09h00'] }
-    ]},
-    alimentacao: { titulo: 'Alimentação', campos: [
-      { label: 'Quantas refeições por dia?', id: 'meta-alim-refeicoes', opcoes: ['2 refeições', '3 refeições', '4 refeições', '5 refeições', '6 refeições'] },
-      { label: 'Principal objetivo?', id: 'meta-alim-objetivo', opcoes: ['Comer mais saudável', 'Reduzir açúcar', 'Comer menos', 'Comer mais', 'Mais frutas e vegetais'] }
-    ]},
-    movimento: { titulo: 'Movimento', campos: [
-      { label: 'Quantos minutos por dia?', id: 'meta-mov-minutos', opcoes: ['15 minutos', '20 minutos', '30 minutos', '45 minutos', '1 hora'] },
-      { label: 'Tipo de atividade?', id: 'meta-mov-tipo', opcoes: ['Caminhada', 'Corrida', 'Ciclismo', 'Academia', 'Yoga', 'Qualquer uma'] }
-    ]},
-    mental: { titulo: 'Bem-estar mental', campos: [
-      { label: 'Minutos de pausa por dia?', id: 'meta-mental-minutos', opcoes: ['5 minutos', '10 minutos', '15 minutos', '20 minutos', '30 minutos'] },
-      { label: 'Melhor horário?', id: 'meta-mental-horario', opcoes: ['Ao acordar', 'Manhã', 'Almoço', 'Tarde', 'Noite', 'Antes de dormir'] }
-    ]},
+    agua:{titulo:'Hidratação',campos:[{label:'Quantos copos de água por dia?',id:'meta-agua-copos',opcoes:['4 copos (1L)','6 copos (1,5L)','8 copos (2L)','10 copos (2,5L)','12 copos (3L)']}]},
+    sono:{titulo:'Sono',campos:[{label:'Que horas quer dormir?',id:'meta-sono-dormir',opcoes:['21h00','22h00','22h30','23h00','23h30','00h00','00h30']},{label:'Que horas quer acordar?',id:'meta-sono-acordar',opcoes:['05h00','06h00','06h30','07h00','07h30','08h00','09h00']}]},
+    alimentacao:{titulo:'Alimentação',campos:[{label:'Quantas refeições por dia?',id:'meta-alim-refeicoes',opcoes:['2 refeições','3 refeições','4 refeições','5 refeições','6 refeições']},{label:'Principal objetivo?',id:'meta-alim-objetivo',opcoes:['Comer mais saudável','Reduzir açúcar','Comer menos','Comer mais','Mais frutas e vegetais']}]},
+    movimento:{titulo:'Movimento',campos:[{label:'Quantos minutos por dia?',id:'meta-mov-minutos',opcoes:['15 minutos','20 minutos','30 minutos','45 minutos','1 hora']},{label:'Tipo de atividade?',id:'meta-mov-tipo',opcoes:['Caminhada','Corrida','Ciclismo','Academia','Yoga','Qualquer uma']}]},
+    mental:{titulo:'Bem-estar mental',campos:[{label:'Minutos de pausa por dia?',id:'meta-mental-minutos',opcoes:['5 minutos','10 minutos','15 minutos','20 minutos','30 minutos']},{label:'Melhor horário?',id:'meta-mental-horario',opcoes:['Ao acordar','Manhã','Almoço','Tarde','Noite','Antes de dormir']}]},
   };
 
   function toggleHabito(btn) {
     const id = btn.dataset.id;
     btn.classList.toggle('selected');
-    if (habitosSelecionados.includes(id)) {
-      habitosSelecionados = habitosSelecionados.filter(h => h !== id);
-    } else {
-      habitosSelecionados.push(id);
-    }
+    if (habitosSelecionados.includes(id)) habitosSelecionados = habitosSelecionados.filter(h=>h!==id);
+    else habitosSelecionados.push(id);
   }
 
   function atualizarObHeader() {
-    const labels = ['Passo 1 de 3', 'Passo 2 de 3', 'Passo 3 de 3'];
-    const titles = ['O que você quer melhorar?', 'Defina suas metas', 'Tudo pronto!'];
-    const subs = ['Escolha ao menos um hábito para começar. Você pode mudar depois.', 'Configure seus objetivos para cada hábito selecionado.', 'Sua rotina foi configurada com sucesso!'];
-    document.getElementById('ob-label').textContent = labels[obStep - 1];
-    document.getElementById('ob-title').textContent = titles[obStep - 1];
-    document.getElementById('ob-sub').textContent = subs[obStep - 1];
-    for (let i = 1; i <= 3; i++) {
-      const bar = document.getElementById('bar-' + i);
-      bar.className = 'step-bar';
-      if (i < obStep) bar.classList.add('done');
-      else if (i === obStep) bar.classList.add('active');
+    const labels=['Passo 1 de 3','Passo 2 de 3','Passo 3 de 3'];
+    const titles=['O que você quer melhorar?','Defina suas metas','Tudo pronto!'];
+    const subs=['Escolha ao menos um hábito para começar.','Configure seus objetivos.','Sua rotina foi configurada!'];
+    document.getElementById('ob-label').textContent=labels[obStep-1];
+    document.getElementById('ob-title').textContent=titles[obStep-1];
+    document.getElementById('ob-sub').textContent=subs[obStep-1];
+    for(let i=1;i<=3;i++){
+      const bar=document.getElementById('bar-'+i);
+      bar.className='step-bar';
+      if(i<obStep)bar.classList.add('done');
+      else if(i===obStep)bar.classList.add('active');
     }
-    document.getElementById('btn-back').style.display = obStep > 1 ? 'flex' : 'none';
-    document.querySelector('.btn-next-text').textContent = obStep === 3 ? 'Começar agora!' : 'Continuar';
+    document.getElementById('btn-back').style.display=obStep>1?'flex':'none';
+    document.querySelector('.btn-next-text').textContent=obStep===3?'Começar agora!':'Continuar';
   }
 
   function gerarMetas() {
-    const lista = document.getElementById('metas-list');
-    lista.innerHTML = '';
-    habitosSelecionados.forEach(id => {
-      const config = metasConfig[id];
-      if (!config) return;
-      const card = document.createElement('div');
-      card.className = 'meta-card';
-      let html = `<div class="meta-card-header"><span class="meta-emoji">${habitosConfig[id].emoji}</span><span class="meta-card-title">${config.titulo}</span></div>`;
-      config.campos.forEach(campo => {
-        html += `<label class="meta-field-label">${campo.label}</label><select class="meta-input" id="${campo.id}">`;
-        campo.opcoes.forEach(op => { html += `<option>${op}</option>`; });
-        html += `</select>`;
+    const lista=document.getElementById('metas-list');lista.innerHTML='';
+    habitosSelecionados.forEach(id=>{
+      const config=metasConfig[id];if(!config)return;
+      const card=document.createElement('div');card.className='meta-card';
+      let html=`<div class="meta-card-header"><span class="meta-emoji">${habitosConfig[id].emoji}</span><span class="meta-card-title">${config.titulo}</span></div>`;
+      config.campos.forEach(campo=>{
+        html+=`<label class="meta-field-label">${campo.label}</label><select class="meta-input" id="${campo.id}">`;
+        campo.opcoes.forEach(op=>{html+=`<option>${op}</option>`;});
+        html+=`</select>`;
       });
-      card.innerHTML = html;
-      lista.appendChild(card);
+      card.innerHTML=html;lista.appendChild(card);
     });
   }
 
   function gerarConfirmacao() {
-    const wrap = document.getElementById('confirm-habits');
-    wrap.innerHTML = '';
-    habitosSelecionados.forEach(id => {
-      const badge = document.createElement('div');
-      badge.className = 'confirm-badge';
-      badge.textContent = habitosConfig[id].emoji + ' ' + habitosConfig[id].nome;
+    const wrap=document.getElementById('confirm-habits');wrap.innerHTML='';
+    habitosSelecionados.forEach(id=>{
+      const badge=document.createElement('div');badge.className='confirm-badge';
+      badge.textContent=habitosConfig[id].emoji+' '+habitosConfig[id].nome;
       wrap.appendChild(badge);
     });
   }
 
   function coletarMetas() {
-    const metas = {};
-    habitosSelecionados.forEach(id => {
-      const config = metasConfig[id];
-      if (!config) return;
-      metas[id] = {};
-      config.campos.forEach(campo => {
-        const el = document.getElementById(campo.id);
-        if (el) metas[id][campo.id] = el.value;
-      });
+    const metas={};
+    habitosSelecionados.forEach(id=>{
+      const config=metasConfig[id];if(!config)return;
+      metas[id]={};
+      config.campos.forEach(campo=>{const el=document.getElementById(campo.id);if(el)metas[id][campo.id]=el.value;});
     });
     return metas;
   }
 
   async function avancarStep() {
-    if (obStep === 1) {
-      if (habitosSelecionados.length === 0) { showToast('⚠️ Selecione ao menos um hábito', true); return; }
-      gerarMetas();
-    }
-    if (obStep === 2) { gerarConfirmacao(); }
-    if (obStep === 3) {
-      const btn = document.getElementById('btn-next');
-      btn.disabled = true; btn.classList.add('loading');
-      document.querySelector('.btn-next-text').textContent = 'Salvando...';
-      try {
-        await window.salvarOnboarding(habitosSelecionados, coletarMetas());
+    if(obStep===1){if(habitosSelecionados.length===0){showToast('⚠️ Selecione ao menos um hábito',true);return;}gerarMetas();}
+    if(obStep===2){gerarConfirmacao();}
+    if(obStep===3){
+      const btn=document.getElementById('btn-next');
+      btn.disabled=true;btn.classList.add('loading');
+      document.querySelector('.btn-next-text').textContent='Salvando...';
+      try{
+        await window.salvarOnboarding(habitosSelecionados,coletarMetas());
         showToast('✅ Rotina salva!');
-        setTimeout(() => window.location.href = 'dashboard.html', 1200);
-      } catch (e) {
-        showToast('❌ Erro ao salvar. Tente novamente.', true);
-        btn.disabled = false; btn.classList.remove('loading');
-        document.querySelector('.btn-next-text').textContent = 'Começar agora!';
+        setTimeout(()=>window.location.href='dashboard.html',1200);
+      }catch(e){
+        showToast('❌ Erro ao salvar.',true);
+        btn.disabled=false;btn.classList.remove('loading');
+        document.querySelector('.btn-next-text').textContent='Começar agora!';
       }
       return;
     }
-    document.getElementById('ob-step-' + obStep).classList.remove('active');
+    document.getElementById('ob-step-'+obStep).classList.remove('active');
     obStep++;
-    document.getElementById('ob-step-' + obStep).classList.add('active');
+    document.getElementById('ob-step-'+obStep).classList.add('active');
     atualizarObHeader();
   }
 
   function voltarStep() {
-    document.getElementById('ob-step-' + obStep).classList.remove('active');
+    document.getElementById('ob-step-'+obStep).classList.remove('active');
     obStep--;
-    document.getElementById('ob-step-' + obStep).classList.add('active');
+    document.getElementById('ob-step-'+obStep).classList.add('active');
     atualizarObHeader();
   }
 
   atualizarObHeader();
 </script>
-
 </body>
 </html>
