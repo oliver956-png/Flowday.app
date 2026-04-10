@@ -35,7 +35,6 @@
   .screen { display:none; flex-direction:column; flex:1; min-height:0; }
   .screen.active { display:flex; }
 
-  /* ===== HEADER ESCURO ===== */
   .dash-header { background:var(--header-bg); padding:48px 20px 20px; flex-shrink:0; position:relative; overflow:hidden; transition:background 0.3s; }
   .dash-header::before { content:''; position:absolute; width:220px; height:220px; border-radius:50%; background:rgba(99,153,34,0.1); top:-60px; right:-60px; }
   .dash-header::after { content:''; position:absolute; width:120px; height:120px; border-radius:50%; background:rgba(29,158,117,0.08); bottom:-30px; left:20px; }
@@ -56,7 +55,6 @@
   .progress-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--green-mid),var(--teal-mid)); transition:width 0.5s ease; }
   .dash-progress-msg { font-size:11px; color:rgba(255,255,255,0.35); font-weight:300; }
 
-  /* ===== CONTEÚDO GERAL ===== */
   .dash-content { flex:1; overflow-y:auto; padding:16px 20px 100px; }
   .section-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--text); letter-spacing:-0.3px; }
 
@@ -96,7 +94,7 @@
   .empty-state-title { font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:var(--text); margin-bottom:6px; }
   .empty-state-sub { font-size:13px; color:var(--muted); font-weight:300; line-height:1.6; }
 
-  /* ===== ÁGUA ===== */
+  /* ÁGUA */
   .agua-screen-header { background:var(--header-bg); padding:48px 20px 24px; flex-shrink:0; position:relative; overflow:hidden; }
   .agua-screen-header::before { content:''; position:absolute; width:180px; height:180px; border-radius:50%; background:rgba(59,130,246,0.15); top:-50px; right:-40px; }
   .agua-screen-title { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:white; letter-spacing:-0.8px; margin-bottom:4px; position:relative; z-index:1; }
@@ -116,7 +114,7 @@
   .agua-btn { flex:1; padding:12px; border-radius:14px; border:1.5px solid var(--blue-border); background:var(--card-bg); font-size:13px; font-weight:500; color:#3B82F6; font-family:'DM Sans',sans-serif; cursor:pointer; }
   .agua-btn.primary { background:#3B82F6; color:white; border-color:#3B82F6; }
 
-  /* ===== SONO ===== */
+  /* SONO */
   .sono-screen-header { background:var(--header-bg); padding:48px 20px 24px; flex-shrink:0; position:relative; overflow:hidden; }
   .sono-screen-header::before { content:''; position:absolute; width:180px; height:180px; border-radius:50%; background:rgba(139,92,246,0.15); top:-50px; right:-40px; }
   .sono-screen-title { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:white; letter-spacing:-0.8px; margin-bottom:4px; position:relative; z-index:1; }
@@ -140,7 +138,81 @@
   .sono-dica-title { font-size:13px; font-weight:500; color:var(--text); margin-bottom:6px; }
   .sono-dica-text { font-size:12px; color:var(--muted); font-weight:300; line-height:1.6; }
 
-  /* ===== PROGRESSO ===== */
+  /* PLANTAÇÃO */
+  .plant-header { background:linear-gradient(160deg,#0A2A06,#1a4a0a); padding:48px 20px 24px; flex-shrink:0; position:relative; overflow:hidden; }
+  .plant-header::before { content:''; position:absolute; width:200px; height:200px; border-radius:50%; background:rgba(99,153,34,0.15); top:-60px; right:-60px; }
+  .plant-header::after { content:''; position:absolute; width:100px; height:100px; border-radius:50%; background:rgba(29,158,117,0.1); bottom:-20px; left:20px; }
+  .plant-header-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; position:relative; z-index:1; }
+  .plant-header-title { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:white; letter-spacing:-0.8px; }
+  .plant-header-sub { font-size:13px; color:rgba(255,255,255,0.4); font-weight:300; position:relative; z-index:1; margin-bottom:16px; }
+  .plant-pontos-badge { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15); border-radius:100px; padding:6px 14px; display:flex; align-items:center; gap:6px; position:relative; z-index:1; }
+  .plant-pontos-badge span { font-size:13px; font-weight:600; color:white; }
+  .plant-pontos-badge small { font-size:11px; color:rgba(255,255,255,0.5); }
+  .plant-content { flex:1; overflow-y:auto; padding:16px 20px 100px; }
+
+  .vasos-section { margin-bottom:20px; }
+  .vasos-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--text); margin-bottom:12px; }
+  .vasos-grid { display:flex; gap:10px; }
+
+  .vaso-card { flex:1; background:var(--card-bg); border:1px solid var(--border); border-radius:20px; padding:14px 10px; text-align:center; cursor:pointer; transition:all 0.2s; position:relative; min-height:160px; display:flex; flex-direction:column; align-items:center; justify-content:space-between; }
+  .vaso-card:hover { border-color:var(--green-mid); }
+  .vaso-card.vazio { border-style:dashed; }
+
+  .planta-anim { font-size:36px; line-height:1; margin-bottom:4px; transition:all 0.4s ease; display:block; }
+  @keyframes crescer { 0%{transform:scale(0.8)} 50%{transform:scale(1.15)} 100%{transform:scale(1)} }
+  @keyframes balanco { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} }
+  .planta-anim.animando { animation:crescer 0.6s ease; }
+  .planta-anim.frutificando { animation:balanco 2s ease-in-out infinite; }
+
+  .vaso-nome { font-size:11px; font-weight:500; color:var(--text); display:block; margin-bottom:2px; }
+  .vaso-estagio { font-size:10px; color:var(--muted); font-weight:300; display:block; margin-bottom:6px; }
+  .vaso-progress { width:100%; height:4px; background:var(--border); border-radius:100px; overflow:hidden; margin-bottom:6px; }
+  .vaso-progress-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--green-mid),var(--teal-mid)); transition:width 0.5s ease; }
+
+  .regada-badge { position:absolute; top:8px; right:8px; background:#3B82F6; color:white; font-size:9px; font-weight:600; padding:2px 6px; border-radius:100px; }
+  .pronta-badge { position:absolute; top:8px; right:8px; background:var(--amber); color:white; font-size:9px; font-weight:600; padding:2px 6px; border-radius:100px; animation:pulsar 1.5s ease-in-out infinite; }
+  @keyframes pulsar { 0%,100%{opacity:1} 50%{opacity:0.6} }
+  .limite-badge { position:absolute; top:8px; left:8px; background:var(--muted); color:white; font-size:9px; font-weight:600; padding:2px 6px; border-radius:100px; }
+
+  .btn-regar { width:100%; padding:8px; background:var(--blue-light); border:1px solid var(--blue-border); border-radius:10px; font-size:11px; font-weight:500; color:#3B82F6; font-family:'DM Sans',sans-serif; cursor:pointer; }
+  .btn-regar.regada { background:var(--green-light); border-color:rgba(99,153,34,0.3); color:var(--green); cursor:default; }
+  .btn-colher { width:100%; padding:8px; background:var(--amber); border:none; border-radius:10px; font-size:11px; font-weight:600; color:white; font-family:'DM Sans',sans-serif; cursor:pointer; }
+  .btn-plantar { width:100%; padding:8px; background:var(--green-light); border:1px solid rgba(99,153,34,0.3); border-radius:10px; font-size:11px; font-weight:500; color:var(--green); font-family:'DM Sans',sans-serif; cursor:pointer; }
+  .btn-bloqueada { width:100%; padding:8px; background:var(--surface); border:1px solid var(--border); border-radius:10px; font-size:10px; font-weight:400; color:var(--muted); font-family:'DM Sans',sans-serif; cursor:not-allowed; }
+
+  .loja-section { margin-bottom:20px; }
+  .loja-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--text); margin-bottom:4px; }
+  .loja-sub { font-size:12px; color:var(--muted); font-weight:300; margin-bottom:12px; }
+  .sementes-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .semente-card { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; padding:14px; cursor:pointer; transition:all 0.2s; position:relative; }
+  .semente-card:hover { border-color:var(--green-mid); transform:translateY(-1px); }
+  .semente-card.rara { border-color:var(--amber-border); background:var(--amber-light); }
+  .semente-card.lendaria { border-color:#DDD6FE; background:var(--purple-light); }
+  .semente-card.bloqueada { opacity:0.5; cursor:not-allowed; }
+  .semente-emoji { font-size:28px; display:block; margin-bottom:8px; }
+  .semente-nome { font-family:'Syne',sans-serif; font-size:13px; font-weight:700; color:var(--text); display:block; margin-bottom:2px; }
+  .semente-desc { font-size:11px; color:var(--muted); font-weight:300; display:block; margin-bottom:8px; line-height:1.4; }
+  .semente-preco { display:flex; align-items:center; justify-content:space-between; }
+  .semente-pts { font-size:12px; font-weight:600; color:var(--green); }
+  .semente-raridade { font-size:9px; font-weight:600; padding:2px 7px; border-radius:100px; }
+  .semente-raridade.comum { background:var(--green-light); color:var(--green); }
+  .semente-raridade.rara { background:var(--amber-light); color:#92400E; }
+  .semente-raridade.lendaria { background:var(--purple-light); color:#5B21B6; }
+  .limite-semanal-aviso { font-size:10px; color:var(--error); font-weight:400; margin-top:4px; display:block; }
+
+  .troca-section { margin-bottom:20px; }
+  .troca-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--text); margin-bottom:4px; }
+  .troca-sub { font-size:12px; color:var(--muted); font-weight:300; margin-bottom:12px; }
+  .troca-card { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; padding:14px 16px; margin-bottom:10px; display:flex; align-items:center; gap:12px; }
+  .troca-icon { width:44px; height:44px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
+  .troca-info { flex:1; }
+  .troca-nome { font-size:14px; font-weight:500; color:var(--text); display:block; }
+  .troca-desc { font-size:11px; color:var(--muted); font-weight:300; display:block; margin-top:1px; }
+  .troca-btn { padding:8px 14px; border-radius:100px; font-size:12px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; transition:all 0.2s; border:none; white-space:nowrap; }
+  .troca-btn.disponivel { background:var(--green); color:white; }
+  .troca-btn.sem-pts { background:var(--border); color:var(--muted); cursor:not-allowed; }
+
+  /* PROGRESSO */
   .prog-header { background:var(--header-bg); padding:48px 20px 24px; flex-shrink:0; position:relative; overflow:hidden; }
   .prog-header::before { content:''; position:absolute; width:180px; height:180px; border-radius:50%; background:rgba(99,153,34,0.12); top:-50px; right:-40px; }
   .prog-header-title { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:white; letter-spacing:-0.8px; margin-bottom:4px; position:relative; z-index:1; }
@@ -154,7 +226,7 @@
   .nota-geral-card::after { content:''; position:absolute; width:160px; height:160px; border-radius:50%; background:rgba(255,255,255,0.05); right:-40px; bottom:-40px; }
   .nota-geral-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:12px; position:relative; z-index:1; }
   .nota-geral-label { font-size:11px; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:1px; font-weight:300; display:block; margin-bottom:4px; }
-  .nota-geral-titulo { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:white; letter-spacing:-0.5px; }
+  .nota-geral-titulo { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:white; }
   .nota-numero { font-family:'Syne',sans-serif; font-size:52px; font-weight:800; color:white; letter-spacing:-3px; line-height:1; }
   .nota-dez { font-size:22px; color:rgba(255,255,255,0.4); font-weight:400; }
   .nota-geral-desc { font-size:13px; color:rgba(255,255,255,0.65); font-weight:300; line-height:1.6; position:relative; z-index:1; }
@@ -180,7 +252,6 @@
   .diag-card.amarelo { background:var(--amber-light); border:1px solid var(--amber-border); }
   .diag-card.vermelho { background:var(--red-light); border:1px solid var(--red-border); }
   .diag-card.roxo { background:var(--purple-light); border:1px solid var(--purple-border); }
-  .diag-card.azul { background:var(--blue-light); border:1px solid var(--blue-border); }
   .diag-icon { font-size:22px; flex-shrink:0; margin-top:1px; }
   .diag-info { flex:1; }
   .diag-titulo { font-size:13px; font-weight:500; color:var(--text); display:block; margin-bottom:3px; }
@@ -190,105 +261,8 @@
   .dica-num { width:22px; height:22px; border-radius:50%; background:var(--green-mid); color:white; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
   .dica-texto { font-size:12px; color:var(--muted); font-weight:300; line-height:1.6; }
 
-  /* ===== PLANTAÇÃO ===== */
-  .plant-header {
-    background: linear-gradient(160deg, #0A2A06, #1a4a0a);
-    padding: 48px 20px 24px; flex-shrink:0; position:relative; overflow:hidden;
-  }
-  .plant-header::before { content:''; position:absolute; width:200px; height:200px; border-radius:50%; background:rgba(99,153,34,0.15); top:-60px; right:-60px; }
-  .plant-header::after { content:''; position:absolute; width:100px; height:100px; border-radius:50%; background:rgba(29,158,117,0.1); bottom:-20px; left:20px; }
-  .plant-header-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; position:relative; z-index:1; }
-  .plant-header-title { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:white; letter-spacing:-0.8px; }
-  .plant-header-sub { font-size:13px; color:rgba(255,255,255,0.4); font-weight:300; position:relative; z-index:1; margin-bottom:16px; }
-  .plant-pontos-badge { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15); border-radius:100px; padding:6px 14px; display:flex; align-items:center; gap:6px; position:relative; z-index:1; }
-  .plant-pontos-badge span { font-size:13px; font-weight:600; color:white; }
-  .plant-pontos-badge small { font-size:11px; color:rgba(255,255,255,0.5); }
-
-  .plant-content { flex:1; overflow-y:auto; padding:16px 20px 100px; }
-
-  /* Vasos */
-  .vasos-section { margin-bottom:20px; }
-  .vasos-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--text); margin-bottom:12px; }
-  .vasos-grid { display:flex; gap:10px; }
-
-  .vaso-card {
-    flex:1; background:var(--card-bg); border:1px solid var(--border);
-    border-radius:20px; padding:14px 10px; text-align:center;
-    cursor:pointer; transition:all 0.2s; position:relative;
-    min-height:160px; display:flex; flex-direction:column; align-items:center; justify-content:space-between;
-  }
-  .vaso-card:hover { border-color:var(--green-mid); }
-  .vaso-card.vazio { border-style:dashed; }
-  .vaso-card.selecionado { border-color:var(--green-mid); border-width:2px; background:var(--green-light); }
-
-  /* Animação de crescimento */
-  .planta-anim { font-size:36px; line-height:1; margin-bottom:4px; transition:all 0.4s ease; display:block; }
-  @keyframes crescer { 0%{transform:scale(0.8)} 50%{transform:scale(1.15)} 100%{transform:scale(1)} }
-  @keyframes balanco { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} }
-  .planta-anim.animando { animation:crescer 0.6s ease; }
-  .planta-anim.frutificando { animation:balanco 2s ease-in-out infinite; }
-
-  .vaso-emoji { font-size:24px; margin-bottom:2px; display:block; }
-  .vaso-nome { font-size:11px; font-weight:500; color:var(--text); display:block; margin-bottom:2px; }
-  .vaso-estagio { font-size:10px; color:var(--muted); font-weight:300; display:block; margin-bottom:6px; }
-
-  /* Barra de crescimento */
-  .vaso-progress { width:100%; height:4px; background:var(--border); border-radius:100px; overflow:hidden; margin-bottom:6px; }
-  .vaso-progress-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--green-mid),var(--teal-mid)); transition:width 0.5s ease; }
-
-  /* Badge de regada */
-  .regada-badge { position:absolute; top:8px; right:8px; background:#3B82F6; color:white; font-size:9px; font-weight:600; padding:2px 6px; border-radius:100px; }
-  .pronta-badge { position:absolute; top:8px; right:8px; background:var(--amber); color:white; font-size:9px; font-weight:600; padding:2px 6px; border-radius:100px; animation:pulsar 1.5s ease-in-out infinite; }
-  @keyframes pulsar { 0%,100%{opacity:1} 50%{opacity:0.6} }
-
-  .btn-regar { width:100%; padding:8px; background:var(--blue-light); border:1px solid var(--blue-border); border-radius:10px; font-size:11px; font-weight:500; color:#3B82F6; font-family:'DM Sans',sans-serif; cursor:pointer; transition:all 0.2s; }
-  .btn-regar:hover { background:#DBEAFE; }
-  .btn-regar.regada { background:var(--green-light); border-color:rgba(99,153,34,0.3); color:var(--green); cursor:default; }
-  .btn-colher { width:100%; padding:8px; background:var(--amber); border:none; border-radius:10px; font-size:11px; font-weight:600; color:white; font-family:'DM Sans',sans-serif; cursor:pointer; }
-  .btn-plantar { width:100%; padding:8px; background:var(--green-light); border:1px solid rgba(99,153,34,0.3); border-radius:10px; font-size:11px; font-weight:500; color:var(--green); font-family:'DM Sans',sans-serif; cursor:pointer; }
-
-  /* Loja de sementes */
-  .loja-section { margin-bottom:20px; }
-  .loja-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--text); margin-bottom:4px; }
-  .loja-sub { font-size:12px; color:var(--muted); font-weight:300; margin-bottom:12px; }
-
-  .sementes-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-
-  .semente-card {
-    background:var(--card-bg); border:1px solid var(--border);
-    border-radius:16px; padding:14px; cursor:pointer;
-    transition:all 0.2s; position:relative;
-  }
-  .semente-card:hover { border-color:var(--green-mid); transform:translateY(-1px); }
-  .semente-card.rara { border-color:var(--amber-border); background:var(--amber-light); }
-  .semente-card.lendaria { border-color:#DDD6FE; background:var(--purple-light); }
-
-  .semente-emoji { font-size:28px; display:block; margin-bottom:8px; }
-  .semente-nome { font-family:'Syne',sans-serif; font-size:13px; font-weight:700; color:var(--text); display:block; margin-bottom:2px; }
-  .semente-desc { font-size:11px; color:var(--muted); font-weight:300; display:block; margin-bottom:8px; line-height:1.4; }
-  .semente-preco { display:flex; align-items:center; justify-content:space-between; }
-  .semente-pts { font-size:12px; font-weight:600; color:var(--green); }
-  .semente-raridade { font-size:9px; font-weight:600; padding:2px 7px; border-radius:100px; }
-  .semente-raridade.comum { background:var(--green-light); color:var(--green); }
-  .semente-raridade.rara { background:var(--amber-light); color:#92400E; }
-  .semente-raridade.lendaria { background:var(--purple-light); color:#5B21B6; }
-
-  /* Loja de pontos */
-  .troca-section { margin-bottom:20px; }
-  .troca-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--text); margin-bottom:4px; }
-  .troca-sub { font-size:12px; color:var(--muted); font-weight:300; margin-bottom:12px; }
-  .troca-card { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; padding:14px 16px; margin-bottom:10px; display:flex; align-items:center; gap:12px; }
-  .troca-icon { width:44px; height:44px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
-  .troca-info { flex:1; }
-  .troca-nome { font-size:14px; font-weight:500; color:var(--text); display:block; }
-  .troca-desc { font-size:11px; color:var(--muted); font-weight:300; display:block; margin-top:1px; }
-  .troca-btn { padding:8px 14px; border-radius:100px; font-size:12px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; transition:all 0.2s; border:none; }
-  .troca-btn.disponivel { background:var(--green); color:white; }
-  .troca-btn.bloqueado { background:var(--border); color:var(--muted); cursor:not-allowed; }
-  .troca-btn.em-breve { background:var(--amber-light); color:#92400E; border:1px solid var(--amber-border); cursor:not-allowed; }
-
-  /* ===== CONFIGURAÇÕES ===== */
-  .config-header { background:var(--white); padding:48px 20px 16px; flex-shrink:0; border-bottom:1px solid var(--border); }
+  /* CONFIG */
+  .config-header { background:var(--white); padding:48px 20px 16px; flex-shrink:0; border-bottom:1px solid var(--border); transition:background 0.3s; }
   .config-page-title { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--text); letter-spacing:-0.5px; }
   .config-content { flex:1; overflow-y:auto; padding:16px 20px 100px; }
   .config-profile { display:flex; align-items:center; gap:14px; background:var(--surface); border-radius:18px; padding:16px; margin-bottom:20px; }
@@ -297,7 +271,7 @@
   .config-profile-info small { font-size:12px; color:var(--muted); font-weight:300; }
   .config-section { margin-bottom:20px; }
   .config-section-title { font-size:11px; font-weight:500; color:var(--muted); letter-spacing:1px; text-transform:uppercase; margin-bottom:8px; padding-left:4px; }
-  .config-group { background:var(--card-bg); border:1px solid var(--border); border-radius:18px; overflow:hidden; }
+  .config-group { background:var(--card-bg); border:1px solid var(--border); border-radius:18px; overflow:hidden; transition:background 0.3s; }
   .config-item { display:flex; align-items:center; gap:12px; padding:14px 16px; border-bottom:1px solid var(--border); cursor:pointer; transition:background 0.15s; }
   .config-item:last-child { border-bottom:none; }
   .config-item:hover { background:var(--surface); }
@@ -320,15 +294,14 @@
   /* MODAIS */
   .modal-overlay { display:none; position:fixed; inset:0; z-index:900; background:rgba(0,0,0,0.5); align-items:flex-end; justify-content:center; }
   .modal-overlay.active { display:flex; }
-  .modal-sheet { background:var(--white); border-radius:24px 24px 0 0; width:100%; max-width:430px; display:flex; flex-direction:column; animation:slideUp 0.3s ease; }
+  .modal-sheet { background:var(--white); border-radius:24px 24px 0 0; width:100%; max-width:430px; display:flex; flex-direction:column; animation:slideUp 0.3s ease; transition:background 0.3s; }
   @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
   .modal-handle { width:40px; height:4px; background:var(--border); border-radius:100px; margin:12px auto 0; flex-shrink:0; }
   .modal-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px 12px; border-bottom:1px solid var(--border); }
   .modal-title { font-family:'Syne',sans-serif; font-size:17px; font-weight:700; color:var(--text); }
   .modal-close { background:var(--surface); border:none; width:30px; height:30px; border-radius:100px; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; color:var(--muted); }
-  .modal-body { padding:16px 20px 32px; }
+  .modal-body { padding:16px 20px 32px; max-height:60vh; overflow-y:auto; }
 
-  /* Modal plantar semente */
   .modal-sementes-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
   .modal-semente-opt { background:var(--surface); border:1.5px solid var(--border); border-radius:14px; padding:14px; cursor:pointer; text-align:center; transition:all 0.2s; }
   .modal-semente-opt:hover { border-color:var(--green-mid); }
@@ -340,7 +313,6 @@
   .modal-semente-pts { font-size:10px; color:var(--muted); font-weight:300; display:block; margin-top:2px; }
   .btn-confirmar-plantar { width:100%; padding:14px; background:var(--green); color:white; border:none; border-radius:100px; font-size:14px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; margin-top:16px; }
 
-  /* Modal colher */
   .colher-content { text-align:center; padding:8px 0; }
   .colher-emoji { font-size:60px; display:block; margin-bottom:12px; }
   .colher-titulo { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--text); margin-bottom:6px; }
@@ -348,7 +320,7 @@
   .colher-pontos { font-family:'Syne',sans-serif; font-size:32px; font-weight:800; color:var(--green); margin-bottom:16px; }
   .btn-colher-confirm { width:100%; padding:14px; background:var(--amber); color:white; border:none; border-radius:100px; font-size:14px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer; }
 
-  /* Idioma */
+  /* MODAL IDIOMA */
   .idioma-opcao { display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--border); cursor:pointer; }
   .idioma-opcao:last-child { border-bottom:none; }
   .idioma-opcao-info { display:flex; align-items:center; gap:12px; }
@@ -359,7 +331,7 @@
   .btn-enviar-senha { width:100%; padding:13px; background:var(--green); color:white; border:none; border-radius:100px; font-size:14px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; margin-top:4px; }
 
   /* BOTTOM NAV */
-  .bottom-nav { position:absolute; bottom:0; left:0; right:0; background:var(--nav-bg); border-top:1px solid var(--border); display:flex; align-items:center; padding:8px 2px 18px; z-index:10; }
+  .bottom-nav { position:absolute; bottom:0; left:0; right:0; background:var(--nav-bg); border-top:1px solid var(--border); display:flex; align-items:center; padding:8px 2px 18px; z-index:10; transition:background 0.3s; }
   .nav-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:2px; cursor:pointer; border:none; background:none; font-family:'DM Sans',sans-serif; padding:4px 0; }
   .nav-item-icon { font-size:18px; line-height:1; }
   .nav-item-label { font-size:8px; color:var(--muted); font-weight:400; }
@@ -384,7 +356,7 @@
     <div class="modal-handle"></div>
     <div class="modal-header"><span class="modal-title">🌱 Escolher semente</span><button class="modal-close" onclick="fecharModal('modal-plantar')">✕</button></div>
     <div class="modal-body">
-      <p style="font-size:12px;color:var(--muted);font-weight:300;margin-bottom:14px">Escolha uma semente do seu inventário para plantar neste vaso.</p>
+      <p style="font-size:12px;color:var(--muted);font-weight:300;margin-bottom:14px">Escolha uma semente do seu inventário para plantar.</p>
       <div class="modal-sementes-grid" id="modal-sementes-lista"></div>
       <button class="btn-confirmar-plantar" onclick="confirmarPlantio()">🌱 Plantar semente</button>
     </div>
@@ -398,8 +370,8 @@
     <div class="modal-body">
       <div class="colher-content">
         <span class="colher-emoji" id="colher-emoji">🍎</span>
-        <div class="colher-titulo" id="colher-titulo">Maçã colhida!</div>
-        <div class="colher-desc" id="colher-desc">Sua planta cresceu com sucesso! Troque o fruto por pontos.</div>
+        <div class="colher-titulo" id="colher-titulo">Pronto para colher!</div>
+        <div class="colher-desc" id="colher-desc">Sua planta cresceu! Troque por pontos.</div>
         <div class="colher-pontos" id="colher-pontos">+50 pts</div>
         <button class="btn-colher-confirm" onclick="confirmarColheita()">🌾 Colher e ganhar pontos!</button>
       </div>
@@ -410,11 +382,16 @@
 <div class="modal-overlay" id="modal-idioma">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
-    <div class="modal-header"><span class="modal-title">Idioma</span><button class="modal-close" onclick="fecharModal('modal-idioma')">✕</button></div>
+    <div class="modal-header"><span class="modal-title" data-i18n="lang_title">Idioma</span><button class="modal-close" onclick="fecharModal('modal-idioma')">✕</button></div>
     <div class="modal-body">
-      <div class="idioma-opcao selected" data-lang="pt-BR" onclick="selecionarIdioma(this)"><div class="idioma-opcao-info"><span class="idioma-flag">🇧🇷</span><span class="idioma-nome">Português (Brasil)</span></div><span class="idioma-check">✓</span></div>
+      <div class="idioma-opcao" data-lang="pt-BR" onclick="selecionarIdioma(this)"><div class="idioma-opcao-info"><span class="idioma-flag">🇧🇷</span><span class="idioma-nome">Português (Brasil)</span></div><span class="idioma-check">✓</span></div>
+      <div class="idioma-opcao" data-lang="pt-PT" onclick="selecionarIdioma(this)"><div class="idioma-opcao-info"><span class="idioma-flag">🇵🇹</span><span class="idioma-nome">Português (Portugal)</span></div><span class="idioma-check">✓</span></div>
       <div class="idioma-opcao" data-lang="en" onclick="selecionarIdioma(this)"><div class="idioma-opcao-info"><span class="idioma-flag">🇺🇸</span><span class="idioma-nome">English</span></div><span class="idioma-check">✓</span></div>
       <div class="idioma-opcao" data-lang="es" onclick="selecionarIdioma(this)"><div class="idioma-opcao-info"><span class="idioma-flag">🇪🇸</span><span class="idioma-nome">Español</span></div><span class="idioma-check">✓</span></div>
+      <div class="idioma-opcao" data-lang="fr" onclick="selecionarIdioma(this)"><div class="idioma-opcao-info"><span class="idioma-flag">🇫🇷</span><span class="idioma-nome">Français</span></div><span class="idioma-check">✓</span></div>
+      <div class="idioma-opcao" data-lang="de" onclick="selecionarIdioma(this)"><div class="idioma-opcao-info"><span class="idioma-flag">🇩🇪</span><span class="idioma-nome">Deutsch</span></div><span class="idioma-check">✓</span></div>
+      <div class="idioma-opcao" data-lang="ru" onclick="selecionarIdioma(this)"><div class="idioma-opcao-info"><span class="idioma-flag">🇷🇺</span><span class="idioma-nome">Русский</span></div><span class="idioma-check">✓</span></div>
+      <div class="idioma-opcao" data-lang="ja" onclick="selecionarIdioma(this)"><div class="idioma-opcao-info"><span class="idioma-flag">🇯🇵</span><span class="idioma-nome">日本語</span></div><span class="idioma-check">✓</span></div>
     </div>
   </div>
 </div>
@@ -422,30 +399,18 @@
 <div class="modal-overlay" id="modal-senha">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
-    <div class="modal-header"><span class="modal-title">Alterar senha</span><button class="modal-close" onclick="fecharModal('modal-senha')">✕</button></div>
+    <div class="modal-header"><span class="modal-title" data-i18n="change_pass">Alterar senha</span><button class="modal-close" onclick="fecharModal('modal-senha')">✕</button></div>
     <div class="modal-body">
-      <p style="font-size:13px;color:var(--muted);font-weight:300;margin-bottom:16px;line-height:1.6">Enviaremos um e-mail para redefinir sua senha.</p>
+      <p style="font-size:13px;color:var(--muted);font-weight:300;margin-bottom:16px;line-height:1.6" data-i18n="pass_desc">Enviaremos um e-mail para redefinir sua senha.</p>
       <p style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:16px" id="senha-email-display"></p>
-      <button class="btn-enviar-senha" onclick="enviarRedefinicao()">Enviar e-mail de redefinição</button>
+      <button class="btn-enviar-senha" onclick="enviarRedefinicao()" data-i18n="send_reset">Enviar e-mail de redefinição</button>
     </div>
   </div>
 </div>
 
 <div class="phone-frame">
 
-  <!-- NAV HELPER -->
-  <template id="nav-tpl">
-    <div class="bottom-nav">
-      <button class="nav-item" data-tela="inicio" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label">Início</span></button>
-      <button class="nav-item" data-tela="agua" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label">Água</span></button>
-      <button class="nav-item" data-tela="sono" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label">Sono</span></button>
-      <button class="nav-item" data-tela="plantacao" onclick="navegar('plantacao')"><span class="nav-item-icon">🌱</span><span class="nav-item-label">Plantação</span></button>
-      <button class="nav-item" data-tela="progresso" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label">Progresso</span></button>
-      <button class="nav-item" data-tela="config" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label">Config.</span></button>
-    </div>
-  </template>
-
-  <!-- ===== INÍCIO ===== -->
+  <!-- INÍCIO -->
   <div class="screen active" id="screen-inicio">
     <div class="dash-header">
       <div class="dash-header-top">
@@ -453,12 +418,12 @@
         <div class="dash-avatar" id="dash-avatar" onclick="navegar('config')">?</div>
       </div>
       <div class="dash-stats">
-        <div class="dash-stat"><span class="dash-stat-emoji">🔥</span><span class="dash-stat-value" id="stat-streak">0</span><span class="dash-stat-label">dias seguidos</span></div>
-        <div class="dash-stat"><span class="dash-stat-emoji">⭐</span><span class="dash-stat-value" id="stat-pontos">0</span><span class="dash-stat-label">pontos</span></div>
-        <div class="dash-stat"><span class="dash-stat-emoji">✅</span><span class="dash-stat-value" id="stat-feitos">0</span><span class="dash-stat-label">concluídos</span></div>
+        <div class="dash-stat"><span class="dash-stat-emoji">🔥</span><span class="dash-stat-value" id="stat-streak">0</span><span class="dash-stat-label" data-i18n="days_row">dias seguidos</span></div>
+        <div class="dash-stat"><span class="dash-stat-emoji">⭐</span><span class="dash-stat-value" id="stat-pontos">0</span><span class="dash-stat-label" data-i18n="points">pontos</span></div>
+        <div class="dash-stat"><span class="dash-stat-emoji">✅</span><span class="dash-stat-value" id="stat-feitos">0</span><span class="dash-stat-label" data-i18n="done">concluídos</span></div>
       </div>
       <div class="dash-progress">
-        <div class="dash-progress-top"><span>Progresso de hoje</span><strong id="prog-texto">0 de 0</strong></div>
+        <div class="dash-progress-top"><span data-i18n="progress_today">Progresso de hoje</span><strong id="prog-texto">0 de 0</strong></div>
         <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
         <div class="dash-progress-msg" id="prog-msg">Carregando...</div>
       </div>
@@ -466,30 +431,30 @@
     <div class="dash-content">
       <div class="motivacional" style="margin-bottom:20px">
         <div class="motivacional-icon" id="motiv-icon">🌱</div>
-        <div class="motivacional-text"><small>Frase do dia</small><span id="motiv-texto">"Cada dia é uma nova chance de ser melhor."</span></div>
+        <div class="motivacional-text"><small data-i18n="phrase_day">Frase do dia</small><span id="motiv-texto">"Cada dia é uma nova chance."</span></div>
       </div>
       <div id="relatorio-mini-wrap" style="display:none"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-        <span class="section-title">Seus hábitos</span>
-        <button style="font-size:12px;color:var(--green);font-weight:500;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif" onclick="window.location.href='index.html'">Editar</button>
+        <span class="section-title" data-i18n="your_habits">Seus hábitos</span>
+        <button style="font-size:12px;color:var(--green);font-weight:500;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif" onclick="window.location.href='index.html'" data-i18n="edit">Editar</button>
       </div>
-      <div id="habitos-lista"><div class="empty-state"><div class="empty-state-icon">⏳</div><div class="empty-state-title">Carregando...</div></div></div>
+      <div id="habitos-lista"></div>
     </div>
-    <div class="bottom-nav" id="nav-inicio">
-      <button class="nav-item active" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label">Início</span></button>
-      <button class="nav-item" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label">Água</span></button>
-      <button class="nav-item" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label">Sono</span></button>
-      <button class="nav-item" onclick="navegar('plantacao')"><span class="nav-item-icon">🌱</span><span class="nav-item-label">Plantação</span></button>
-      <button class="nav-item" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label">Progresso</span></button>
-      <button class="nav-item" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label">Config.</span></button>
+    <div class="bottom-nav">
+      <button class="nav-item active" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label" data-i18n="nav_home">Início</span></button>
+      <button class="nav-item" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label" data-i18n="nav_water">Água</span></button>
+      <button class="nav-item" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label" data-i18n="nav_sleep">Sono</span></button>
+      <button class="nav-item" onclick="navegar('plantacao')"><span class="nav-item-icon">🌱</span><span class="nav-item-label" data-i18n="nav_farm">Plantação</span></button>
+      <button class="nav-item" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label" data-i18n="nav_progress">Progresso</span></button>
+      <button class="nav-item" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label" data-i18n="nav_config">Config.</span></button>
     </div>
   </div>
 
-  <!-- ===== ÁGUA ===== -->
+  <!-- ÁGUA -->
   <div class="screen" id="screen-agua">
     <div class="agua-screen-header">
-      <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:8px;position:relative;z-index:1">💧 Hidratação</div>
-      <div class="agua-screen-title">Beba mais água</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:8px;position:relative;z-index:1">💧 <span data-i18n="hydration">Hidratação</span></div>
+      <div class="agua-screen-title" data-i18n="drink_more">Beba mais água</div>
       <div class="agua-screen-sub" id="agua-screen-sub">Meta: 8 copos por dia</div>
     </div>
     <div class="agua-screen-content">
@@ -499,247 +464,457 @@
         <div class="agua-progress-bar"><div class="agua-progress-fill" id="agua-prog-fill" style="width:0%"></div></div>
         <div class="copos-grid" id="copos-grid"></div>
         <div class="agua-actions">
-          <button class="agua-btn" onclick="resetarAgua()">🔄 Resetar</button>
-          <button class="agua-btn primary" onclick="adicionarCopo()">+ 1 copo</button>
+          <button class="agua-btn" onclick="resetarAgua()" data-i18n="reset">🔄 Resetar</button>
+          <button class="agua-btn primary" onclick="adicionarCopo()" data-i18n="add_cup">+ 1 copo</button>
         </div>
       </div>
       <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:14px 16px">
-        <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:6px">💡 Dica de hidratação</div>
+        <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:6px">💡 <span data-i18n="water_tip">Dica de hidratação</span></div>
         <div style="font-size:12px;color:var(--muted);font-weight:300;line-height:1.6" id="agua-dica">Beber água ao acordar ativa o metabolismo.</div>
       </div>
     </div>
     <div class="bottom-nav">
-      <button class="nav-item" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label">Início</span></button>
-      <button class="nav-item active" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label">Água</span></button>
-      <button class="nav-item" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label">Sono</span></button>
-      <button class="nav-item" onclick="navegar('plantacao')"><span class="nav-item-icon">🌱</span><span class="nav-item-label">Plantação</span></button>
-      <button class="nav-item" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label">Progresso</span></button>
-      <button class="nav-item" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label">Config.</span></button>
+      <button class="nav-item" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label" data-i18n="nav_home">Início</span></button>
+      <button class="nav-item active" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label" data-i18n="nav_water">Água</span></button>
+      <button class="nav-item" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label" data-i18n="nav_sleep">Sono</span></button>
+      <button class="nav-item" onclick="navegar('plantacao')"><span class="nav-item-icon">🌱</span><span class="nav-item-label" data-i18n="nav_farm">Plantação</span></button>
+      <button class="nav-item" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label" data-i18n="nav_progress">Progresso</span></button>
+      <button class="nav-item" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label" data-i18n="nav_config">Config.</span></button>
     </div>
   </div>
 
-  <!-- ===== SONO ===== -->
+  <!-- SONO -->
   <div class="screen" id="screen-sono">
     <div class="sono-screen-header">
-      <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:8px">😴 Sono</div>
-      <div class="sono-screen-title">Qualidade do sono</div>
-      <div class="sono-screen-sub">Acompanhe seu descanso diário</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:8px">😴 <span data-i18n="sleep">Sono</span></div>
+      <div class="sono-screen-title" data-i18n="sleep_quality">Qualidade do sono</div>
+      <div class="sono-screen-sub" data-i18n="sleep_sub">Acompanhe seu descanso diário</div>
     </div>
     <div class="sono-screen-content">
       <div class="sono-big-card">
         <div class="sono-horas-big" id="sono-horas-big">—</div>
-        <span class="sono-horas-sub">horas de sono planejadas</span>
+        <span class="sono-horas-sub" data-i18n="planned_sleep">horas de sono planejadas</span>
         <div class="sono-horarios-row">
-          <div class="sono-horario-item"><span class="sono-horario-label">🌙 Dormir</span><span class="sono-horario-valor" id="sono-dormir">—</span></div>
-          <div class="sono-horario-item"><span class="sono-horario-label">☀️ Acordar</span><span class="sono-horario-valor" id="sono-acordar">—</span></div>
+          <div class="sono-horario-item"><span class="sono-horario-label">🌙 <span data-i18n="sleep_time">Dormir</span></span><span class="sono-horario-valor" id="sono-dormir">—</span></div>
+          <div class="sono-horario-item"><span class="sono-horario-label">☀️ <span data-i18n="wake_time">Acordar</span></span><span class="sono-horario-valor" id="sono-acordar">—</span></div>
         </div>
-        <span class="sono-qualidade-label">Como foi seu sono hoje?</span>
+        <span class="sono-qualidade-label" data-i18n="sleep_today">Como foi seu sono hoje?</span>
         <div class="sono-opcoes">
-          <button class="sono-opcao" data-val="pessimo" onclick="marcarSono(this)"><span class="sono-opcao-emoji">😫</span>Péssimo</button>
-          <button class="sono-opcao" data-val="ruim" onclick="marcarSono(this)"><span class="sono-opcao-emoji">😕</span>Ruim</button>
+          <button class="sono-opcao" data-val="pessimo" onclick="marcarSono(this)"><span class="sono-opcao-emoji">😫</span><span data-i18n="terrible">Péssimo</span></button>
+          <button class="sono-opcao" data-val="ruim" onclick="marcarSono(this)"><span class="sono-opcao-emoji">😕</span><span data-i18n="bad">Ruim</span></button>
           <button class="sono-opcao" data-val="ok" onclick="marcarSono(this)"><span class="sono-opcao-emoji">😐</span>Ok</button>
-          <button class="sono-opcao" data-val="bom" onclick="marcarSono(this)"><span class="sono-opcao-emoji">😊</span>Bom</button>
-          <button class="sono-opcao" data-val="otimo" onclick="marcarSono(this)"><span class="sono-opcao-emoji">🤩</span>Ótimo</button>
+          <button class="sono-opcao" data-val="bom" onclick="marcarSono(this)"><span class="sono-opcao-emoji">😊</span><span data-i18n="good">Bom</span></button>
+          <button class="sono-opcao" data-val="otimo" onclick="marcarSono(this)"><span class="sono-opcao-emoji">🤩</span><span data-i18n="great">Ótimo</span></button>
         </div>
       </div>
-      <div class="sono-dica"><div class="sono-dica-title">💡 Dica para dormir melhor</div><div class="sono-dica-text" id="sono-dica">Evite telas 30 min antes de dormir.</div></div>
+      <div class="sono-dica"><div class="sono-dica-title">💡 <span data-i18n="sleep_tip">Dica para dormir melhor</span></div><div class="sono-dica-text" id="sono-dica">Evite telas 30 min antes de dormir.</div></div>
     </div>
     <div class="bottom-nav">
-      <button class="nav-item" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label">Início</span></button>
-      <button class="nav-item" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label">Água</span></button>
-      <button class="nav-item active" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label">Sono</span></button>
-      <button class="nav-item" onclick="navegar('plantacao')"><span class="nav-item-icon">🌱</span><span class="nav-item-label">Plantação</span></button>
-      <button class="nav-item" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label">Progresso</span></button>
-      <button class="nav-item" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label">Config.</span></button>
+      <button class="nav-item" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label" data-i18n="nav_home">Início</span></button>
+      <button class="nav-item" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label" data-i18n="nav_water">Água</span></button>
+      <button class="nav-item active" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label" data-i18n="nav_sleep">Sono</span></button>
+      <button class="nav-item" onclick="navegar('plantacao')"><span class="nav-item-icon">🌱</span><span class="nav-item-label" data-i18n="nav_farm">Plantação</span></button>
+      <button class="nav-item" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label" data-i18n="nav_progress">Progresso</span></button>
+      <button class="nav-item" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label" data-i18n="nav_config">Config.</span></button>
     </div>
   </div>
 
-  <!-- ===== PLANTAÇÃO ===== -->
+  <!-- PLANTAÇÃO -->
   <div class="screen" id="screen-plantacao">
     <div class="plant-header">
       <div class="plant-header-top">
         <div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:4px;position:relative;z-index:1">🌱 Plantação</div>
-          <div class="plant-header-title">Minha horta</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:4px;position:relative;z-index:1">🌱 <span data-i18n="nav_farm">Plantação</span></div>
+          <div class="plant-header-title" data-i18n="my_farm">Minha horta</div>
         </div>
-        <div class="plant-pontos-badge">
-          <span id="plant-pontos">0</span>
-          <small>pts</small>
-        </div>
+        <div class="plant-pontos-badge"><span id="plant-pontos">0</span><small data-i18n="pts">pts</small></div>
       </div>
-      <div class="plant-header-sub">Plante, regue e colha frutos com seus hábitos!</div>
+      <div class="plant-header-sub" data-i18n="farm_sub">Plante, regue e colha frutos com seus hábitos!</div>
     </div>
-
     <div class="plant-content">
-
-      <!-- VASOS -->
       <div class="vasos-section">
-        <div class="vasos-title">🪴 Meus vasos</div>
-        <div class="vasos-grid" id="vasos-grid">
-          <!-- Gerado pelo JS -->
-        </div>
+        <div class="vasos-title" data-i18n="my_pots">🪴 Meus vasos</div>
+        <div class="vasos-grid" id="vasos-grid"></div>
       </div>
-
-      <!-- LOJA DE SEMENTES -->
       <div class="loja-section">
-        <div class="loja-title">🛒 Loja de sementes</div>
-        <div class="loja-sub">Compre sementes com seus pontos e plante nos vasos</div>
-        <div class="sementes-grid">
-          <div class="semente-card" onclick="comprarSemente('morango')">
-            <span class="semente-emoji">🍓</span>
-            <span class="semente-nome">Morango</span>
-            <span class="semente-desc">Cresce em 5 dias. Fácil de cultivar!</span>
-            <div class="semente-preco">
-              <span class="semente-pts">Grátis</span>
-              <span class="semente-raridade comum">Comum</span>
-            </div>
-          </div>
-          <div class="semente-card" onclick="comprarSemente('maca')">
-            <span class="semente-emoji">🍎</span>
-            <span class="semente-nome">Maçã</span>
-            <span class="semente-desc">Cresce em 5 dias. Clássica e nutritiva!</span>
-            <div class="semente-preco">
-              <span class="semente-pts">Grátis</span>
-              <span class="semente-raridade comum">Comum</span>
-            </div>
-          </div>
-          <div class="semente-card rara" onclick="comprarSemente('girassol')">
-            <span class="semente-emoji">🌻</span>
-            <span class="semente-nome">Girassol</span>
-            <span class="semente-desc">Raro e alegre. Requer mais dedicação!</span>
-            <div class="semente-preco">
-              <span class="semente-pts">100 pts</span>
-              <span class="semente-raridade rara">Raro</span>
-            </div>
-          </div>
-          <div class="semente-card lendaria" onclick="comprarSemente('uva')">
-            <span class="semente-emoji">🍇</span>
-            <span class="semente-nome">Uva</span>
-            <span class="semente-desc">Lendária! Só os mais dedicados colhem.</span>
-            <div class="semente-preco">
-              <span class="semente-pts">250 pts</span>
-              <span class="semente-raridade lendaria">Lendária</span>
-            </div>
-          </div>
-        </div>
+        <div class="loja-title" data-i18n="seed_shop">🛒 Loja de sementes</div>
+        <div class="loja-sub" data-i18n="seed_shop_sub">Compre sementes com seus pontos</div>
+        <div class="sementes-grid" id="sementes-loja"></div>
       </div>
-
-      <!-- LOJA DE PONTOS -->
       <div class="troca-section">
-        <div class="troca-title">🎁 Trocar pontos</div>
-        <div class="troca-sub">Use seus pontos por recompensas exclusivas</div>
-        <div class="troca-card">
-          <div class="troca-icon" style="background:#FEF3C7">🔥</div>
-          <div class="troca-info">
-            <span class="troca-nome">FlowDay VIP</span>
-            <span class="troca-desc">1 mês de acesso premium · 500 pts</span>
-          </div>
-          <button class="troca-btn em-breve">Em breve</button>
-        </div>
-        <div class="troca-card">
-          <div class="troca-icon" style="background:#EAF3DE">🚫</div>
-          <div class="troca-info">
-            <span class="troca-nome">Sem anúncios</span>
-            <span class="troca-desc">7 dias sem anúncios · 200 pts</span>
-          </div>
-          <button class="troca-btn em-breve">Em breve</button>
-        </div>
-        <div class="troca-card">
-          <div class="troca-icon" style="background:#E1F5EE">🌱</div>
-          <div class="troca-info">
-            <span class="troca-nome">Semente especial</span>
-            <span class="troca-desc">Receba uma semente rara · 150 pts</span>
-          </div>
-          <button class="troca-btn em-breve">Em breve</button>
-        </div>
+        <div class="troca-title" data-i18n="exchange_pts">🎁 Trocar pontos</div>
+        <div class="troca-sub" data-i18n="exchange_sub">Use seus pontos por recompensas</div>
+        <div id="trocas-lista"></div>
       </div>
-
     </div>
-
     <div class="bottom-nav">
-      <button class="nav-item" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label">Início</span></button>
-      <button class="nav-item" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label">Água</span></button>
-      <button class="nav-item" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label">Sono</span></button>
-      <button class="nav-item active" onclick="navegar('plantacao')"><span class="nav-item-icon">🌱</span><span class="nav-item-label">Plantação</span></button>
-      <button class="nav-item" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label">Progresso</span></button>
-      <button class="nav-item" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label">Config.</span></button>
+      <button class="nav-item" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label" data-i18n="nav_home">Início</span></button>
+      <button class="nav-item" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label" data-i18n="nav_water">Água</span></button>
+      <button class="nav-item" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label" data-i18n="nav_sleep">Sono</span></button>
+      <button class="nav-item active" onclick="navegar('plantacao')"><span class="nav-item-icon">🌱</span><span class="nav-item-label" data-i18n="nav_farm">Plantação</span></button>
+      <button class="nav-item" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label" data-i18n="nav_progress">Progresso</span></button>
+      <button class="nav-item" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label" data-i18n="nav_config">Config.</span></button>
     </div>
   </div>
 
-  <!-- ===== PROGRESSO ===== -->
+  <!-- PROGRESSO -->
   <div class="screen" id="screen-progresso">
     <div class="prog-header">
-      <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:8px;position:relative;z-index:1">📊 Análise</div>
-      <div class="prog-header-title">Relatório semanal</div>
-      <div class="prog-header-sub" id="prog-periodo">Calculando sua semana...</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:8px;position:relative;z-index:1">📊 <span data-i18n="analysis">Análise</span></div>
+      <div class="prog-header-title" data-i18n="weekly_report">Relatório semanal</div>
+      <div class="prog-header-sub" id="prog-periodo">Calculando...</div>
     </div>
     <div class="prog-content" id="prog-content">
       <div class="empty-state"><div class="empty-state-icon">⏳</div><div class="empty-state-title">Carregando...</div></div>
     </div>
     <div class="bottom-nav">
-      <button class="nav-item" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label">Início</span></button>
-      <button class="nav-item" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label">Água</span></button>
-      <button class="nav-item" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label">Sono</span></button>
-      <button class="nav-item" onclick="navegar('plantacao')"><span class="nav-item-icon">🌱</span><span class="nav-item-label">Plantação</span></button>
-      <button class="nav-item active" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label">Progresso</span></button>
-      <button class="nav-item" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label">Config.</span></button>
+      <button class="nav-item" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label" data-i18n="nav_home">Início</span></button>
+      <button class="nav-item" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label" data-i18n="nav_water">Água</span></button>
+      <button class="nav-item" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label" data-i18n="nav_sleep">Sono</span></button>
+      <button class="nav-item" onclick="navegar('plantacao')"><span class="nav-item-icon">🌱</span><span class="nav-item-label" data-i18n="nav_farm">Plantação</span></button>
+      <button class="nav-item active" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label" data-i18n="nav_progress">Progresso</span></button>
+      <button class="nav-item" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label" data-i18n="nav_config">Config.</span></button>
     </div>
   </div>
 
-  <!-- ===== CONFIGURAÇÕES ===== -->
+  <!-- CONFIG -->
   <div class="screen" id="screen-config">
-    <div class="config-header"><div class="config-page-title">Configurações</div></div>
+    <div class="config-header"><div class="config-page-title" data-i18n="settings">Configurações</div></div>
     <div class="config-content">
       <div class="config-profile">
         <div class="config-avatar" id="cfg-avatar">?</div>
         <div class="config-profile-info"><strong id="cfg-nome">Carregando...</strong><small id="cfg-email"></small></div>
       </div>
       <div class="config-section">
-        <div class="config-section-title">Conta</div>
+        <div class="config-section-title" data-i18n="account">Conta</div>
         <div class="config-group">
-          <div class="config-item"><div class="config-item-icon" style="background:#EAF3DE">👤</div><div class="config-item-info"><span class="config-item-label">Nome</span><span class="config-item-desc" id="cfg-nome-desc">—</span></div><div class="config-item-right"><span class="config-arrow">›</span></div></div>
+          <div class="config-item"><div class="config-item-icon" style="background:#EAF3DE">👤</div><div class="config-item-info"><span class="config-item-label" data-i18n="name">Nome</span><span class="config-item-desc" id="cfg-nome-desc">—</span></div><div class="config-item-right"><span class="config-arrow">›</span></div></div>
           <div class="config-item"><div class="config-item-icon" style="background:#EAF3DE">📧</div><div class="config-item-info"><span class="config-item-label">E-mail</span><span class="config-item-desc" id="cfg-email-desc">—</span></div><div class="config-item-right"><span class="config-arrow">›</span></div></div>
-          <div class="config-item" onclick="abrirModal('modal-senha')"><div class="config-item-icon" style="background:#EAF3DE">🔒</div><div class="config-item-info"><span class="config-item-label">Alterar senha</span><span class="config-item-desc">Redefinir via e-mail</span></div><div class="config-item-right"><span class="config-arrow">›</span></div></div>
+          <div class="config-item" onclick="abrirModal('modal-senha')"><div class="config-item-icon" style="background:#EAF3DE">🔒</div><div class="config-item-info"><span class="config-item-label" data-i18n="change_pass">Alterar senha</span><span class="config-item-desc" data-i18n="reset_via_email">Redefinir via e-mail</span></div><div class="config-item-right"><span class="config-arrow">›</span></div></div>
         </div>
       </div>
       <div class="config-section">
-        <div class="config-section-title">Notificações</div>
+        <div class="config-section-title" data-i18n="notifications">Notificações</div>
         <div class="config-group">
-          <div class="config-item"><div class="config-item-icon" style="background:#E1F5EE">🔔</div><div class="config-item-info"><span class="config-item-label">Lembretes diários</span><span class="config-item-desc" id="notif-desc">Ativado</span></div><div class="config-item-right"><label class="toggle-wrap"><input type="checkbox" class="toggle-input" id="toggle-notif" checked onchange="salvarConfig('notif',this.checked)"><span class="toggle-slider"></span></label></div></div>
-          <div class="config-item"><div class="config-item-icon" style="background:#E1F5EE">🏆</div><div class="config-item-info"><span class="config-item-label">Conquistas</span><span class="config-item-desc" id="conquistas-desc">Ativado</span></div><div class="config-item-right"><label class="toggle-wrap"><input type="checkbox" class="toggle-input" id="toggle-conquistas" checked onchange="salvarConfig('conquistas',this.checked)"><span class="toggle-slider"></span></label></div></div>
-          <div class="config-item"><div class="config-item-icon" style="background:#E1F5EE">📣</div><div class="config-item-info"><span class="config-item-label">Novidades</span><span class="config-item-desc" id="news-desc">Desativado</span></div><div class="config-item-right"><label class="toggle-wrap"><input type="checkbox" class="toggle-input" id="toggle-news" onchange="salvarConfig('news',this.checked)"><span class="toggle-slider"></span></label></div></div>
+          <div class="config-item"><div class="config-item-icon" style="background:#E1F5EE">🔔</div><div class="config-item-info"><span class="config-item-label" data-i18n="daily_reminders">Lembretes diários</span><span class="config-item-desc" id="notif-desc">Ativado</span></div><div class="config-item-right"><label class="toggle-wrap"><input type="checkbox" class="toggle-input" id="toggle-notif" checked onchange="salvarConfig('notif',this.checked)"><span class="toggle-slider"></span></label></div></div>
+          <div class="config-item"><div class="config-item-icon" style="background:#E1F5EE">🏆</div><div class="config-item-info"><span class="config-item-label" data-i18n="achievements">Conquistas</span><span class="config-item-desc" id="conquistas-desc">Ativado</span></div><div class="config-item-right"><label class="toggle-wrap"><input type="checkbox" class="toggle-input" id="toggle-conquistas" checked onchange="salvarConfig('conquistas',this.checked)"><span class="toggle-slider"></span></label></div></div>
+          <div class="config-item"><div class="config-item-icon" style="background:#E1F5EE">📣</div><div class="config-item-info"><span class="config-item-label" data-i18n="news">Novidades</span><span class="config-item-desc" id="news-desc">Desativado</span></div><div class="config-item-right"><label class="toggle-wrap"><input type="checkbox" class="toggle-input" id="toggle-news" onchange="salvarConfig('news',this.checked)"><span class="toggle-slider"></span></label></div></div>
         </div>
       </div>
       <div class="config-section">
-        <div class="config-section-title">Aparência</div>
+        <div class="config-section-title" data-i18n="appearance">Aparência</div>
         <div class="config-group">
-          <div class="config-item"><div class="config-item-icon" style="background:#EEEDFE">🌙</div><div class="config-item-info"><span class="config-item-label">Modo escuro</span><span class="config-item-desc" id="dark-desc">Desativado</span></div><div class="config-item-right"><label class="toggle-wrap"><input type="checkbox" class="toggle-input" id="toggle-dark" onchange="toggleDarkMode(this.checked)"><span class="toggle-slider"></span></label></div></div>
-          <div class="config-item" onclick="abrirModal('modal-idioma')"><div class="config-item-icon" style="background:#EEEDFE">🌍</div><div class="config-item-info"><span class="config-item-label">Idioma</span><span class="config-item-desc" id="idioma-desc">Português (Brasil)</span></div><div class="config-item-right"><span class="config-item-value" id="idioma-val">PT-BR</span><span class="config-arrow">›</span></div></div>
+          <div class="config-item"><div class="config-item-icon" style="background:#EEEDFE">🌙</div><div class="config-item-info"><span class="config-item-label" data-i18n="dark_mode">Modo escuro</span><span class="config-item-desc" id="dark-desc">Desativado</span></div><div class="config-item-right"><label class="toggle-wrap"><input type="checkbox" class="toggle-input" id="toggle-dark" onchange="toggleDarkMode(this.checked)"><span class="toggle-slider"></span></label></div></div>
+          <div class="config-item" onclick="abrirModal('modal-idioma')"><div class="config-item-icon" style="background:#EEEDFE">🌍</div><div class="config-item-info"><span class="config-item-label" data-i18n="language">Idioma</span><span class="config-item-desc" id="idioma-desc">Português (Brasil)</span></div><div class="config-item-right"><span class="config-item-value" id="idioma-val">PT-BR</span><span class="config-arrow">›</span></div></div>
         </div>
       </div>
       <div class="config-section">
-        <div class="config-section-title">Mais</div>
+        <div class="config-section-title" data-i18n="more">Mais</div>
         <div class="config-group">
-          <div class="config-item" onclick="navegar('plantacao')"><div class="config-item-icon" style="background:#FEF3C7">🔥</div><div class="config-item-info"><span class="config-item-label">Assinar Premium</span><span class="config-item-desc">Troque pontos na Plantação</span></div><div class="config-item-right"><span class="config-arrow">›</span></div></div>
-          <div class="config-item" onclick="window.open('mailto:flowday.support@gmail.com')"><div class="config-item-icon" style="background:#E1F5EE">📧</div><div class="config-item-info"><span class="config-item-label">Suporte</span><span class="config-item-desc">flowday.support@gmail.com</span></div><div class="config-item-right"><span class="config-arrow">›</span></div></div>
-          <div class="config-item"><div class="config-item-icon" style="background:#FEE2E2">🗑️</div><div class="config-item-info"><span class="config-item-label" style="color:var(--error)">Excluir conta</span><span class="config-item-desc">Remove todos os seus dados</span></div><div class="config-item-right"><span class="config-arrow">›</span></div></div>
+          <div class="config-item" onclick="navegar('plantacao')"><div class="config-item-icon" style="background:#FEF3C7">🔥</div><div class="config-item-info"><span class="config-item-label" data-i18n="subscribe_vip">Assinar Premium</span><span class="config-item-desc" data-i18n="exchange_in_farm">Troque pontos na Plantação</span></div><div class="config-item-right"><span class="config-arrow">›</span></div></div>
+          <div class="config-item" onclick="window.open('mailto:flowday.support@gmail.com')"><div class="config-item-icon" style="background:#E1F5EE">📧</div><div class="config-item-info"><span class="config-item-label" data-i18n="support">Suporte</span><span class="config-item-desc"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="02646e6d7566637b2c717772726d707642656f636b6e2c616d6f">[email&#160;protected]</a></span></div><div class="config-item-right"><span class="config-arrow">›</span></div></div>
+          <div class="config-item"><div class="config-item-icon" style="background:#FEE2E2">🗑️</div><div class="config-item-info"><span class="config-item-label" style="color:var(--error)" data-i18n="delete_account">Excluir conta</span><span class="config-item-desc" data-i18n="delete_desc">Remove todos os seus dados</span></div><div class="config-item-right"><span class="config-arrow">›</span></div></div>
         </div>
       </div>
-      <button class="btn-sair" onclick="handleLogout()">🚪 Sair da conta</button>
+      <button class="btn-sair" onclick="handleLogout()">🚪 <span data-i18n="logout">Sair da conta</span></button>
       <div class="config-version">FlowDay v1.0.0 · Raj Studios · 2026</div>
     </div>
     <div class="bottom-nav">
-      <button class="nav-item" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label">Início</span></button>
-      <button class="nav-item" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label">Água</span></button>
-      <button class="nav-item" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label">Sono</span></button>
-      <button class="nav-item" onclick="navegar('plantacao')"><span class="nav-item-icon">🌱</span><span class="nav-item-label">Plantação</span></button>
-      <button class="nav-item" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label">Progresso</span></button>
-      <button class="nav-item active" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label">Config.</span></button>
+      <button class="nav-item" onclick="navegar('inicio')"><span class="nav-item-icon">🏠</span><span class="nav-item-label" data-i18n="nav_home">Início</span></button>
+      <button class="nav-item" onclick="navegar('agua')"><span class="nav-item-icon">💧</span><span class="nav-item-label" data-i18n="nav_water">Água</span></button>
+      <button class="nav-item" onclick="navegar('sono')"><span class="nav-item-icon">😴</span><span class="nav-item-label" data-i18n="nav_sleep">Sono</span></button>
+      <button class="nav-item" onclick="navegar('plantacao')"><span class="nav-item-icon">🌱</span><span class="nav-item-label" data-i18n="nav_farm">Plantação</span></button>
+      <button class="nav-item" onclick="navegar('progresso')"><span class="nav-item-icon">📊</span><span class="nav-item-label" data-i18n="nav_progress">Progresso</span></button>
+      <button class="nav-item active" onclick="navegar('config')"><span class="nav-item-icon">⚙️</span><span class="nav-item-label" data-i18n="nav_config">Config.</span></button>
     </div>
   </div>
 
 </div>
 <div class="toast" id="toast"></div>
+
+<!-- ==================== SISTEMA DE IDIOMAS ==================== -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const TRADUCOES = {
+  'pt-BR': {
+    nav_home:'Início', nav_water:'Água', nav_sleep:'Sono', nav_farm:'Plantação',
+    nav_progress:'Progresso', nav_config:'Config.',
+    days_row:'dias seguidos', points:'pontos', done:'concluídos',
+    progress_today:'Progresso de hoje', phrase_day:'Frase do dia',
+    your_habits:'Seus hábitos', edit:'Editar',
+    hydration:'Hidratação', drink_more:'Beba mais água', water_tip:'Dica de hidratação',
+    reset:'🔄 Resetar', add_cup:'+ 1 copo',
+    sleep:'Sono', sleep_quality:'Qualidade do sono', sleep_sub:'Acompanhe seu descanso diário',
+    planned_sleep:'horas de sono planejadas', sleep_time:'Dormir', wake_time:'Acordar',
+    sleep_today:'Como foi seu sono hoje?', sleep_tip:'Dica para dormir melhor',
+    terrible:'Péssimo', bad:'Ruim', good:'Bom', great:'Ótimo',
+    my_farm:'Minha horta', farm_sub:'Plante, regue e colha frutos com seus hábitos!',
+    my_pots:'🪴 Meus vasos', seed_shop:'🛒 Loja de sementes',
+    seed_shop_sub:'Compre sementes com seus pontos', exchange_pts:'🎁 Trocar pontos',
+    exchange_sub:'Use seus pontos por recompensas', pts:'pts',
+    analysis:'Análise', weekly_report:'Relatório semanal',
+    settings:'Configurações', account:'Conta', name:'Nome',
+    change_pass:'Alterar senha', reset_via_email:'Redefinir via e-mail',
+    pass_desc:'Enviaremos um e-mail para redefinir sua senha.',
+    send_reset:'Enviar e-mail de redefinição',
+    notifications:'Notificações', daily_reminders:'Lembretes diários',
+    achievements:'Conquistas', news:'Novidades',
+    appearance:'Aparência', dark_mode:'Modo escuro', language:'Idioma',
+    more:'Mais', subscribe_vip:'Assinar Premium',
+    exchange_in_farm:'Troque pontos na Plantação', support:'Suporte',
+    delete_account:'Excluir conta', delete_desc:'Remove todos os seus dados',
+    logout:'Sair da conta', lang_title:'Idioma',
+    good_morning:'Bom dia', good_afternoon:'Boa tarde', good_evening:'Boa noite',
+  },
+  'en': {
+    nav_home:'Home', nav_water:'Water', nav_sleep:'Sleep', nav_farm:'Garden',
+    nav_progress:'Progress', nav_config:'Config.',
+    days_row:'day streak', points:'points', done:'done',
+    progress_today:"Today's progress", phrase_day:'Quote of the day',
+    your_habits:'Your habits', edit:'Edit',
+    hydration:'Hydration', drink_more:'Drink more water', water_tip:'Hydration tip',
+    reset:'🔄 Reset', add_cup:'+ 1 cup',
+    sleep:'Sleep', sleep_quality:'Sleep quality', sleep_sub:'Track your daily rest',
+    planned_sleep:'planned sleep hours', sleep_time:'Bedtime', wake_time:'Wake up',
+    sleep_today:'How was your sleep today?', sleep_tip:'Tips for better sleep',
+    terrible:'Terrible', bad:'Bad', good:'Good', great:'Great',
+    my_farm:'My garden', farm_sub:'Plant, water and harvest with your habits!',
+    my_pots:'🪴 My pots', seed_shop:'🛒 Seed shop',
+    seed_shop_sub:'Buy seeds with your points', exchange_pts:'🎁 Exchange points',
+    exchange_sub:'Use your points for rewards', pts:'pts',
+    analysis:'Analysis', weekly_report:'Weekly report',
+    settings:'Settings', account:'Account', name:'Name',
+    change_pass:'Change password', reset_via_email:'Reset via email',
+    pass_desc:'We will send you an email to reset your password.',
+    send_reset:'Send reset email',
+    notifications:'Notifications', daily_reminders:'Daily reminders',
+    achievements:'Achievements', news:'Updates',
+    appearance:'Appearance', dark_mode:'Dark mode', language:'Language',
+    more:'More', subscribe_vip:'Subscribe Premium',
+    exchange_in_farm:'Exchange points in Garden', support:'Support',
+    delete_account:'Delete account', delete_desc:'Removes all your data',
+    logout:'Sign out', lang_title:'Language',
+    good_morning:'Good morning', good_afternoon:'Good afternoon', good_evening:'Good evening',
+  },
+  'es': {
+    nav_home:'Inicio', nav_water:'Agua', nav_sleep:'Sueño', nav_farm:'Jardín',
+    nav_progress:'Progreso', nav_config:'Config.',
+    days_row:'días seguidos', points:'puntos', done:'completados',
+    progress_today:'Progreso de hoy', phrase_day:'Frase del día',
+    your_habits:'Tus hábitos', edit:'Editar',
+    hydration:'Hidratación', drink_more:'Bebe más agua', water_tip:'Consejo de hidratación',
+    reset:'🔄 Reiniciar', add_cup:'+ 1 vaso',
+    sleep:'Sueño', sleep_quality:'Calidad del sueño', sleep_sub:'Sigue tu descanso diario',
+    planned_sleep:'horas de sueño planificadas', sleep_time:'Dormir', wake_time:'Despertar',
+    sleep_today:'¿Cómo fue tu sueño hoy?', sleep_tip:'Consejos para dormir mejor',
+    terrible:'Pésimo', bad:'Malo', good:'Bien', great:'Excelente',
+    my_farm:'Mi jardín', farm_sub:'¡Planta, riega y cosecha con tus hábitos!',
+    my_pots:'🪴 Mis macetas', seed_shop:'🛒 Tienda de semillas',
+    seed_shop_sub:'Compra semillas con tus puntos', exchange_pts:'🎁 Canjear puntos',
+    exchange_sub:'Usa tus puntos por recompensas', pts:'pts',
+    analysis:'Análisis', weekly_report:'Informe semanal',
+    settings:'Configuración', account:'Cuenta', name:'Nombre',
+    change_pass:'Cambiar contraseña', reset_via_email:'Restablecer por email',
+    pass_desc:'Te enviaremos un email para restablecer tu contraseña.',
+    send_reset:'Enviar email de restablecimiento',
+    notifications:'Notificaciones', daily_reminders:'Recordatorios diarios',
+    achievements:'Logros', news:'Novedades',
+    appearance:'Apariencia', dark_mode:'Modo oscuro', language:'Idioma',
+    more:'Más', subscribe_vip:'Suscribirse Premium',
+    exchange_in_farm:'Canjea puntos en el Jardín', support:'Soporte',
+    delete_account:'Eliminar cuenta', delete_desc:'Elimina todos tus datos',
+    logout:'Cerrar sesión', lang_title:'Idioma',
+    good_morning:'Buenos días', good_afternoon:'Buenas tardes', good_evening:'Buenas noches',
+  },
+  'pt-PT': {
+    nav_home:'Início', nav_water:'Água', nav_sleep:'Sono', nav_farm:'Plantação',
+    nav_progress:'Progresso', nav_config:'Config.',
+    days_row:'dias seguidos', points:'pontos', done:'concluídos',
+    progress_today:'Progresso de hoje', phrase_day:'Frase do dia',
+    your_habits:'Os seus hábitos', edit:'Editar',
+    hydration:'Hidratação', drink_more:'Beba mais água', water_tip:'Dica de hidratação',
+    reset:'🔄 Repor', add_cup:'+ 1 copo',
+    sleep:'Sono', sleep_quality:'Qualidade do sono', sleep_sub:'Acompanhe o seu descanso',
+    planned_sleep:'horas de sono planeadas', sleep_time:'Dormir', wake_time:'Acordar',
+    sleep_today:'Como foi o seu sono hoje?', sleep_tip:'Dica para dormir melhor',
+    terrible:'Péssimo', bad:'Mau', good:'Bom', great:'Ótimo',
+    my_farm:'A minha horta', farm_sub:'Plante, regue e colha com os seus hábitos!',
+    my_pots:'🪴 Os meus vasos', seed_shop:'🛒 Loja de sementes',
+    seed_shop_sub:'Compre sementes com os seus pontos', exchange_pts:'🎁 Trocar pontos',
+    exchange_sub:'Use os seus pontos por recompensas', pts:'pts',
+    analysis:'Análise', weekly_report:'Relatório semanal',
+    settings:'Definições', account:'Conta', name:'Nome',
+    change_pass:'Alterar palavra-passe', reset_via_email:'Redefinir via e-mail',
+    pass_desc:'Enviaremos um e-mail para redefinir a sua palavra-passe.',
+    send_reset:'Enviar e-mail de redefinição',
+    notifications:'Notificações', daily_reminders:'Lembretes diários',
+    achievements:'Conquistas', news:'Novidades',
+    appearance:'Aparência', dark_mode:'Modo escuro', language:'Idioma',
+    more:'Mais', subscribe_vip:'Subscrever Premium',
+    exchange_in_farm:'Troque pontos na Plantação', support:'Suporte',
+    delete_account:'Eliminar conta', delete_desc:'Remove todos os seus dados',
+    logout:'Terminar sessão', lang_title:'Idioma',
+    good_morning:'Bom dia', good_afternoon:'Boa tarde', good_evening:'Boa noite',
+  },
+  'fr': {
+    nav_home:'Accueil', nav_water:'Eau', nav_sleep:'Sommeil', nav_farm:'Jardin',
+    nav_progress:'Progrès', nav_config:'Config.',
+    days_row:'jours de suite', points:'points', done:'accomplis',
+    progress_today:"Progrès d'aujourd'hui", phrase_day:'Citation du jour',
+    your_habits:'Vos habitudes', edit:'Modifier',
+    hydration:'Hydratation', drink_more:"Buvez plus d'eau", water_tip:"Conseil d'hydratation",
+    reset:'🔄 Réinitialiser', add_cup:'+ 1 verre',
+    sleep:'Sommeil', sleep_quality:'Qualité du sommeil', sleep_sub:'Suivez votre repos quotidien',
+    planned_sleep:'heures de sommeil prévues', sleep_time:'Dormir', wake_time:'Se réveiller',
+    sleep_today:"Comment était votre sommeil aujourd'hui?", sleep_tip:'Conseils pour mieux dormir',
+    terrible:'Horrible', bad:'Mauvais', good:'Bien', great:'Excellent',
+    my_farm:'Mon jardin', farm_sub:'Plantez, arrosez et récoltez avec vos habitudes!',
+    my_pots:'🪴 Mes pots', seed_shop:'🛒 Boutique de graines',
+    seed_shop_sub:'Achetez des graines avec vos points', exchange_pts:'🎁 Échanger des points',
+    exchange_sub:'Utilisez vos points pour des récompenses', pts:'pts',
+    analysis:'Analyse', weekly_report:'Rapport hebdomadaire',
+    settings:'Paramètres', account:'Compte', name:'Nom',
+    change_pass:'Changer le mot de passe', reset_via_email:'Réinitialiser par e-mail',
+    pass_desc:'Nous enverrons un e-mail pour réinitialiser votre mot de passe.',
+    send_reset:'Envoyer un e-mail de réinitialisation',
+    notifications:'Notifications', daily_reminders:'Rappels quotidiens',
+    achievements:'Succès', news:'Nouveautés',
+    appearance:'Apparence', dark_mode:'Mode sombre', language:'Langue',
+    more:'Plus', subscribe_vip:'Abonnement Premium',
+    exchange_in_farm:'Échangez des points dans le Jardin', support:'Support',
+    delete_account:'Supprimer le compte', delete_desc:'Supprime toutes vos données',
+    logout:'Se déconnecter', lang_title:'Langue',
+    good_morning:'Bonjour', good_afternoon:'Bon après-midi', good_evening:'Bonsoir',
+  },
+  'de': {
+    nav_home:'Start', nav_water:'Wasser', nav_sleep:'Schlaf', nav_farm:'Garten',
+    nav_progress:'Fortschritt', nav_config:'Einst.',
+    days_row:'Tage in Folge', points:'Punkte', done:'abgeschlossen',
+    progress_today:'Heutiger Fortschritt', phrase_day:'Zitat des Tages',
+    your_habits:'Deine Gewohnheiten', edit:'Bearbeiten',
+    hydration:'Hydratation', drink_more:'Trink mehr Wasser', water_tip:'Hydrationstipp',
+    reset:'🔄 Zurücksetzen', add_cup:'+ 1 Glas',
+    sleep:'Schlaf', sleep_quality:'Schlafqualität', sleep_sub:'Verfolge deine tägliche Ruhe',
+    planned_sleep:'geplante Schlafstunden', sleep_time:'Schlafen', wake_time:'Aufwachen',
+    sleep_today:'Wie war dein Schlaf heute?', sleep_tip:'Tipps für besseren Schlaf',
+    terrible:'Schrecklich', bad:'Schlecht', good:'Gut', great:'Ausgezeichnet',
+    my_farm:'Mein Garten', farm_sub:'Pflanze, gieße und ernte mit deinen Gewohnheiten!',
+    my_pots:'🪴 Meine Töpfe', seed_shop:'🛒 Samenladen',
+    seed_shop_sub:'Kaufe Samen mit deinen Punkten', exchange_pts:'🎁 Punkte einlösen',
+    exchange_sub:'Verwende deine Punkte für Belohnungen', pts:'Pkt',
+    analysis:'Analyse', weekly_report:'Wochenbericht',
+    settings:'Einstellungen', account:'Konto', name:'Name',
+    change_pass:'Passwort ändern', reset_via_email:'Zurücksetzen per E-Mail',
+    pass_desc:'Wir senden dir eine E-Mail zum Zurücksetzen des Passworts.',
+    send_reset:'E-Mail zum Zurücksetzen senden',
+    notifications:'Benachrichtigungen', daily_reminders:'Tägliche Erinnerungen',
+    achievements:'Erfolge', news:'Neuigkeiten',
+    appearance:'Erscheinungsbild', dark_mode:'Dunkler Modus', language:'Sprache',
+    more:'Mehr', subscribe_vip:'Premium abonnieren',
+    exchange_in_farm:'Punkte im Garten einlösen', support:'Support',
+    delete_account:'Konto löschen', delete_desc:'Löscht alle deine Daten',
+    logout:'Abmelden', lang_title:'Sprache',
+    good_morning:'Guten Morgen', good_afternoon:'Guten Nachmittag', good_evening:'Guten Abend',
+  },
+  'ru': {
+    nav_home:'Главная', nav_water:'Вода', nav_sleep:'Сон', nav_farm:'Сад',
+    nav_progress:'Прогресс', nav_config:'Настр.',
+    days_row:'дней подряд', points:'очки', done:'выполнено',
+    progress_today:'Прогресс сегодня', phrase_day:'Цитата дня',
+    your_habits:'Ваши привычки', edit:'Изменить',
+    hydration:'Гидратация', drink_more:'Пейте больше воды', water_tip:'Совет по гидратации',
+    reset:'🔄 Сбросить', add_cup:'+ 1 стакан',
+    sleep:'Сон', sleep_quality:'Качество сна', sleep_sub:'Следите за своим ежедневным отдыхом',
+    planned_sleep:'запланированных часов сна', sleep_time:'Спать', wake_time:'Проснуться',
+    sleep_today:'Как был ваш сон сегодня?', sleep_tip:'Советы для лучшего сна',
+    terrible:'Ужасно', bad:'Плохо', good:'Хорошо', great:'Отлично',
+    my_farm:'Мой сад', farm_sub:'Сажайте, поливайте и собирайте урожай!',
+    my_pots:'🪴 Мои горшки', seed_shop:'🛒 Магазин семян',
+    seed_shop_sub:'Покупайте семена за очки', exchange_pts:'🎁 Обменять очки',
+    exchange_sub:'Используйте очки для наград', pts:'оч',
+    analysis:'Анализ', weekly_report:'Еженедельный отчёт',
+    settings:'Настройки', account:'Аккаунт', name:'Имя',
+    change_pass:'Изменить пароль', reset_via_email:'Сбросить по e-mail',
+    pass_desc:'Мы отправим письмо для сброса пароля.',
+    send_reset:'Отправить письмо для сброса',
+    notifications:'Уведомления', daily_reminders:'Ежедневные напоминания',
+    achievements:'Достижения', news:'Новости',
+    appearance:'Внешний вид', dark_mode:'Тёмный режим', language:'Язык',
+    more:'Ещё', subscribe_vip:'Подписаться на Premium',
+    exchange_in_farm:'Обменяйте очки в Саду', support:'Поддержка',
+    delete_account:'Удалить аккаунт', delete_desc:'Удаляет все ваши данные',
+    logout:'Выйти', lang_title:'Язык',
+    good_morning:'Доброе утро', good_afternoon:'Добрый день', good_evening:'Добрый вечер',
+  },
+  'ja': {
+    nav_home:'ホーム', nav_water:'水分', nav_sleep:'睡眠', nav_farm:'農園',
+    nav_progress:'進捗', nav_config:'設定',
+    days_row:'日連続', points:'ポイント', done:'達成',
+    progress_today:'今日の進捗', phrase_day:'今日の名言',
+    your_habits:'あなたの習慣', edit:'編集',
+    hydration:'水分補給', drink_more:'もっと水を飲もう', water_tip:'水分補給のヒント',
+    reset:'🔄 リセット', add_cup:'+ 1杯',
+    sleep:'睡眠', sleep_quality:'睡眠の質', sleep_sub:'毎日の休息を記録しよう',
+    planned_sleep:'計画した睡眠時間', sleep_time:'就寝', wake_time:'起床',
+    sleep_today:'今日の睡眠はどうでしたか？', sleep_tip:'より良い睡眠のためのヒント',
+    terrible:'最悪', bad:'悪い', good:'良い', great:'最高',
+    my_farm:'私の農園', farm_sub:'植えて、水やりして、収穫しよう！',
+    my_pots:'🪴 鉢植え', seed_shop:'🛒 種の店',
+    seed_shop_sub:'ポイントで種を購入', exchange_pts:'🎁 ポイント交換',
+    exchange_sub:'ポイントで報酬をゲット', pts:'pt',
+    analysis:'分析', weekly_report:'週次レポート',
+    settings:'設定', account:'アカウント', name:'名前',
+    change_pass:'パスワード変更', reset_via_email:'メールでリセット',
+    pass_desc:'パスワードリセット用のメールを送信します。',
+    send_reset:'リセットメールを送信',
+    notifications:'通知', daily_reminders:'毎日のリマインダー',
+    achievements:'実績', news:'お知らせ',
+    appearance:'外観', dark_mode:'ダークモード', language:'言語',
+    more:'その他', subscribe_vip:'プレミアム登録',
+    exchange_in_farm:'農園でポイント交換', support:'サポート',
+    delete_account:'アカウント削除', delete_desc:'すべてのデータを削除します',
+    logout:'ログアウト', lang_title:'言語',
+    good_morning:'おはようございます', good_afternoon:'こんにちは', good_evening:'こんばんは',
+  },
+};
+
+let _langAtual = localStorage.getItem('cfg_idioma') || 'pt-BR';
+
+function t(key) {
+  return (TRADUCOES[_langAtual] || TRADUCOES['pt-BR'])[key] || key;
+}
+
+function aplicarIdioma(lang, mostrarToast) {
+  _langAtual = lang;
+  localStorage.setItem('cfg_idioma', lang);
+
+  // Aplicar todas as traduções no DOM
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const trad = t(key);
+    if (trad) el.textContent = trad;
+  });
+
+  // Atualizar selector do modal
+  document.querySelectorAll('.idioma-opcao').forEach(o => o.classList.toggle('selected', o.dataset.lang === lang));
+  const nomes = {'pt-BR':'Português (Brasil)','pt-PT':'Português (Portugal)','en':'English','es':'Español','fr':'Français','de':'Deutsch','ru':'Русский','ja':'日本語'};
+  const vals = {'pt-BR':'PT-BR','pt-PT':'PT-PT','en':'EN','es':'ES','fr':'FR','de':'DE','ru':'RU','ja':'JA'};
+  document.getElementById('idioma-desc').textContent = nomes[lang] || nomes['pt-BR'];
+  document.getElementById('idioma-val').textContent = vals[lang] || 'PT-BR';
+
+  const toasts = {'pt-BR':'🇧🇷 Português ativado','pt-PT':'🇵🇹 Português (PT) ativado','en':'🇺🇸 English activated','es':'🇪🇸 Español activado','fr':'🇫🇷 Français activé','de':'🇩🇪 Deutsch aktiviert','ru':'🇷🇺 Русский активирован','ja':'🇯🇵 日本語に切り替えました'};
+  if (mostrarToast) showToast(toasts[lang] || '✅ Idioma alterado');
+}
+
+function selecionarIdioma(el) {
+  fecharModal('modal-idioma');
+  aplicarIdioma(el.dataset.lang, true);
+}
+
+// Aplicar idioma salvo ao carregar
+document.addEventListener('DOMContentLoaded', () => {
+  aplicarIdioma(_langAtual, false);
+});
+</script>
 
 <!-- FIREBASE -->
 <script type="module">
@@ -767,28 +942,27 @@
     mental:{emoji:'🧘',nome:'Pausa mental',meta:(m)=>m?.['meta-mental-minutos']?`${m['meta-mental-minutos']} de pausa`:'10 min de foco'},
   };
 
-  const frases=[
-    {icon:'🌱',texto:'"Cada dia é uma nova chance de ser melhor."'},
-    {icon:'💪',texto:'"Consistência vence intensidade. Sempre."'},
-    {icon:'🌊',texto:'"Pequenos passos todos os dias constroem grandes resultados."'},
-    {icon:'🌟',texto:'"Você não precisa ser perfeito, só precisa continuar."'},
-    {icon:'🧠',texto:'"Cuide da sua mente como cuida do seu corpo."'},
-    {icon:'🔥',texto:'"A disciplina de hoje é a liberdade de amanhã."'},
-    {icon:'🌙',texto:'"Descansar também faz parte da jornada."'},
+  const frases = [
+    {icon:'🌱',texto:{ptBR:'"Cada dia é uma nova chance de ser melhor."',en:'"Every day is a new chance to be better."',es:'"Cada día es una nueva oportunidad de mejorar."'}},
+    {icon:'💪',texto:{ptBR:'"Consistência vence intensidade. Sempre."',en:'"Consistency beats intensity. Always."',es:'"La consistencia vence a la intensidad. Siempre."'}},
+    {icon:'🌊',texto:{ptBR:'"Pequenos passos constroem grandes resultados."',en:'"Small steps build great results."',es:'"Pequeños pasos construyen grandes resultados."'}},
+    {icon:'🌟',texto:{ptBR:'"Você não precisa ser perfeito, só precisa continuar."',en:'"You don\'t need to be perfect, just keep going."',es:'"No necesitas ser perfecto, solo continúa."'}},
+    {icon:'🔥',texto:{ptBR:'"A disciplina de hoje é a liberdade de amanhã."',en:'"Today\'s discipline is tomorrow\'s freedom."',es:'"La disciplina de hoy es la libertad de mañana."'}},
+    {icon:'🧠',texto:{ptBR:'"Cuide da sua mente como cuida do seu corpo."',en:'"Take care of your mind as you do your body."',es:'"Cuida tu mente como cuidas tu cuerpo."'}},
+    {icon:'🌙',texto:{ptBR:'"Descansar também faz parte da jornada."',en:'"Resting is also part of the journey."',es:'"Descansar también forma parte del camino."'}},
   ];
 
-  const dicasAgua=['Beber água ao acordar ativa o metabolismo.','Adicione rodelas de limão para tornar a água mais saborosa.','Mantenha uma garrafinha sempre por perto.','Beba um copo antes de cada refeição.'];
-  const dicasSono=['Evite telas 30 min antes de dormir.','Mantenha o quarto escuro e fresco.','Tente dormir e acordar no mesmo horário.','Uma caminhada leve à tarde melhora o sono.'];
+  const dicasAgua = ['Beber água ao acordar ativa o metabolismo.','Adicione limão para tornar a água mais saborosa.','Mantenha uma garrafinha sempre por perto.','Beba um copo antes de cada refeição.'];
+  const dicasSono = ['Evite telas 30 min antes de dormir.','Mantenha o quarto escuro e fresco.','Tente dormir e acordar no mesmo horário.','Uma caminhada leve à tarde melhora o sono.'];
 
-  // Config das sementes
+  // Config sementes — grátis limitadas a 1 colheita por semana
   window.SEMENTES_CONFIG = {
-    morango:{emoji:'🍓',nome:'Morango',fruto:'🍓',pontos:30,preco:0,raridade:'comum'},
-    maca:{emoji:'🍎',nome:'Maçã',fruto:'🍎',pontos:30,preco:0,raridade:'comum'},
-    girassol:{emoji:'🌻',nome:'Girassol',fruto:'🌻',pontos:80,preco:100,raridade:'rara'},
-    uva:{emoji:'🍇',nome:'Uva',fruto:'🍇',pontos:150,preco:250,raridade:'lendaria'},
+    morango:{emoji:'🍓',nome:'Morango',fruto:'🍓',pontos:30,preco:0,raridade:'comum',limiteSemanal:1},
+    maca:{emoji:'🍎',nome:'Maçã',fruto:'🍎',pontos:30,preco:0,raridade:'comum',limiteSemanal:1},
+    girassol:{emoji:'🌻',nome:'Girassol',fruto:'🌻',pontos:80,preco:100,raridade:'rara',limiteSemanal:null},
+    uva:{emoji:'🍇',nome:'Uva',fruto:'🍇',pontos:150,preco:250,raridade:'lendaria',limiteSemanal:null},
   };
 
-  // Estágios
   window.ESTAGIOS = [
     {emoji:'🌑',nome:'Semente',min:0},
     {emoji:'🌱',nome:'Broto',min:20},
@@ -797,9 +971,24 @@
     {emoji:'🌳',nome:'Adulta',min:90},
   ];
 
+  // Trocas de pontos
+  const TROCAS = [
+    {id:'vip_mes',icon:'🔥',bg:'#FEF3C7',nome:'FlowDay VIP',desc:'1 mês de acesso premium',preco:3050},
+    {id:'sem_anuncios',icon:'🚫',bg:'#EAF3DE',nome:'Sem anúncios',desc:'7 dias sem anúncios',preco:1500},
+    {id:'semente_esp',icon:'🌱',bg:'#E1F5EE',nome:'Semente especial',desc:'Receba uma semente rara',preco:150},
+  ];
+
   let _uid,_hoje,_dados,_habitos,_metas,_feitos,_userEmail;
-  let _vasoSelecionado=null;
-  let _sementeSelecionada=null;
+  let _vasoSelecionado=null,_sementeSelecionada=null;
+
+  // Semana ISO
+  function getSemanaKey(date=new Date()){
+    const d=new Date(date);
+    d.setHours(0,0,0,0);
+    d.setDate(d.getDate()+4-(d.getDay()||7));
+    const yearStart=new Date(d.getFullYear(),0,1);
+    return `${d.getFullYear()}-W${Math.ceil(((d-yearStart)/86400000+1)/7)}`;
+  }
 
   onAuthStateChanged(auth,async(user)=>{
     if(!user){window.location.href='index.html';return;}
@@ -813,17 +1002,22 @@
 
     const nome=_dados.nome||user.displayName||'Usuário';
     const inicial=nome.charAt(0).toUpperCase();
+    const lang=localStorage.getItem('cfg_idioma')||'pt-BR';
+    const saud={'pt-BR':[t('good_morning'),t('good_afternoon'),t('good_evening')],'pt-PT':[t('good_morning'),t('good_afternoon'),t('good_evening')],'en':['Good morning','Good afternoon','Good evening'],'es':['Buenos días','Buenas tardes','Buenas noches'],'fr':['Bonjour','Bon après-midi','Bonsoir'],'de':['Guten Morgen','Guten Nachmittag','Guten Abend'],'ru':['Доброе утро','Добрый день','Добрый вечер'],'ja':['おはようございます','こんにちは','こんばんは']}[lang]||[t('good_morning'),t('good_afternoon'),t('good_evening')];
+    const h=new Date().getHours();
+    const saudacao=h<12?saud[0]:h<18?saud[1]:saud[2];
 
-    document.getElementById('dash-nome').textContent=`Olá, ${nome.split(' ')[0]}!`;
+    document.getElementById('dash-nome').textContent=`${saudacao}, ${nome.split(' ')[0]}!`;
     document.getElementById('dash-avatar').textContent=inicial;
-    document.getElementById('dash-saudacao').textContent=saudacao()+' ✦';
+    document.getElementById('dash-saudacao').textContent='FlowDay ✦';
     document.getElementById('stat-streak').textContent=_dados.streak||0;
     document.getElementById('stat-pontos').textContent=_dados.pontos||0;
     document.getElementById('plant-pontos').textContent=_dados.pontos||0;
 
     const fi=new Date().getDay()%frases.length;
     document.getElementById('motiv-icon').textContent=frases[fi].icon;
-    document.getElementById('motiv-texto').textContent=frases[fi].texto;
+    const langKey={'pt-BR':'ptBR','pt-PT':'ptBR','en':'en','es':'es','fr':'fr','de':'de','ru':'ru','ja':'ja'}[lang]||'ptBR';
+    document.getElementById('motiv-texto').textContent=frases[fi].texto[langKey];
 
     document.getElementById('cfg-avatar').textContent=inicial;
     document.getElementById('cfg-nome').textContent=nome;
@@ -858,10 +1052,10 @@
     renderHabitos();
     atualizarProgresso();
     renderVasos();
+    renderLojaPlantacao();
     gerarRelatorio();
   });
 
-  // ---- HÁBITOS ----
   function renderHabitos(){
     const lista=document.getElementById('habitos-lista');
     const outros=_habitos.filter(h=>!['agua','sono'].includes(h));
@@ -889,10 +1083,9 @@
     document.getElementById('stat-pontos').textContent=pts;
     document.getElementById('plant-pontos').textContent=pts;
     renderHabitos();atualizarProgresso();
-    atualizarCrescimentoVasos();
   }
 
-  // ---- ÁGUA ----
+  // ÁGUA
   window.renderCopos=function(bebidos,meta){
     const grid=document.getElementById('copos-grid');grid.innerHTML='';
     for(let i=0;i<meta;i++){
@@ -901,10 +1094,9 @@
       div.innerHTML=`<svg viewBox="0 0 36 44" fill="none"><path d="M6 4h24l-3 36H9L6 4z" fill="${cheio?'#BFDBFE':'#F1F5F9'}" stroke="${cheio?'#3B82F6':'#CBD5E1'}" stroke-width="1.5" stroke-linejoin="round"/>${cheio?`<path d="M8 20h20" stroke="#93C5FD" stroke-width="1" opacity="0.5"/><text x="18" y="30" text-anchor="middle" font-size="9" fill="#1D4ED8">${i+1}</text>`:''}</svg>`;
       grid.appendChild(div);
     }
-    const litrosVal=bebidos*0.25,metaLitros=meta*0.25;
-    const pct=meta===0?0:Math.round((bebidos/meta)*100);
-    document.getElementById('agua-litros-big').textContent=litrosVal%1===0?litrosVal+'L':litrosVal.toFixed(2).replace('.',',')+'L';
-    document.getElementById('agua-litros-meta').textContent=`de ${metaLitros%1===0?metaLitros+'L':metaLitros.toFixed(2).replace('.',',')}L — ${pct}%`;
+    const lv=bebidos*0.25,ml=meta*0.25,pct=meta===0?0:Math.round((bebidos/meta)*100);
+    document.getElementById('agua-litros-big').textContent=lv%1===0?lv+'L':lv.toFixed(2).replace('.',',')+'L';
+    document.getElementById('agua-litros-meta').textContent=`de ${ml%1===0?ml+'L':ml.toFixed(2).replace('.',',')}L — ${pct}%`;
     document.getElementById('agua-prog-fill').style.width=pct+'%';
     if(bebidos>=meta&&!_feitos.includes('agua')){_feitos.push('agua');updateDoc(doc(db,"usuarios",_uid),{[`feitosHoje.${_hoje}`]:_feitos});}
     else if(bebidos<meta&&_feitos.includes('agua')){_feitos=_feitos.filter(f=>f!=='agua');updateDoc(doc(db,"usuarios",_uid),{[`feitosHoje.${_hoje}`]:_feitos});}
@@ -927,7 +1119,7 @@
     _dados.aguaHoje={..._dados.aguaHoje,[_hoje]:0};renderCopos(0,window._metaCopos);
   };
 
-  // ---- SONO ----
+  // SONO
   window.marcarSono=async function(btn){
     document.querySelectorAll('.sono-opcao').forEach(b=>b.classList.remove('selected'));
     btn.classList.add('selected');
@@ -937,7 +1129,6 @@
     atualizarProgresso();showToast('😴 Sono registrado!');
   };
 
-  // ---- PROGRESSO ----
   function atualizarProgresso(){
     const total=_habitos.length,feitos=_feitos.length;
     const pct=total===0?0:Math.round((feitos/total)*100);
@@ -952,51 +1143,60 @@
   }
 
   // ---- PLANTAÇÃO ----
-  function getVasos(){ return _dados.vasos || [{id:0,semente:null,estagio:0,crescimento:0,regadaHoje:false,pronta:false},{id:1,semente:null,estagio:0,crescimento:0,regadaHoje:false,pronta:false},{id:2,semente:null,estagio:0,crescimento:0,regadaHoje:false,pronta:false}]; }
+  function getVasos(){
+    return _dados.vasos||[
+      {id:0,semente:null,estagio:0,crescimento:0,regadaHoje:false,pronta:false},
+      {id:1,semente:null,estagio:0,crescimento:0,regadaHoje:false,pronta:false},
+      {id:2,semente:null,estagio:0,crescimento:0,regadaHoje:false,pronta:false}
+    ];
+  }
 
-  function calcularEstagio(crescimento){
-    const estagios=window.ESTAGIOS;
-    let atual=0;
-    for(let i=estagios.length-1;i>=0;i--){
-      if(crescimento>=estagios[i].min){atual=i;break;}
-    }
-    return atual;
+  function calcularEstagio(c){
+    let idx=0;
+    for(let i=window.ESTAGIOS.length-1;i>=0;i--){if(c>=window.ESTAGIOS[i].min){idx=i;break;}}
+    return idx;
+  }
+
+  // Verifica se semente comum atingiu limite semanal
+  function atingiuLimiteSemanal(key){
+    const cfg=window.SEMENTES_CONFIG[key];
+    if(!cfg.limiteSemanal)return false;
+    const semana=getSemanaKey();
+    const colheitasSemana=_dados.colheitasSemana||{};
+    const qtd=colheitasSemana[`${key}_${semana}`]||0;
+    return qtd>=cfg.limiteSemanal;
   }
 
   window.renderVasos=function(){
     const vasos=getVasos();
     const grid=document.getElementById('vasos-grid');
     grid.innerHTML='';
-
     vasos.forEach((vaso,i)=>{
       const card=document.createElement('div');
       card.className='vaso-card'+(vaso.semente?'':' vazio');
 
       if(!vaso.semente){
-        card.innerHTML=`
-          <span class="planta-anim">🪴</span>
-          <span class="vaso-nome">Vaso ${i+1}</span>
-          <span class="vaso-estagio">Vazio</span>
-          <div class="vaso-progress"><div class="vaso-progress-fill" style="width:0%"></div></div>
-          <button class="btn-plantar" onclick="abrirModalPlantar(${i})">🌱 Plantar</button>
-        `;
+        card.innerHTML=`<span class="planta-anim">🪴</span><span class="vaso-nome">Vaso ${i+1}</span><span class="vaso-estagio">Vazio</span><div class="vaso-progress"><div class="vaso-progress-fill" style="width:0%"></div></div><button class="btn-plantar" onclick="abrirModalPlantar(${i})">🌱 Plantar</button>`;
       } else {
         const cfg=window.SEMENTES_CONFIG[vaso.semente];
-        const estIdx=calcularEstagio(vaso.crescimento);
-        const est=window.ESTAGIOS[estIdx];
+        const est=window.ESTAGIOS[calcularEstagio(vaso.crescimento)];
         const pronta=vaso.crescimento>=100;
         const regadaHoje=vaso.regadaHoje===_hoje;
+        const limiteAtingido=pronta&&atingiuLimiteSemanal(vaso.semente);
 
         card.innerHTML=`
-          ${pronta?`<span class="pronta-badge">Pronta!</span>`:''}
+          ${pronta&&!limiteAtingido?`<span class="pronta-badge">Pronta!</span>`:''}
+          ${limiteAtingido?`<span class="limite-badge">Limite/sem.</span>`:''}
           ${regadaHoje&&!pronta?`<span class="regada-badge">💧</span>`:''}
-          <span class="planta-anim ${pronta?'frutificando':''}" id="planta-${i}">${pronta?cfg.fruto:est.emoji}</span>
+          <span class="planta-anim ${pronta&&!limiteAtingido?'frutificando':''}" id="planta-${i}">${pronta?cfg.fruto:est.emoji}</span>
           <span class="vaso-nome">${cfg.nome}</span>
-          <span class="vaso-estagio">${pronta?'Pronta para colher!':est.nome} · ${vaso.crescimento}%</span>
+          <span class="vaso-estagio">${pronta?(limiteAtingido?'Limite semanal atingido':'Pronta para colher!'):est.nome} · ${vaso.crescimento}%</span>
           <div class="vaso-progress"><div class="vaso-progress-fill" style="width:${vaso.crescimento}%"></div></div>
           ${pronta
-            ? `<button class="btn-colher" onclick="abrirModalColher(${i})">🌾 Colher</button>`
-            : `<button class="btn-regar ${regadaHoje?'regada':''}" onclick="${regadaHoje?'':` regarVaso(${i})`}">${regadaHoje?'✓ Regada hoje':'💧 Regar'}</button>`
+            ? limiteAtingido
+              ? `<button class="btn-bloqueada">🔒 Disponível na próxima semana</button>`
+              : `<button class="btn-colher" onclick="abrirModalColher(${i})">🌾 Colher</button>`
+            : `<button class="btn-regar ${regadaHoje?'regada':''}" ${regadaHoje?'disabled':''} onclick="${regadaHoje?'':` regarVaso(${i})`}">${regadaHoje?'✓ Regada hoje':'💧 Regar'}</button>`
           }
         `;
       }
@@ -1004,29 +1204,89 @@
     });
   };
 
+  function renderLojaPlantacao(){
+    // Sementes
+    const grid=document.getElementById('sementes-loja');
+    grid.innerHTML='';
+    Object.entries(window.SEMENTES_CONFIG).forEach(([key,cfg])=>{
+      const limiteAtingido=atingiuLimiteSemanal(key);
+      const div=document.createElement('div');
+      div.className=`semente-card ${cfg.raridade!=='comum'?cfg.raridade:''} ${limiteAtingido?'bloqueada':''}`;
+      if(!limiteAtingido) div.onclick=()=>comprarSemente(key);
+      div.innerHTML=`
+        <span class="semente-emoji">${cfg.emoji}</span>
+        <span class="semente-nome">${cfg.nome}</span>
+        <span class="semente-desc">${cfg.raridade==='comum'?'Cresce em 5 dias.':cfg.raridade==='rara'?'Raro e especial!':'Lendária!'}</span>
+        ${limiteAtingido?`<span class="limite-semanal-aviso">🔒 Limite semanal atingido</span>`:''}
+        <div class="semente-preco">
+          <span class="semente-pts">${cfg.preco===0?'Grátis':cfg.preco+' pts'}</span>
+          <span class="semente-raridade ${cfg.raridade}">${cfg.raridade==='comum'?'Comum':cfg.raridade==='rara'?'Raro':'Lendária'}</span>
+        </div>
+      `;
+      grid.appendChild(div);
+    });
+
+    // Trocas com preços corretos
+    const lista=document.getElementById('trocas-lista');
+    lista.innerHTML='';
+    TROCAS.forEach(troca=>{
+      const pts=_dados.pontos||0;
+      const temPts=pts>=troca.preco;
+      const div=document.createElement('div');
+      div.className='troca-card';
+      div.innerHTML=`
+        <div class="troca-icon" style="background:${troca.bg}">${troca.icon}</div>
+        <div class="troca-info">
+          <span class="troca-nome">${troca.nome}</span>
+          <span class="troca-desc">${troca.desc} · ${troca.preco} pts</span>
+        </div>
+        <button class="troca-btn ${temPts?'disponivel':'sem-pts'}" ${temPts?`onclick="trocarPontos('${troca.id}',${troca.preco})"`:''}>
+          ${temPts?'Trocar':'Faltam '+(troca.preco-pts)+' pts'}
+        </button>
+      `;
+      lista.appendChild(div);
+    });
+  }
+
+  window.trocarPontos=async function(id,preco){
+    const pts=_dados.pontos||0;
+    if(pts<preco){showToast('❌ Pontos insuficientes',true);return;}
+    const novosPts=pts-preco;
+    _dados.pontos=novosPts;
+    await updateDoc(doc(db,"usuarios",_uid),{pontos:novosPts});
+    document.getElementById('stat-pontos').textContent=novosPts;
+    document.getElementById('plant-pontos').textContent=novosPts;
+    renderLojaPlantacao();
+    if(id==='vip_mes') showToast('🔥 VIP ativado! (em breve)','sucesso');
+    else if(id==='sem_anuncios') showToast('🚫 Sem anúncios por 7 dias! (em breve)','sucesso');
+    else if(id==='semente_esp'){
+      const inv={...(_dados.inventario||{morango:1,maca:1})};
+      inv['girassol']=(inv['girassol']||0)+1;
+      _dados.inventario=inv;
+      await updateDoc(doc(db,"usuarios",_uid),{inventario:inv,pontos:novosPts});
+      showToast('🌻 Semente de Girassol recebida!','sucesso');
+    }
+  };
+
   window.abrirModalPlantar=function(vasoIdx){
-    _vasoSelecionado=vasoIdx;
-    _sementeSelecionada=null;
+    _vasoSelecionado=vasoIdx;_sementeSelecionada=null;
     const lista=document.getElementById('modal-sementes-lista');
     lista.innerHTML='';
-    // Sementes disponíveis no inventário (ou compráveis)
-    const inventario=_dados.inventario||{morango:1,maca:1};
+    const inventario={...(_dados.inventario||{morango:1,maca:1})};
     Object.entries(window.SEMENTES_CONFIG).forEach(([key,cfg])=>{
       const qtd=inventario[key]||0;
       if(qtd<=0)return;
+      const limiteAtingido=atingiuLimiteSemanal(key);
+      if(limiteAtingido)return; // Não mostra sementes com limite atingido
       const div=document.createElement('div');
       div.className=`modal-semente-opt ${cfg.raridade!=='comum'?cfg.raridade:''}`;
       div.dataset.key=key;
-      div.onclick=()=>{
-        document.querySelectorAll('.modal-semente-opt').forEach(d=>d.classList.remove('selected'));
-        div.classList.add('selected');
-        _sementeSelecionada=key;
-      };
+      div.onclick=()=>{document.querySelectorAll('.modal-semente-opt').forEach(d=>d.classList.remove('selected'));div.classList.add('selected');_sementeSelecionada=key;};
       div.innerHTML=`<span class="modal-semente-emoji">${cfg.emoji}</span><span class="modal-semente-nome">${cfg.nome}</span><span class="modal-semente-pts">${qtd} disponível${qtd>1?'is':''}</span>`;
       lista.appendChild(div);
     });
     if(lista.children.length===0){
-      lista.innerHTML=`<div style="grid-column:span 2;text-align:center;color:var(--muted);font-size:13px;padding:20px 0">Você não tem sementes!<br>Compre na loja abaixo. 🌱</div>`;
+      lista.innerHTML=`<div style="grid-column:span 2;text-align:center;color:var(--muted);font-size:13px;padding:20px 0">Sem sementes disponíveis!<br>Compre na loja abaixo. 🌱</div>`;
     }
     abrirModal('modal-plantar');
   };
@@ -1039,44 +1299,34 @@
     inv[_sementeSelecionada]=(inv[_sementeSelecionada]||1)-1;
     _dados.vasos=vasos;_dados.inventario=inv;
     await updateDoc(doc(db,"usuarios",_uid),{vasos,inventario:inv});
-    fecharModal('modal-plantar');
-    renderVasos();
+    fecharModal('modal-plantar');renderVasos();
     showToast('🌱 Semente plantada!','sucesso');
   };
 
   window.regarVaso=async function(vasoIdx){
     const vasos=getVasos();
     const vaso=vasos[vasoIdx];
-    if(!vaso.semente){return;}
+    if(!vaso.semente)return;
     if(vaso.regadaHoje===_hoje){showToast('💧 Já regada hoje!',true);return;}
-
-    // Crescimento baseado em hábitos feitos hoje
     const total=Math.max(_habitos.length,1);
     const pct=Math.round((_feitos.length/total)*100);
-    const bonus=Math.round(pct*0.15); // máx ~15% por dia
-    const crescBase=5;
-    const crescimento=Math.min(100,vaso.crescimento+crescBase+bonus);
-
+    const bonus=Math.round(pct*0.15);
+    const crescimento=Math.min(100,vaso.crescimento+5+bonus);
     vasos[vasoIdx]={...vaso,crescimento,regadaHoje:_hoje,pronta:crescimento>=100};
     _dados.vasos=vasos;
     await updateDoc(doc(db,"usuarios",_uid),{vasos});
-
-    // Animação
     const planta=document.getElementById(`planta-${vasoIdx}`);
     if(planta){planta.classList.add('animando');setTimeout(()=>planta.classList.remove('animando'),700);}
-
-    renderVasos();
-    showToast(`💧 Regada! +${crescBase+bonus}% de crescimento`,'sucesso');
+    renderVasos();showToast(`💧 Regada! +${5+bonus}% de crescimento`,'sucesso');
   };
 
   window.abrirModalColher=function(vasoIdx){
     _vasoSelecionado=vasoIdx;
     const vasos=getVasos();
-    const vaso=vasos[vasoIdx];
-    const cfg=window.SEMENTES_CONFIG[vaso.semente];
+    const cfg=window.SEMENTES_CONFIG[vasos[vasoIdx].semente];
     document.getElementById('colher-emoji').textContent=cfg.fruto;
     document.getElementById('colher-titulo').textContent=`${cfg.nome} pronto!`;
-    document.getElementById('colher-desc').textContent=`Sua ${cfg.nome.toLowerCase()} cresceu com sucesso! Colha e troque por pontos.`;
+    document.getElementById('colher-desc').textContent=`Sua ${cfg.nome.toLowerCase()} cresceu! Colha e ganhe pontos.`;
     document.getElementById('colher-pontos').textContent=`+${cfg.pontos} pts`;
     abrirModal('modal-colher');
   };
@@ -1085,21 +1335,24 @@
     const vasos=getVasos();
     const vaso=vasos[_vasoSelecionado];
     const cfg=window.SEMENTES_CONFIG[vaso.semente];
+    const semana=getSemanaKey();
+    const chaveColheita=`${vaso.semente}_${semana}`;
+    const colheitasSemana={...(_dados.colheitasSemana||{})};
+    colheitasSemana[chaveColheita]=(colheitasSemana[chaveColheita]||0)+1;
     const novosPontos=(_dados.pontos||0)+cfg.pontos;
     vasos[_vasoSelecionado]={id:_vasoSelecionado,semente:null,estagio:0,crescimento:0,regadaHoje:false,pronta:false};
-    _dados.vasos=vasos;_dados.pontos=novosPontos;
-    await updateDoc(doc(db,"usuarios",_uid),{vasos,pontos:novosPontos});
+    _dados.vasos=vasos;_dados.pontos=novosPontos;_dados.colheitasSemana=colheitasSemana;
+    await updateDoc(doc(db,"usuarios",_uid),{vasos,pontos:novosPontos,colheitasSemana});
     document.getElementById('stat-pontos').textContent=novosPontos;
     document.getElementById('plant-pontos').textContent=novosPontos;
-    fecharModal('modal-colher');
-    renderVasos();
-    showToast(`🎉 +${cfg.pontos} pontos ganhos!`,'sucesso');
+    fecharModal('modal-colher');renderVasos();renderLojaPlantacao();
+    showToast(`🎉 +${cfg.pontos} pontos!`,'sucesso');
   };
 
   window.comprarSemente=async function(key){
     const cfg=window.SEMENTES_CONFIG[key];
     const pts=_dados.pontos||0;
-    if(pts<cfg.preco){showToast(`❌ Pontos insuficientes (${cfg.preco} pts necessários)`,true);return;}
+    if(pts<cfg.preco){showToast(`❌ Precisa de ${cfg.preco} pts`,true);return;}
     const inv={...(_dados.inventario||{morango:1,maca:1})};
     inv[key]=(inv[key]||0)+1;
     const novosPts=pts-cfg.preco;
@@ -1107,15 +1360,11 @@
     await updateDoc(doc(db,"usuarios",_uid),{inventario:inv,pontos:novosPts});
     document.getElementById('stat-pontos').textContent=novosPts;
     document.getElementById('plant-pontos').textContent=novosPts;
-    showToast(`${cfg.emoji} ${cfg.nome} adicionada ao inventário!`,'sucesso');
+    renderLojaPlantacao();
+    showToast(`${cfg.emoji} ${cfg.nome} adicionada!`,'sucesso');
   };
 
-  function atualizarCrescimentoVasos(){
-    // Chamado quando hábitos mudam, sem regar novamente
-    renderVasos();
-  }
-
-  // ---- RELATÓRIO ----
+  // RELATÓRIO
   function gerarRelatorio(){
     const dias=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
     const hoje=new Date();
@@ -1123,9 +1372,8 @@
     for(let i=6;i>=0;i--){
       const d=new Date(hoje);d.setDate(hoje.getDate()-i);
       const key=d.toISOString().split('T')[0];
-      ultimos7.push({key,nomeDia:dias[d.getDay()],eHoje:i===0});
+      ultimos7.push({key,nomeDia:dias[d.getDay()],eHoje:i===0,d});
     }
-
     const dadosDias=ultimos7.map(({key,nomeDia,eHoje})=>{
       const feitos=_dados.feitosHoje?.[key]||[];
       const total=_habitos.length||1;
@@ -1139,58 +1387,58 @@
       return{nomeDia,eHoje,pctHab,pctAgua,sonoScore,pctAlim,temDados:feitos.length>0||copos>0||sonoVal};
     });
 
-    const diasComDados=dadosDias.filter(d=>d.temDados);
-    const temDados=diasComDados.length>=2;
-    const mediaAgua=diasComDados.length>0?Math.round(diasComDados.reduce((s,d)=>s+d.pctAgua,0)/diasComDados.length):0;
-    const mediaSono=diasComDados.length>0?Math.round(diasComDados.reduce((s,d)=>s+d.sonoScore,0)/diasComDados.length):0;
-    const mediaHab=diasComDados.length>0?Math.round(diasComDados.reduce((s,d)=>s+d.pctHab,0)/diasComDados.length):0;
-    const mediaAlim=diasComDados.length>0?Math.round(diasComDados.reduce((s,d)=>s+d.pctAlim,0)/diasComDados.length):0;
-    const notaGeral=Math.round((mediaAgua*0.25+mediaSono*0.3+mediaHab*0.3+mediaAlim*0.15)/10);
+    const dc=dadosDias.filter(d=>d.temDados);
+    const temDados=dc.length>=2;
+    const mA=dc.length>0?Math.round(dc.reduce((s,d)=>s+d.pctAgua,0)/dc.length):0;
+    const mS=dc.length>0?Math.round(dc.reduce((s,d)=>s+d.sonoScore,0)/dc.length):0;
+    const mH=dc.length>0?Math.round(dc.reduce((s,d)=>s+d.pctHab,0)/dc.length):0;
+    const mAl=dc.length>0?Math.round(dc.reduce((s,d)=>s+d.pctAlim,0)/dc.length):0;
+    const nota=Math.round((mA*0.25+mS*0.3+mH*0.3+mAl*0.15)/10);
 
-    let classNivel,tituloNivel,descNivel;
-    if(!temDados){classNivel='bom';tituloNivel='Poucos dados ainda';descNivel='Continue registrando para ver seu diagnóstico!';}
-    else if(notaGeral<=3){classNivel='urgente';tituloNivel='Mudança urgente!';descNivel='Sua rotina está impactando sua saúde. Hora de agir!';}
-    else if(notaGeral<=5){classNivel='atencao';tituloNivel='Precisa de atenção';descNivel='Você tem muito espaço para melhorar!';}
-    else if(notaGeral<=7){classNivel='bom';tituloNivel='Bom, mas pode melhorar';descNivel='Você está no caminho certo!';}
-    else{classNivel='otimo';tituloNivel='Rotina excelente!';descNivel='Você está arrasando!';}
+    let cls,tit,desc;
+    if(!temDados){cls='bom';tit='Poucos dados ainda';desc='Continue registrando para ver seu diagnóstico!';}
+    else if(nota<=3){cls='urgente';tit='Mudança urgente!';desc='Sua rotina está impactando sua saúde.';}
+    else if(nota<=5){cls='atencao';tit='Precisa de atenção';desc='Há muito espaço para melhorar!';}
+    else if(nota<=7){cls='bom';tit='Bom, mas pode melhorar';desc='Você está no caminho certo!';}
+    else{cls='otimo';tit='Rotina excelente!';desc='Você está arrasando!';}
 
     const dicas=[];
-    if(mediaAgua<60)dicas.push('Hidratação baixa: tente beber pelo menos um copo a cada 2 horas.');
-    if(mediaSono<60)dicas.push('Sono irregular: estabeleça um horário fixo para dormir.');
-    if(mediaHab<50)dicas.push('Consistência: comece com 2 hábitos por dia e vá aumentando.');
-    if(_habitos.includes('alimentacao')&&mediaAlim<50)dicas.push('Alimentação: prepare refeições com antecedência para facilitar escolhas saudáveis.');
-    if(dicas.length===0)dicas.push('Mantenha a consistência! Você está indo muito bem.');
+    if(mA<60)dicas.push('Hidratação baixa: tente beber pelo menos um copo a cada 2 horas.');
+    if(mS<60)dicas.push('Sono irregular: estabeleça um horário fixo para dormir.');
+    if(mH<50)dicas.push('Consistência: comece com 2 hábitos por dia e vá aumentando.');
+    if(_habitos.includes('alimentacao')&&mAl<50)dicas.push('Alimentação: prepare refeições com antecedência.');
+    if(dicas.length===0)dicas.push('Continue assim! Você está indo muito bem.');
 
-    const diagAreas=[];
+    const diags=[];
     if(_habitos.includes('agua')){
-      if(mediaAgua>=80)diagAreas.push({tipo:'verde',icon:'💧',titulo:'Hidratação ótima',texto:`Média de ${mediaAgua}% da meta. Continue assim!`});
-      else if(mediaAgua>=50)diagAreas.push({tipo:'amarelo',icon:'💧',titulo:'Hidratação regular',texto:`Média de ${mediaAgua}%. Você pode aumentar um pouco.`});
-      else diagAreas.push({tipo:'vermelho',icon:'💧',titulo:'Hidratação insuficiente',texto:`Apenas ${mediaAgua}% da meta. Desidratação afeta energia e foco.`});
+      if(mA>=80)diags.push({t:'verde',i:'💧',n:'Hidratação ótima',d:`Média de ${mA}%. Continue!`});
+      else if(mA>=50)diags.push({t:'amarelo',i:'💧',n:'Hidratação regular',d:`Média de ${mA}%. Pode melhorar.`});
+      else diags.push({t:'vermelho',i:'💧',n:'Hidratação insuficiente',d:`Apenas ${mA}%. Desidratação afeta energia.`});
     }
     if(_habitos.includes('sono')){
-      if(mediaSono>=80)diagAreas.push({tipo:'roxo',icon:'😴',titulo:'Sono muito bom',texto:`Qualidade média de ${mediaSono}%. Excelente descanso!`});
-      else if(mediaSono>=50)diagAreas.push({tipo:'amarelo',icon:'😴',titulo:'Sono irregular',texto:`Qualidade média de ${mediaSono}%. Tente ser mais consistente.`});
-      else diagAreas.push({tipo:'vermelho',icon:'😴',titulo:'Sono precário',texto:`Qualidade de ${mediaSono}%. Sono ruim afeta humor e memória.`});
+      if(mS>=80)diags.push({t:'roxo',i:'😴',n:'Sono muito bom',d:`Qualidade ${mS}%. Excelente!`});
+      else if(mS>=50)diags.push({t:'amarelo',i:'😴',n:'Sono irregular',d:`Qualidade ${mS}%. Seja mais consistente.`});
+      else diags.push({t:'vermelho',i:'😴',n:'Sono precário',d:`Qualidade ${mS}%. Sono ruim afeta humor.`});
     }
     if(_habitos.includes('alimentacao')){
-      if(mediaAlim>=80)diagAreas.push({tipo:'verde',icon:'🥗',titulo:'Alimentação consistente',texto:`Registros em ${mediaAlim}% dos dias. Ótima disciplina!`});
-      else diagAreas.push({tipo:'amarelo',icon:'🥗',titulo:'Alimentação irregular',texto:`Registros em ${mediaAlim}% dos dias. Seja mais consistente.`});
+      if(mAl>=80)diags.push({t:'verde',i:'🥗',n:'Alimentação consistente',d:`${mAl}% dos dias. Ótimo!`});
+      else diags.push({t:'amarelo',i:'🥗',n:'Alimentação irregular',d:`${mAl}% dos dias. Seja mais consistente.`});
     }
-    if(mediaHab>=80)diagAreas.push({tipo:'verde',icon:'✅',titulo:'Hábitos em dia',texto:`Média de ${mediaHab}% dos hábitos. Incrível!`});
-    else if(mediaHab>=50)diagAreas.push({tipo:'amarelo',icon:'✅',titulo:'Hábitos regulares',texto:`Média de ${mediaHab}%. Há margem para melhorar!`});
-    else diagAreas.push({tipo:'vermelho',icon:'✅',titulo:'Hábitos negligenciados',texto:`Apenas ${mediaHab}%. Foque na consistência diária.`});
+    if(mH>=80)diags.push({t:'verde',i:'✅',n:'Hábitos em dia',d:`${mH}% dos hábitos. Incrível!`});
+    else if(mH>=50)diags.push({t:'amarelo',i:'✅',n:'Hábitos regulares',d:`${mH}%. Há margem para melhorar.`});
+    else diags.push({t:'vermelho',i:'✅',n:'Hábitos negligenciados',d:`${mH}%. Foque na consistência.`});
 
-    const primeiroDia=ultimos7[0].d?ultimos7[0].d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}):'-';
-    const ultimoDia=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});
-    document.getElementById('prog-periodo').textContent=`${primeiroDia} – ${ultimoDia}`;
+    const prim=ultimos7[0].d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});
+    const ult=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});
+    document.getElementById('prog-periodo').textContent=`${prim} – ${ult}`;
 
     document.getElementById('prog-content').innerHTML=`
-      <div class="nota-geral-card ${classNivel}">
+      <div class="nota-geral-card ${cls}">
         <div class="nota-geral-top">
-          <div><span class="nota-geral-label">Nota da semana</span><div class="nota-geral-titulo">${tituloNivel}</div></div>
-          <div style="text-align:right"><span class="nota-numero">${temDados?notaGeral:'?'}<span class="nota-dez">/10</span></span></div>
+          <div><span class="nota-geral-label">Nota da semana</span><div class="nota-geral-titulo">${tit}</div></div>
+          <div style="text-align:right"><span class="nota-numero">${temDados?nota:'?'}<span class="nota-dez">/10</span></span></div>
         </div>
-        <div class="nota-geral-desc">${descNivel}</div>
+        <div class="nota-geral-desc">${desc}</div>
       </div>
       <div class="grafico-card">
         <div class="grafico-titulo">📈 Evolução dos 7 dias</div>
@@ -1204,7 +1452,7 @@
       </div>
       <div class="diag-section">
         <div class="diag-section-title">Diagnóstico por área</div>
-        ${diagAreas.map(d=>`<div class="diag-card ${d.tipo}"><div class="diag-icon">${d.icon}</div><div class="diag-info"><span class="diag-titulo">${d.titulo}</span><span class="diag-texto">${d.texto}</span></div></div>`).join('')}
+        ${diags.map(d=>`<div class="diag-card ${d.t}"><div class="diag-icon">${d.i}</div><div class="diag-info"><span class="diag-titulo">${d.n}</span><span class="diag-texto">${d.d}</span></div></div>`).join('')}
       </div>
       <div class="diag-section">
         <div class="diag-section-title">💡 Dicas personalizadas</div>
@@ -1212,29 +1460,28 @@
       </div>
     `;
 
-    const grafico=document.getElementById('grafico-barras');
-    if(grafico){
-      grafico.innerHTML='';
+    const g=document.getElementById('grafico-barras');
+    if(g){
+      g.innerHTML='';
       dadosDias.forEach(d=>{
-        const wrap=document.createElement('div');wrap.className='grafico-bar-wrap';
-        const altAgua=d.pctAgua>0?Math.max(4,Math.round(d.pctAgua*0.7)):4;
-        const altSono=d.sonoScore>0?Math.max(4,Math.round(d.sonoScore*0.7)):4;
-        const altHab=d.pctHab>0?Math.max(4,Math.round(d.pctHab*0.7)):4;
+        const w=document.createElement('div');w.className='grafico-bar-wrap';
+        const aA=d.pctAgua>0?Math.max(4,Math.round(d.pctAgua*0.7)):4;
+        const aS=d.sonoScore>0?Math.max(4,Math.round(d.sonoScore*0.7)):4;
+        const aH=d.pctHab>0?Math.max(4,Math.round(d.pctHab*0.7)):4;
         const tem=d.pctAgua>0||d.sonoScore>0||d.pctHab>0;
-        wrap.innerHTML=`<div style="display:flex;gap:2px;align-items:flex-end;height:70px"><div class="grafico-bar ${tem?'agua':'vazio'}" style="height:${tem?altAgua:4}px;width:8px"></div><div class="grafico-bar ${tem?'sono':'vazio'}" style="height:${tem?altSono:4}px;width:8px"></div><div class="grafico-bar ${tem?'hab':'vazio'}" style="height:${tem?altHab:4}px;width:8px"></div></div><div class="grafico-dia ${d.eHoje?'hoje':''}">${d.eHoje?'Hoje':d.nomeDia}</div>`;
-        grafico.appendChild(wrap);
+        w.innerHTML=`<div style="display:flex;gap:2px;align-items:flex-end;height:70px"><div class="grafico-bar ${tem?'agua':'vazio'}" style="height:${tem?aA:4}px;width:8px"></div><div class="grafico-bar ${tem?'sono':'vazio'}" style="height:${tem?aS:4}px;width:8px"></div><div class="grafico-bar ${tem?'hab':'vazio'}" style="height:${tem?aH:4}px;width:8px"></div></div><div class="grafico-dia ${d.eHoje?'hoje':''}">${d.eHoje?'Hoje':d.nomeDia}</div>`;
+        g.appendChild(w);
       });
     }
 
-    // Card mini no início
     if(temDados){
       const wrap=document.getElementById('relatorio-mini-wrap');
       wrap.style.display='block';
-      wrap.innerHTML=`<div class="relatorio-card-mini ${classNivel}" onclick="navegar('progresso')"><div class="relatorio-mini-top"><span class="relatorio-mini-badge">📊 Relatório semanal</span><span class="relatorio-mini-nota">${notaGeral}/10</span></div><div class="relatorio-mini-titulo">${tituloNivel}</div><div class="relatorio-mini-sub">${descNivel}</div><div class="relatorio-mini-ver">Toque para ver detalhes →</div></div>`;
+      wrap.innerHTML=`<div class="relatorio-card-mini ${cls}" onclick="navegar('progresso')"><div class="relatorio-mini-top"><span class="relatorio-mini-badge">📊 Relatório semanal</span><span class="relatorio-mini-nota">${nota}/10</span></div><div class="relatorio-mini-titulo">${tit}</div><div class="relatorio-mini-sub">${desc}</div><div class="relatorio-mini-ver">Toque para ver detalhes →</div></div>`;
     }
   }
 
-  // ---- CONFIG ----
+  // CONFIG
   window.salvarConfig=function(chave,valor){
     localStorage.setItem('cfg_'+chave,JSON.stringify(valor));
     const desc=document.getElementById(chave+'-desc');
@@ -1254,27 +1501,19 @@
     document.documentElement.setAttribute('data-theme',dark?'dark':'light');
     document.getElementById('toggle-dark').checked=dark;
     document.getElementById('dark-desc').textContent=dark?'Ativado':'Desativado';
-    const notif=JSON.parse(localStorage.getItem('cfg_notif')??'true');
-    document.getElementById('toggle-notif').checked=notif;
-    document.getElementById('notif-desc').textContent=notif?'Ativado':'Desativado';
-    const conquistas=JSON.parse(localStorage.getItem('cfg_conquistas')??'true');
-    document.getElementById('toggle-conquistas').checked=conquistas;
-    document.getElementById('conquistas-desc').textContent=conquistas?'Ativado':'Desativado';
-    const news=JSON.parse(localStorage.getItem('cfg_news')||'false');
-    document.getElementById('toggle-news').checked=news;
-    document.getElementById('news-desc').textContent=news?'Ativado':'Desativado';
-    const lang=localStorage.getItem('cfg_idioma')||'pt-BR';
-    aplicarIdioma(lang,false);
+    ['notif','conquistas','news'].forEach(k=>{
+      const val=JSON.parse(localStorage.getItem('cfg_'+k)??(k==='news'?'false':'true'));
+      document.getElementById('toggle-'+k).checked=val;
+      document.getElementById(k+'-desc').textContent=val?'Ativado':'Desativado';
+    });
   }
 
   window.enviarRedefinicao=async function(){
     try{await sendPasswordResetEmail(auth,_userEmail);fecharModal('modal-senha');showToast('📧 E-mail enviado!');}
-    catch(e){showToast('❌ Erro ao enviar e-mail',true);}
+    catch(e){showToast('❌ Erro ao enviar',true);}
   };
 
   window.handleLogout=async function(){await signOut(auth);window.location.href='index.html';};
-
-  function saudacao(){const h=new Date().getHours();if(h<12)return'Bom dia';if(h<18)return'Boa tarde';return'Boa noite';}
 </script>
 
 <script>
@@ -1287,31 +1526,6 @@
   document.querySelectorAll('.modal-overlay').forEach(o=>{
     o.addEventListener('click',function(e){if(e.target===this)fecharModal(this.id);});
   });
-  function selecionarIdioma(el){
-    document.querySelectorAll('.idioma-opcao').forEach(o=>o.classList.remove('selected'));
-    el.classList.add('selected');
-    const lang=el.dataset.lang;
-    localStorage.setItem('cfg_idioma',lang);
-    aplicarIdioma(lang,true);
-    fecharModal('modal-idioma');
-  }
-  function aplicarIdioma(lang,mostrarToast){
-    const mapa={'pt-BR':{nome:'Português (Brasil)',val:'PT-BR',toast:'🇧🇷 Idioma: Português'},'en':{nome:'English',val:'EN',toast:'🇺🇸 Language: English'},'es':{nome:'Español',val:'ES',toast:'🇪🇸 Idioma: Español'}};
-    const info=mapa[lang]||mapa['pt-BR'];
-    document.getElementById('idioma-desc').textContent=info.nome;
-    document.getElementById('idioma-val').textContent=info.val;
-    document.querySelectorAll('.idioma-opcao').forEach(o=>o.classList.toggle('selected',o.dataset.lang===lang));
-    if(mostrarToast)showToast(info.toast);
-  }
   function showToast(msg,tipo=false){
     const t=document.getElementById('toast');
-    t.textContent=msg;
-    t.className='toast';
-    if(tipo==='sucesso')t.classList.add('sucesso');
-    else if(tipo===true)t.classList.add('erro');
-    t.classList.add('show');
-    setTimeout(()=>t.classList.remove('show'),3000);
-  }
-</script>
-</body>
-</html>
+    t.textContent=ms
