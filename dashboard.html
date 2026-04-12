@@ -1515,17 +1515,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.handleLogout=async function(){await signOut(auth);window.location.href='index.html';};
 </script>
+</script>
 
 <script>
+  // Funções globais — definidas antes dos onclick dos botões
   function navegar(tela){
     document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
     document.getElementById('screen-'+tela).classList.add('active');
   }
   function abrirModal(id){document.getElementById(id).classList.add('active');}
   function fecharModal(id){document.getElementById(id).classList.remove('active');}
-  document.querySelectorAll('.modal-overlay').forEach(o=>{
-    o.addEventListener('click',function(e){if(e.target===this)fecharModal(this.id);});
+
+  // Fechar modal clicando fora
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.modal-overlay').forEach(o=>{
+      o.addEventListener('click',function(e){if(e.target===this)fecharModal(this.id);});
+    });
+    aplicarIdiomaIndex();
   });
+
   function showToast(msg,tipo=false){
     const t=document.getElementById('toast');
-    t.textContent=ms
+    if(!t) return;
+    t.textContent=msg;
+    t.className='toast';
+    if(tipo==='sucesso') t.classList.add('sucesso');
+    else if(tipo===true) t.classList.add('erro');
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),3000);
+  }
+
+  function selecionarIdioma(el){
+    fecharModal('modal-idioma');
+    aplicarIdioma(el.dataset.lang, true);
+    localStorage.setItem('cfg_idioma', el.dataset.lang);
+  }
+
+  function aplicarIdiomaIndex(){
+    const lang = localStorage.getItem('cfg_idioma') || 'pt-BR';
+    document.querySelectorAll('.idioma-opcao').forEach(o=>{
+      o.classList.toggle('selected', o.dataset.lang === lang);
+    });
+  }
+</script>
+</body>
+</html>
